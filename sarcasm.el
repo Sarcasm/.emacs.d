@@ -40,12 +40,6 @@
 (column-number-mode 1)		 ;print column number on the mode-line
 ;; (display-time-mode 0)
 
-;; Emacs session system
-(desktop-save-mode 1)
-
-;; reload only 4 buffers at startup
-(setq desktop-restore-eager 5)
-
 ;; Emacs perso load path
 (add-to-list 'load-path "~/.emacs.d/elisp")
 
@@ -60,3 +54,8 @@
 (require 'sarcasm-c)			;C stuff
 (require 'sarcasm-c++)			;C++ stuff
 (require 'sarcasm-elpa)			;ELPA (Emacs Lisp Package Archive) stuff
+(require 'sarcasm-gtags)                ;GTags stuff
+(require 'sarcasm-semantic)             ;General Semantic stuff
+(require 'sarcasm-ac)                   ;Auto-complete stuff
+(require 'sarcasm-el-get)               ;el-get packages and config
+(require 'sarcasm-session)              ;restoring Emacs at startup

@@ -20,4 +20,9 @@
     ("VECTOR"		"#include <vector>")
     ))
 
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (setq ac-sources (append '(ac-source-clang) ac-sources)))
+          )
+
 (provide 'sarcasm-c++)

@@ -32,4 +32,23 @@ require input from user."
     (c-man cur-word))
   )
 
+;; Miscellaneous functions for compilation
+(defun flymake-or-compile-next-error ()
+  "If Flymake mode is enable then go to the next Flymake error,
+otherwise assume it's compile next error."
+  (interactive)
+  (if flymake-mode
+      (flymake-goto-next-error)
+    (next-error))
+  )
+
+(defun flymake-or-compile-prev-error ()
+  "If Flymake mode is enable then go to the previous Flymake error,
+otherwise assume it's compile previous error."
+  (interactive)
+  (if flymake-mode
+      (flymake-goto-prev-error)
+    (previous-error))
+  )
+
 (provide 'sarcasm-utils)

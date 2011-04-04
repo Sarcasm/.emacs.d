@@ -27,4 +27,8 @@
 ;; (windmove-default-keybindings 'meta) (meta, control, shift)
 (windmove-default-keybindings)		; Shit + arrows (by default)
 
+;; Align with keyboard !
+(global-set-key (kbd "C-c a") 'align-region-or-current)
+(global-set-key (kbd "C-c A") 'align-regexp)
+
 (provide 'sarcasm-keys)
