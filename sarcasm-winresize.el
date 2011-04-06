@@ -76,7 +76,7 @@ the middle"
      (t "mid"))))
 
 (defun win-resize-up ()
-  "Enlarge the window in North direction."
+  "Resize the window in the North direction."
   (interactive)
   (cond
    ((equal "top" (win-resize-top-or-bot)) (enlarge-window (- win-resize-value)))
@@ -85,7 +85,7 @@ the middle"
    (t (message "nil"))))
 
 (defun win-resize-down ()
-  "Enlarge the window in South direction."
+  "Resize the window in the South direction."
   (interactive)
   (cond
    ((equal "top" (win-resize-top-or-bot)) (enlarge-window win-resize-value))
@@ -94,7 +94,7 @@ the middle"
    (t (message "nil"))))
 
 (defun win-resize-left ()
-  "Enlarge the window in East direction."
+  "Resize the window in the East direction."
   (interactive)
   (cond
    ((equal "left" (win-resize-left-or-right)) (enlarge-window-horizontally (- win-resize-value)))
@@ -102,7 +102,7 @@ the middle"
    ((equal "mid" (win-resize-left-or-right)) (enlarge-window-horizontally (- win-resize-value)))))
 
 (defun win-resize-right ()
-  "Enlarge the window in West direction."
+  "Resize the window in the West direction."
   (interactive)
   (cond
    ((equal "left" (win-resize-left-or-right)) (enlarge-window-horizontally win-resize-value))
