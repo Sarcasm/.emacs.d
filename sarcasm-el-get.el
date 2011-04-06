@@ -6,15 +6,29 @@
 (require 'el-get)
 
 (setq el-get-sources
-      '(el-get magit
+      '(el-get
+        magit                        ;control Git from Emacs
+        xcscope xcscope+             ;CScope stuff
+        rainbow-mode                 ;display string color colored
 
-               (:name switch-window
-                      ;; re-define `C-x o' to `switch-window' because
-                      ;; it doesn't work the first time...
-                      after: (lambda ()
-                               (global-set-key (kbd "C-x o") 'switch-window)
-                               )
-                      )
+        ;; Move buffer with C-S-<arrow key>
+        (:name buffer-move
+               :features buffer-move
+               :after (lambda ()
+                        (global-set-key (kbd "<C-S-up>")     'buf-move-up)
+                        (global-set-key (kbd "<C-S-down>")   'buf-move-down)
+                        (global-set-key (kbd "<C-S-left>")   'buf-move-left)
+                        (global-set-key (kbd "<C-S-right>")  'buf-move-right)
+                        )
+               )
+
+        (:name switch-window
+               ;; re-define `C-x o' to `switch-window' because
+               ;; it doesn't work the first time...
+               :after (lambda ()
+                        (global-set-key (kbd "C-x o") 'switch-window)
+                        )
+               )
 
         (:name yasnippet
                :type svn
@@ -24,31 +38,29 @@
                ;; correct task seems to be 'rake compile'
                :build ("rake compile")
                :features yasnippet
-               :post-init (lambda ()
-                            (yas/initialize)
-                            ;; (setq yas/snippet-dirs "~/.emacs.d/snippets")
-                            ;; (yas/load-directory yas/snippet-dirs)
+               ;; :post-init (lambda ()
+               :after (lambda ()
+                        ;; from here: https://github.com/blastura/dot-emacs/blob/master/init.el
+                        ;; (add-hook 'yas/after-exit-snippet-hook
+                        ;;           '(lambda ()
+                        ;;              (indent-region yas/snippet-beg
+                        ;;                             yas/snippet-end)))
 
-                            (setq yas/snippet-dirs (concat el-get-dir "yasnippet/snippets"))
-                            ;; (add-to-list 'yas/snippet-dirs (concat el-get-dir "yasnippet/snippets"))
-                            (yas/reload-all)
-                            ;; (yas/load-directory yas/snippet-dirs)
-                            ;; (yas/load-directory "~/.emacs.d/snippets")
+                        ;; After el-get/yasnippet, personal snippets takes priority
+                        (setq yas/snippet-dirs (cons (concat el-get-dir "yasnippet/snippets")
+                                                     '("~/.emacs.d/snippets")))
+                        (yas/initialize)
 
+                        ;; Map `yas/load-directory' to every element
+                        (mapc 'yas/load-directory yas/snippet-dirs)
 
-                            ;; Fix the promp on X, the default was ugly.
-                            (setq yas/prompt-functions '(yas/dropdown-prompt
-                                                         yas/ido-prompt
-                                                         yas/completing-prompt
-                                                         yas/ido-prompt
-                                                         yas/no-prompt))
-
-                            ;; from here: https://github.com/blastura/dot-emacs/blob/master/init.el
-                            ;; (add-hook 'yas/after-exit-snippet-hook
-                            ;;           '(lambda ()
-                            ;;              (indent-region yas/snippet-beg
-                            ;;                             yas/snippet-end)))
-                            ))
+                        ;; Fix the promp on X, the default was ugly.
+                        (require 'dropdown-list)
+                        (setq yas/prompt-functions '(yas/dropdown-prompt
+                                                     yas/ido-prompt
+                                                     yas/completing-prompt
+                                                     yas/no-prompt))
+                        ))
 
         (:name autocomplete
                :type git
@@ -60,7 +72,8 @@
                             (require 'auto-complete-config)
                             (ac-config-default)
                             ;; Too many words in buffers...
-                            (setq-default ac-sources (remq 'ac-source-words-in-same-mode-buffers ac-sources))
+                            (setq-default ac-sources
+                                          (remq 'ac-source-words-in-same-mode-buffers ac-sources))
                             ))
 
         (:name auto-complete-extension
@@ -69,11 +82,7 @@
         (:name auto-complete-clang
                :type git
                :url "https://github.com/brianjcj/auto-complete-clang.git"
-               :features auto-complete-clang
-               :post-init (lambda ()
-                            (define-key c++-mode-map (kbd "M-TAB") 'ac-complete-clang)
-                            ))
-
+               :features auto-complete-clang)
         ))
 
 ;; Initialize el-get packages
