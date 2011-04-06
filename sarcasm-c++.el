@@ -20,9 +20,12 @@
     ("VECTOR"		"#include <vector>")
     ))
 
+(require 'auto-complete-clang)
 (add-hook 'c++-mode-hook
           (lambda ()
-            (setq ac-sources (append '(ac-source-clang) ac-sources)))
-          )
+            (define-key c++-mode-map (kbd "M-TAB") 'ac-complete-clang)
+
+            ;; (setq ac-sources (append '(ac-source-clang) ac-sources)))
+          ))
 
 (provide 'sarcasm-c++)

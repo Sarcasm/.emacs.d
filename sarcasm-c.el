@@ -18,6 +18,8 @@
 	  '(lambda ()
 	     (semantic-mode)
 
+             (define-key c-mode-map (kbd "M-TAB") 'ac-complete-clang)
+
              (when (boundp 'auto-complete-mode)
                ;; ac-omni-completion-sources is made buffer local so
                ;; you need to add it to a mode hook to activate on

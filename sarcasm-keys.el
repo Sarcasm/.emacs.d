@@ -15,7 +15,10 @@
 ;; - http://superuser.com/questions/214295/emacs-how-to-choose-good-custom-key-bindings
 
 (global-set-key (kbd "C-c i") 'imenu)
-(global-set-key (kbd "C-c s") 'shell)
+;; xscope has [C-c s] for prefix
+;; (global-set-key (kbd "C-c s") 'shell)
+(global-set-key (kbd "C-c C-s") 'shell)
+(global-set-key (kbd "C-x c") 'whitespace-cleanup)
 
 ;; Enable / Disable Fly{make,spell} mode
 (when (fboundp 'flymake-mode)

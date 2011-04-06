@@ -35,10 +35,21 @@
 ;; and sometimes other things.
 (set-language-environment "UTF-8")
 
-(menu-bar-mode	-1)			;I rarely used that bar
+;; (menu-bar-mode	-1)			;I rarely used that bar
 (tool-bar-mode 0) ;toolbar is visible by default on X emacs so disable it
 (column-number-mode 1)		 ;print column number on the mode-line
 ;; (display-time-mode 0)
+
+;; Emacs external `url browser' (usefull in Org-Mode)
+(setq browse-url-generic-program "chromium-browser")
+(setq browse-url-browser-function '(("^file:" . browse-file-url)
+				    ("."      . browse-url-generic)))
+(defun browse-file-url (URL &optional NEW-WINDOW)
+  (browse-url-generic URL NEW-WINDOW)
+)
+
+ ;; Go to the next page automatically in Doc-View
+(setq doc-view-continuous t)
 
 ;; Emacs perso load path
 (add-to-list 'load-path "~/.emacs.d/elisp")
@@ -58,4 +69,5 @@
 (require 'sarcasm-semantic)             ;General Semantic stuff
 (require 'sarcasm-ac)                   ;Auto-complete stuff
 (require 'sarcasm-el-get)               ;el-get packages and config
-(require 'sarcasm-session)              ;restoring Emacs at startup
+(require 'sarcasm-winresize)            ;window manipulations
+;; (require 'sarcasm-session)              ;restoring Emacs at startup

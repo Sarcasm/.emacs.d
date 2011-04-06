@@ -13,6 +13,7 @@
 
 (add-hook 'org-mode-hook
 	  (lambda ()
+            (auto-fill-mode 1)
 	    (define-key org-mode-map [f7] 'org-flyspell-mode-and-dictionary)
 	    ))
 
