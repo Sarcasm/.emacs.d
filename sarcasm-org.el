@@ -56,6 +56,7 @@ change the dictionnary to the corresponding language."
    (ditaa  . t)
    (sh	   . t)
    (R	   . t)
+   (org    . t)
    (latex  . t)
    (python . t)
    ))

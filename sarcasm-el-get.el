@@ -49,7 +49,6 @@
                         ;; After el-get/yasnippet, personal snippets takes priority
                         (setq yas/snippet-dirs (cons (concat el-get-dir "yasnippet/snippets")
                                                      '("~/.emacs.d/snippets")))
-                        (yas/initialize)
 
                         ;; Map `yas/load-directory' to every element
                         (mapc 'yas/load-directory yas/snippet-dirs)
@@ -72,9 +71,10 @@
                             (require 'auto-complete-config)
                             (ac-config-default)
                             ;; Too many words in buffers...
-                            (setq-default ac-sources
-                                          (remq 'ac-source-words-in-same-mode-buffers ac-sources))
-                            ))
+                            ;; (setq-default ac-sources
+                            ;;               (remq 'ac-source-words-in-same-mode-buffers ac-sources)
+                            )
+               )
 
         (:name auto-complete-extension
                :type emacswiki)
@@ -87,5 +87,27 @@
 
 ;; Initialize el-get packages
 (el-get)
+
+;; "Addons" to the YASnippet config and auto-complete
+
+;; Function found here: http://www.emacswiki.org/emacs/tagging.el
+(defun convert-mode-name-to-hook (mode-name)
+  "Converts a mode name into the symbol for its hook"
+  (intern (concat (symbol-name mode-name) "-hook")))
+
+;; Enable yasnippet mode and auto-complete on few programming modes
+(defun sarcasm-enable-ac-and-yas ()
+  "Enable `auto-complete' and `yasnippet'. Also add snippet names
+in auto-complete sources."
+  (yas/minor-mode-on)
+  (auto-complete-mode)
+  (setq ac-sources (append ac-sources '(ac-source-yasnippet)))
+  )
+
+(mapc (lambda (mode)
+        (add-hook (convert-mode-name-to-hook mode) 'sarcasm-enable-ac-and-yas))
+      '(c-mode c++-mode emacs-lisp-mode lisp-mode lua-mode
+               sh-mode org-mode perl-mode css-mode html-mode
+               nxml-mode python-mode ruby-mode snippet-mode))
 
 (provide 'sarcasm-el-get)

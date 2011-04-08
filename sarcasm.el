@@ -57,10 +57,11 @@
 ;; Add Sarcasm directory to default path
 (add-to-list 'load-path sarcasm-load-path)
 
+(require 'sarcasm-el-get)               ;el-get packages and config
+(require 'sarcasm-utils)		;utility functions
 (require 'sarcasm-keys)			;global keybindings
 (require 'sarcasm-rcirc)		;rcirc settings
 (require 'sarcasm-org)			;Org-Mode settings
-(require 'sarcasm-utils)		;utility functions
 (require 'sarcasm-c-common)		;C/C++ common stuff
 (require 'sarcasm-c)			;C stuff
 (require 'sarcasm-c++)			;C++ stuff
@@ -68,6 +69,5 @@
 (require 'sarcasm-gtags)                ;GTags stuff
 (require 'sarcasm-semantic)             ;General Semantic stuff
 (require 'sarcasm-ac)                   ;Auto-complete stuff
-(require 'sarcasm-el-get)               ;el-get packages and config
 (require 'sarcasm-winresize)            ;window manipulations
 ;; (require 'sarcasm-session)              ;restoring Emacs at startup

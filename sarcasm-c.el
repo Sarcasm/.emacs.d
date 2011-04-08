@@ -40,7 +40,7 @@
                ;; semantic and yasnippet (order matters, if reversed snippets
                ;; will appear before semantic tag completions).
                ;; (setq ac-sources '(ac-source-semantic ac-source-yasnippet))
-               (setq ac-sources (append '(ac-source-semantic) ac-sources))
+               (setq ac-sources (append '(ac-source-semantic ac-source-clang) ac-sources))
                )
 	     ))
 
