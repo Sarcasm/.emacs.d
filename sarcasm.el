@@ -51,6 +51,9 @@
  ;; Go to the next page automatically in Doc-View
 (setq doc-view-continuous t)
 
+; Automatically 'chmod' scripts as they are saved
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
 ;; Emacs perso load path
 (add-to-list 'load-path "~/.emacs.d/elisp")
 

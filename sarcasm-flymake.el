@@ -2,6 +2,8 @@
 ;; usage:
 ;; (require 'sarcasm-flymake)
 
+(setq flymake-gui-warnings-enabled nil)
+
 ;; Add syntax checking for C++ headers files.
 (push '("\\.hpp\\'" flymake-simple-make-init) flymake-allowed-file-name-masks)
 (push '("\\.hh\\'" flymake-simple-make-init) flymake-allowed-file-name-masks)
