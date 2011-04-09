@@ -22,9 +22,10 @@
 
 (add-hook 'c++-mode-hook
           (lambda ()
+            (subword-mode)              ;C-c C-w to toggle
             (define-key c++-mode-map (kbd "M-TAB") 'ac-complete-clang)
 
-            (setq ac-sources (append '(ac-source-clang) ac-sources))
+            ;; (setq ac-sources (append '(ac-source-clang) ac-sources))
           ))
 
 (provide 'sarcasm-c++)

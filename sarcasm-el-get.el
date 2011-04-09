@@ -5,11 +5,14 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get/"))
 (require 'el-get)
 
+(add-to-list 'el-get-recipe-path (concat sarcasm-load-path "/sarcasm-recipes"))
+
 (setq el-get-sources
       '(el-get
-        magit                        ;control Git from Emacs
+        magit                        ;control git from Emacs
         xcscope xcscope+             ;CScope stuff
         rainbow-mode                 ;display string color colored
+        flymake-lua                  ;flymake for Lua
 
         ;; Move buffer with C-S-<arrow key>
         (:name buffer-move
