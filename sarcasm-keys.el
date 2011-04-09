@@ -34,4 +34,10 @@
 (global-set-key (kbd "C-c a") 'align-region-or-current)
 (global-set-key (kbd "C-c A") 'align-regexp)
 
+;; M-<left> and M-<right> like the Ecplise IDE functionnality
+(define-key esc-map [up]   'move-text-up)
+(define-key esc-map [down] 'move-text-down)
+(global-set-key (kbd "M-<up>")	 'move-text-up)
+(global-set-key (kbd "M-<down>") 'move-text-down)
+
 (provide 'sarcasm-keys)
