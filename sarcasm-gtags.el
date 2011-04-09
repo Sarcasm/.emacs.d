@@ -36,4 +36,10 @@ activate compile)
 line under the cursor."
   (pulse-momentary-highlight-one-line (point)))
 
+(defadvice gtags-select-it (after gtags-select-it-my-advice
+activate compile)
+  "After a jump to the tag definition found in Global select
+buffer, temporary highlight the line under the cursor."
+  (pulse-momentary-highlight-one-line (point)))
+
 (provide 'sarcasm-gtags)
