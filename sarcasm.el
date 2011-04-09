@@ -65,6 +65,8 @@
 (require 'sarcasm-c-common)		;C/C++ common stuff
 (require 'sarcasm-c)			;C stuff
 (require 'sarcasm-c++)			;C++ stuff
+(require 'sarcasm-flymake)              ;flymake stuff
+(require 'sarcasm-lua)                  ;Lua stuff
 (require 'sarcasm-elpa)			;ELPA (Emacs Lisp Package Archive) stuff
 (require 'sarcasm-gtags)                ;GTags stuff
 (require 'sarcasm-semantic)             ;General Semantic stuff
