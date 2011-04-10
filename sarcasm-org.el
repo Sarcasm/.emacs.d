@@ -15,6 +15,9 @@
 	  (lambda ()
             (auto-fill-mode 1)
 	    (define-key org-mode-map [f7] 'org-flyspell-mode-and-dictionary)
+            ;; Babel handle 'C' not 'c'...ok, in fact babel doesn't
+            ;; know how to execute 'C' use 'c++' instead.
+            (add-to-list 'org-src-lang-modes '("C" . c))
 	    ))
 
 ;; Make windmove work in Org-Mode:
@@ -39,7 +42,6 @@ change the dictionnary to the corresponding language."
 	  (goto-char current-pos)
 	  ))
     (flyspell-mode -1)))
-
 
 
 		      ;; === Org-Babel stuff ===

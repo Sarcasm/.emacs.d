@@ -12,7 +12,7 @@
       )
 
 (setq-default indent-tabs-mode nil	;remove tabulations
-	      show-trailing-whitespace t
+	      ;; show-trailing-whitespace t
 	      autopair-autowrap t ;wrap the region with the paired characters
 	      gdb-many-windows t  ;use gdb-many-windows by default
 	      sentence-end-double-space nil ;sentences end with one
@@ -35,18 +35,16 @@
 ;; and sometimes other things.
 (set-language-environment "UTF-8")
 
-;; (menu-bar-mode	-1)			;I rarely used that bar
-(tool-bar-mode 0) ;toolbar is visible by default on X emacs so disable it
+;; (menu-bar-mode -1)
+(tool-bar-mode -1) ;toolbar is visible by default on X emacs so disable it
+(blink-cursor-mode -1)                  ;it's annoying
+(scroll-bar-mode -1)
 (column-number-mode 1)		 ;print column number on the mode-line
-;; (display-time-mode 0)
 
 ;; Emacs external `url browser' (usefull in Org-Mode)
 (setq browse-url-generic-program "chromium-browser")
 (setq browse-url-browser-function '(("^file:" . browse-file-url)
 				    ("."      . browse-url-generic)))
-(defun browse-file-url (URL &optional NEW-WINDOW)
-  (browse-url-generic URL NEW-WINDOW)
-)
 
  ;; Go to the next page automatically in Doc-View
 (setq doc-view-continuous t)
@@ -75,4 +73,13 @@
 (require 'sarcasm-semantic)             ;General Semantic stuff
 (require 'sarcasm-ac)                   ;Auto-complete stuff
 (require 'sarcasm-winresize)            ;window manipulations
-;; (require 'sarcasm-session)              ;restoring Emacs at startup
+;; (require 'sarcasm-session)           ;restoring Emacs at startup
+
+;; Custom settings
+(setq custom-file
+      (concat (file-name-as-directory sarcasm-load-path) "sarcasm-custom.el"))
+(load custom-file)
+
+;; Color theme
+(setq custom-theme-directory sarcasm-load-path)
+(load-theme 'sarcasm)

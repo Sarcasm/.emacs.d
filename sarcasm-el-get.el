@@ -12,6 +12,7 @@
         magit                        ;control git from Emacs
         xcscope xcscope+             ;CScope stuff
         rainbow-mode                 ;display string color colored
+        lua-mode                     ;Lua-Mode in Emacs 24 is too old
         flymake-lua                  ;flymake for Lua
 
         ;; Move buffer with C-S-<arrow key>
@@ -105,6 +106,9 @@ in auto-complete sources."
   (yas/minor-mode-on)
   (auto-complete-mode)
   (setq ac-sources (append ac-sources '(ac-source-yasnippet)))
+  ;; This is certainly not the good place for that...but for the
+  ;; moment it's ok
+  (setq show-trailing-whitespace t)
   )
 
 (mapc (lambda (mode)
