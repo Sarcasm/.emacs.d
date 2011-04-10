@@ -101,22 +101,22 @@
    `(diff-added ((t (:foreground ,green))))
    `(diff-changed ((t (:foreground ,orange))))
    `(diff-removed ((t (:foreground ,dark-red))))
-   '(diff-hunk-header ((t (:bold t))))
+   `(diff-hunk-header ((t (:bold t))))
    `(diff-function ((t (:foreground ,soft-blue :bold t))))
    `(diff-header ((t (:background ,dark-grey))))
    `(diff-file-header ((t (:foreground ,grey))))
 
    ;; magit
-   '(magit-diff-add ((t (:inherit diff-added))))
-   '(magit-diff-del ((t (:inherit diff-removed))))
-   '(magit-diff-none ((t (:inherit diff-context))))
+   `(magit-diff-add ((t (:foreground ,green))))
+   `(magit-diff-del ((t (:foreground ,dark-red))))
+   `(magit-diff-none ((t (:inherit diff-context))))
    `(magit-branch ((t (:foreground ,pink :bold t))))
    `(magit-header ((t (:foreground ,orange :bold t))))
-   '(magit-diff-hunk-header ((t (:inherit (magit-header diff-hunk-header)))))
-   '(magit-diff-file-header  ((t (:inherit (magit-header diff-file-header)))))
+   `(magit-diff-hunk-header ((t (:inherit (magit-header diff-hunk-header)))))
+   `(magit-diff-file-header  ((t (:inherit (magit-header diff-file-header)))))
    `(magit-log-sha1 ((t (:foreground ,soft-blue))))
    `(magit-log-graph ((t (:foreground ,pink))))
-   `(magit-item-highlight ((t (:background ,dark-red :foreground ,white))))
+   `(magit-item-highlight ((t (:background ,dark-grey))))
    `(magit-item-mark ((t (:foreground ,pink))))
    `(magit-log-tag-label ((t (:box t))))
    `(magit-log-head-label-bisect-good ((t (:background ,green :box t))))
@@ -129,6 +129,18 @@
 
 (provide-theme 'sarcasm)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("3880ec82bb068499c0b8a27bf15ece7960122d9f" "e88e9b3f28989f925b76dc7fc2abc67d21509849" "9e8b16a30694d8589dd49668bf7c718a1976b44a" "32b2924174789c13681f7d091d28127b48f779aa" "3d5647fda222a6e36dc7676ef0d03a2d1f25a961" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; End:

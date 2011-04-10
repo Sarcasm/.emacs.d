@@ -10,7 +10,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("494ffe7ae014bd2dc213baa6340bc0556db35742" default))))
+ '(custom-safe-themes (quote ("96655c260fbde1e4eb52e028732d89eb5dac7722" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
