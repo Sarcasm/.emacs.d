@@ -20,6 +20,8 @@
 (global-set-key (kbd "C-c C-s") 'shell)
 (global-set-key (kbd "C-x c") 'whitespace-cleanup)
 
+(global-set-key [f5] 'magit-status)
+
 ;; Enable / Disable Fly{make,spell} mode
 (when (fboundp 'flymake-mode)
   (global-set-key (kbd "M-RET") 'flymake-mode))

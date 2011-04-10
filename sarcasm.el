@@ -40,6 +40,7 @@
 (blink-cursor-mode -1)                  ;it's annoying
 (scroll-bar-mode -1)
 (column-number-mode 1)		 ;print column number on the mode-line
+(winner-mode 1)
 
 ;; Emacs external `url browser' (usefull in Org-Mode)
 (setq browse-url-generic-program "chromium-browser")
