@@ -125,6 +125,10 @@
    '(magit-log-head-label-tags ((t (:inherit (magit-log-tag-label)))))
    `(magit-log-head-label-local ((t (:foreground ,soft-white :background ,dark-grey
                                                  :box t))))
+
+   ;; Org-Mode & Babel
+   `(org-todo ((t (:bold t :foreground ,red))))
+   `(org-done ((t (:bold t :foreground ,green))))
    ))
 
 (provide-theme 'sarcasm)

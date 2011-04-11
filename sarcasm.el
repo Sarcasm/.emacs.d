@@ -74,6 +74,7 @@
 (require 'sarcasm-semantic)             ;General Semantic stuff
 (require 'sarcasm-ac)                   ;Auto-complete stuff
 (require 'sarcasm-winresize)            ;window manipulations
+(require 'sarcasm-interactively)        ;minibuffer completion & co.
 ;; (require 'sarcasm-session)           ;restoring Emacs at startup
 
 ;; Custom settings

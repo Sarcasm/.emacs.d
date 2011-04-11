@@ -5,7 +5,9 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get/"))
 (require 'el-get)
 
-(add-to-list 'el-get-recipe-path (concat sarcasm-load-path "/sarcasm-recipes"))
+(add-to-list 'el-get-recipe-path
+             (concat (file-name-as-directory sarcasm-load-path)
+                     "sarcasm-recipes"))
 
 (setq el-get-sources
       '(el-get
@@ -14,6 +16,7 @@
         rainbow-mode                 ;display string color colored
         lua-mode                     ;Lua-Mode in Emacs 24 is too old
         flymake-lua                  ;flymake for Lua
+        htmlize                      ;for Org-Mode HTML export of source code
 
         ;; Move buffer with C-S-<arrow key>
         (:name buffer-move
