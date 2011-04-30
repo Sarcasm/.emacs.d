@@ -17,8 +17,9 @@
 (global-set-key (kbd "C-c i") 'imenu)
 ;; xscope has [C-c s] for prefix
 ;; (global-set-key (kbd "C-c s") 'shell)
-(global-set-key (kbd "C-c C-s") 'shell)
+(global-set-key (kbd "C-c b") 'shell)   ;b for bash...
 (global-set-key (kbd "C-x c") 'whitespace-cleanup)
+(global-set-key (kbd "C-c f") 'folding-mode)
 
 (global-set-key [f5] 'magit-status)
 

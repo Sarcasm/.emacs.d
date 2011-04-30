@@ -23,6 +23,7 @@
   ;; variable `mode-require-final-newline' to t.
   ;; (set (make-local-variable 'require-final-newline) t)
 
+  (define-key c-mode-base-map (kbd "C-c m") 'c-man-at-point)
   (define-key c-mode-base-map (kbd "M-n") 'flymake-or-compile-next-error)
   (define-key c-mode-base-map (kbd "M-p") 'flymake-or-compile-prev-error)
   (define-key c-mode-base-map (kbd "C-c c") '(lambda ()

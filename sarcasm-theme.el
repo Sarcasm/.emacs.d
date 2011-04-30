@@ -34,7 +34,7 @@
 (let* ((black "black")
        (white "white")
        (red "firebrick")
-       (green "lime green")          ;lime green, green1, green2, green3 ?
+       (green "lime green")      ;lime green, green1, green2, green3 ?
        (blue "DodgerBlue2")
        (yellow "yellow2")
        (orange "orange")
@@ -45,12 +45,13 @@
        (cyan "cornflower blue")
 
        (soft-black "grey10")
-       (soft-white "white smoke") ;; "MistyRose2"
+       (soft-white "white smoke")       ;"MistyRose2"
        (soft-blue "#4477aa")
        (soft-gold "DarkGoldenrod2")
 
        (dark-grey "grey17")
        (dark-red "dark red")
+       (dark-orange "chocolate")
 
        (bright-grey "grey60")
 
@@ -74,7 +75,7 @@
    `(font-lock-function-name-face ((t (:foreground ,soft-blue :bold t))))
    `(font-lock-keyword-face ((t (:foreground ,cyan :bold t))))
    `(font-lock-string-face ((t (:foreground ,violet))))
-   `(font-lock-type-face ((t (:foreground ,green :bold t))))
+   `(font-lock-type-face ((t (:foreground ,dark-orange :bold t))))
    `(font-lock-variable-name-face ((t (:foreground ,pink)))) ;define, variable name, ...
    `(font-lock-warning-face ((t (:foreground ,red :bold t)))) ;cwarn-mode
    `(isearch ((t (:background ,pink :foreground "black"))))
@@ -83,6 +84,8 @@
    `(link-visited ((t (:foreground ,blue :underline t))))
    `(button ((t (:foreground ,bright-grey :underline t)))) ;backtick links in lisp
    `(trailing-whitespace ((t (:background ,dark-grey))))
+   `(show-paren-match ((t (:background ,yellow :foreground ,dark-grey :bold t))))
+   `(highlight ((t (:background ,dark-grey))))
 
    ;; Flymake
    `(flymake-errline ((t (:background ,dark-grey :foreground ,soft-white :underline ,dark-red))))
@@ -105,6 +108,7 @@
    `(diff-function ((t (:foreground ,soft-blue :bold t))))
    `(diff-header ((t (:background ,dark-grey))))
    `(diff-file-header ((t (:foreground ,grey))))
+   `(diff-refine-change ((t (:background ,dark-grey))))
 
    ;; magit
    `(magit-diff-add ((t (:foreground ,green))))
@@ -129,22 +133,14 @@
    ;; Org-Mode & Babel
    `(org-todo ((t (:bold t :foreground ,red))))
    `(org-done ((t (:bold t :foreground ,green))))
+   `(org-document-info org-document-title ((t (:foreground ,orange))))
+   `(org-document-title ((t (:foreground ,orange))))
+   `(org-document-info ((t (:foreground ,cyan))))
+   `(org-document-info-keyword ((t (:foreground ,dark-orange))))
    ))
 
 (provide-theme 'sarcasm)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("3880ec82bb068499c0b8a27bf15ece7960122d9f" "e88e9b3f28989f925b76dc7fc2abc67d21509849" "9e8b16a30694d8589dd49668bf7c718a1976b44a" "32b2924174789c13681f7d091d28127b48f779aa" "3d5647fda222a6e36dc7676ef0d03a2d1f25a961" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; End:

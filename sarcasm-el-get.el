@@ -11,12 +11,59 @@
 
 (setq el-get-sources
       '(el-get
-        magit                        ;control git from Emacs
-        xcscope xcscope+             ;CScope stuff
-        rainbow-mode                 ;display string color colored
-        lua-mode                     ;Lua-Mode in Emacs 24 is too old
-        flymake-lua                  ;flymake for Lua
-        htmlize                      ;for Org-Mode HTML export of source code
+        magit               ;control git from Emacs
+        xcscope xcscope+    ;CScope stuff
+        rainbow-mode        ;display string color colored
+        lua-mode            ;Lua-Mode in Emacs 24 is too old
+        flymake-lua         ;flymake for Lua
+        htmlize             ;for Org-Mode HTML export of source code
+        folding             ;folding plugin
+        rinari              ;Rinari Is Not A Ruby IDE
+        haml-mode           ;Alternative to ERB
+        sass-mode           ;Alternative to CSS
+        yaml-mode           ;YAML Ain't Markup Language
+
+        (:name autopair
+               :after (lambda ()
+                        (autopair-global-mode 1)
+                        )
+               )
+
+        ;; Ruby/HTML files
+        (:name rhtml-mode
+               :after (lambda ()
+                        (rinari-launch)
+                        )
+               )
+
+        ;; M-x with IDO
+        (:name smex
+               :after (lambda ()
+                        (global-set-key (kbd "M-x") 'smex)
+                        (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+                        ;; This is your old M-x.
+                        (global-set-key (kbd "C-c M-x") 'execute-extended-command)
+                        )
+               )
+
+        (:name iedit
+               :after (lambda ()
+                        (global-set-key (kbd "C-;") 'iedit-mode)
+                        (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
+                        (setq iedit-occurrence-face isearch-face)
+                        )
+               )
+
+        (:name zencoding-mode
+               ;; https://github.com/rooney/zencoding
+               ;; http://www.emacswiki.org/emacs/ZenCoding
+               :after (lambda ()
+                        (add-hook 'sgml-mode-hook 'zencoding-mode) ;auto-start on any markup modes
+                        ))
+
+        (:name offlineimap              ;OfflineIMAP inside Emacs
+               :after (add-hook 'gnus-before-startup-hook 'offlineimap)
+               )
 
         ;; Move buffer with C-S-<arrow key>
         (:name buffer-move
@@ -80,6 +127,10 @@
                             ;; Too many words in buffers...
                             ;; (setq-default ac-sources
                             ;;               (remq 'ac-source-words-in-same-mode-buffers ac-sources)
+
+                            ;; Enable auto-completion with tab in Org-Mode
+                            ;; http://permalink.gmane.org/gmane.emacs.orgmode/37064
+                            (define-key ac-complete-mode-map [tab] 'ac-expand)
                             )
                )
 

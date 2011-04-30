@@ -6,6 +6,9 @@
   '(
     ("ALGO"		"#include <algorithm>")
     ("ASSERT"		"#include <cassert>")
+    ("BIT"		"#include <bitset>")
+    ("CSTD"		"#include <cstdlib>")
+    ("CMATH"		"#include <cmath>")
     ("DEQUE"		"#include <deque>")
     ("IO"		"#include <iostream>")
     ("EXCEPTION"	"#include <exception>")
