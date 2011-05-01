@@ -8,7 +8,7 @@
 ;; http://cvs.savannah.gnu.org/viewvc/global/gtags.el?root=global&view=markup
 ;; (add-to-list 'load-path "~/.emacs.d/global/")
 ;; (autoload 'gtags-mode "gtags" "" t)
-(load-file (expand-file-name "~/.emacs.d/sarcasm-elisp/global/gtags.el"))
+(load-file "/usr/local/share/gtags/gtags.el")
 
 ;; Easy access to tags
 (define-key gtags-mode-map (kbd "C-.") 'gtags-find-tag-from-here-other-window)
