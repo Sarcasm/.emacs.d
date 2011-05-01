@@ -10,15 +10,15 @@ Requirements
 The configuration depend on git, subversion and rake.
 
 On debian the following command should install the required packages:
-: sudo aptitude install git subversion ruby rake
+    sudo aptitude install git subversion ruby rake
 
 
 Install
 -------
 The config use *el-get* (https://github.com/dimitri/el-get).
 
-: git clone git@github.com:Sarcasm/.emacs.d.git ~/.emacs.d
-: emacs -Q
+    git clone git@github.com:Sarcasm/.emacs.d.git ~/.emacs.d
+    emacs -Q
 
 
     ;; So the idea is that you copy/paste this code into your *scratch* buffer,
