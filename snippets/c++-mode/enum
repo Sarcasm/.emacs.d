@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name : enum E {...};
+# contributor : Guillaume Papin
+# --
+enum ${1:Name} {
+  $0
+};

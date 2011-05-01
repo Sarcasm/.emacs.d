@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name : tcase_create(), tcase_add_test()
+# contributor : Guillaume Papin
+# --
+TCase   *tc_${1:name} = tcase_create("${1:$(capitalize yas/text)}");
+
+tcase_add_test(tc_$1, ${2:test_name});$0

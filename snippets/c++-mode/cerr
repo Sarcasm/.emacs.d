@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name : std::cerr << ... << std::endl;
+# contributor : Guillaume Papin
+# --
+std::cerr << ${1:...} << std::endl;

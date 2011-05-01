@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+#name : template for init file
+#contributor : Guillaume Papin
+# --
+;; ${1:description} -- Guillaume Papin
+;; usage:
+;; (require 'sarcasm-${2:module})
+
+$0
+
+(provide 'sarcasm-$2)

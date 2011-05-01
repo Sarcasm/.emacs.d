@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name : START_TEST(name) {..} END_TEST
+# contributor : Guillaume Papin
+# --
+START_TEST(${1:test_name})
+{
+  $0
+}
+END_TEST

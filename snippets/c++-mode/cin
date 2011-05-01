@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name : std::cin >> ...;
+# contributor : Guillaume Papin
+# --
+std::cin >> ${1:...};

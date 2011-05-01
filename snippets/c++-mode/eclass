@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name : class Exception : public std::exception { ... }
+# contributor : Guillaume Papin
+# --
+class ${1:E`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`} : public std::exception
+{
+private:
+    std::string _msg;
+$0
+public:
+    ${1:$(yas/substr text "[^: ]*")}(const std::string & msg) : _msg(msg) {}
+    virtual ~${1:$(yas/substr text "[^: ]*")}() throw() {}
+    const char* what() const throw() { return _msg.c_str(); }
+};

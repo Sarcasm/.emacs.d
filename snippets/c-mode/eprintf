@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name : fprintf(stderr, ftm, ...)
+# contributor : Guillaume Papin
+# --
+fprintf(stderr, "${1:%s}\\n"${1:$(if (string-match "%" text) ", " "\);")
+}$2${1:$(if (string-match "%" text) "\);" "")}
