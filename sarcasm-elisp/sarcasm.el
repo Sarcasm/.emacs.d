@@ -110,6 +110,7 @@ activate compile)
 (require 'sarcasm-winresize)            ;window manipulations
 (require 'sarcasm-interactively)        ;minibuffer completion & co.
 ;; (require 'sarcasm-session)           ;restoring Emacs at startup
+(require 'sarcasm-backup)               ;backup files handling
 
 ;; Custom settings
 (setq custom-file
