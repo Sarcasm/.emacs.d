@@ -111,6 +111,7 @@ activate compile)
 (require 'sarcasm-interactively)        ;minibuffer completion & co.
 ;; (require 'sarcasm-session)           ;restoring Emacs at startup
 (require 'sarcasm-backup)               ;backup files handling
+(require 'sarcasm-dired)                ;dired stuff
 
 ;; Custom settings
 (setq custom-file
