@@ -2,7 +2,7 @@
 ;; usage:
 ;; (require 'sarcasm-dired)
 
-;; Load Dired X when Dired is loaded.
+;; Load Dired Extra
 (require 'dired-x)
 
 ;; Always enable `dired-omit-mode'
@@ -29,7 +29,7 @@
              ;; Yes this is useless, just in order to remember the
              ;; abaility to make conditional commands
              '(if (string= "index.html" file)
-                  (concat "chromium-browser " file)
-                (concat "chromium-browser " file)))))
+                  (concat browse-url-generic-program " " file)
+                (concat browse-url-generic-program " " file)))))
 
 (provide 'sarcasm-dired)
