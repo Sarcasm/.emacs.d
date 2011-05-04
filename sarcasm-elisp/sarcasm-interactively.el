@@ -23,4 +23,8 @@
 
 (ido-mode 1)
 
+(add-to-list 'ido-ignore-files "\\.gitignore")
+(add-to-list 'ido-ignore-files "cscope\\.\\w+")
+(add-to-list 'ido-ignore-files "GPATH\\|GRTAGS\\|GTAGS")
+
 (provide 'sarcasm-interactively)
