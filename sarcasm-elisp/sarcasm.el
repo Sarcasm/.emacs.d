@@ -31,6 +31,7 @@
 				      ".elc"
 				      "~"
 				      ".git/"
+				      ".gitignore"
 				      ".svn/"))
 
 ;; This sets the coding system priority and the default input method
