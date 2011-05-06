@@ -12,7 +12,10 @@
 ;; $). `dired-omit-localp' should be set to NO-DIR
 (setq dired-omit-ignored-files '("GPATH" "GRTAGS" "GTAGS"
                                  "\\.git" "\\.gitignore"
-                                 "cscope\\.\\w+"))
+                                 "cscope\\.\\w+"
+                                 ))
+
+(add-to-list 'dired-omit-extensions ".a")
 
 ;; Construct `dired-omit-files' with `dired-omit-ignored-files'
 (setq dired-omit-files (concat dired-omit-files "\\|"
