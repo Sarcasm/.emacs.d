@@ -22,6 +22,7 @@
         haml-mode           ;Alternative to ERB
         sass-mode           ;Alternative to CSS
         yaml-mode           ;YAML Ain't Markup Language
+        slime               ;The Superior Lisp Interaction Mode for Emacs
 
         (:name autopair
                :after (lambda ()

@@ -11,7 +11,7 @@ The configuration depend on git, subversion and rake.
 
 On debian the following command should install the required packages:
 
-    sudo aptitude install git subversion ruby rake
+    sudo aptitude install git subversion ruby rake cvs
 
 
 Install
