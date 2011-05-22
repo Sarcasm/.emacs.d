@@ -18,8 +18,7 @@
       sentence-end-double-space nil
 
       ;; C-k kills whole line and newline if at beginning of line
-      kill-whole-line t
-      )
+      kill-whole-line t)
 
 (setq-default indent-tabs-mode nil	;remove tabulations
               ;; show-trailing-whitespace t
@@ -104,6 +103,7 @@ activate compile)
 (require 'sarcasm-flymake)              ;flymake stuff
 (require 'sarcasm-lua)                  ;Lua stuff
 (require 'sarcasm-ruby)			;Ruby stuff
+(require 'sarcasm-lisp)			;Lisp stuff
 (require 'sarcasm-elpa)			;ELPA (Emacs Lisp Package Archive) stuff
 (require 'sarcasm-gtags)                ;GTags stuff
 (require 'sarcasm-semantic)             ;General Semantic stuff
@@ -113,6 +113,7 @@ activate compile)
 ;; (require 'sarcasm-session)           ;restoring Emacs at startup
 (require 'sarcasm-backup)               ;backup files handling
 (require 'sarcasm-dired)                ;dired stuff
+(require 'sarcasm-netsoul)              ;NetSoul stuff
 
 ;; Custom settings
 (setq custom-file
