@@ -11,10 +11,9 @@
 
 (setq el-get-sources
       '(el-get
-        magit               ;control git from Emacs
         xcscope xcscope+    ;CScope stuff
         rainbow-mode        ;display string color colored
-        lua-mode            ;Lua-Mode in Emacs 24 is too old
+        ;; lua-mode            ;Lua-Mode in Emacs 24 is too old
         flymake-lua         ;flymake for Lua
         htmlize             ;for Org-Mode HTML export of source code
         folding             ;folding plugin
@@ -22,19 +21,67 @@
         haml-mode           ;Alternative to ERB
         sass-mode           ;Alternative to CSS
         yaml-mode           ;YAML Ain't Markup Language
-        slime               ;The Superior Lisp Interaction Mode for Emacs
+        flymake-ruby        ;flymake for ruby
+        magit               ;control git from Emacs
+        fringe-helper       ;useful with test-case-mode
+
+        (:name lua-mode
+               :type git
+               :url "https://github.com/immerrr/lua-mode.git"
+               :features lua-mode
+               :post-init (lambda ()
+                            (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
+                            (autoload 'lua-mode "lua-mode" "Lua editing mode." t))
+               )
+
+        (:name yari  ;Ri documentation in Emacs
+               :features yari
+               :after (lambda ()
+                        (defun ri-bind-key ()
+                          ;; (local-set-key (kbd "C-h v") 'yari-anything)
+                          (local-set-key (kbd "C-c f") 'yari))
+                        (add-hook 'ruby-mode-hook 'ri-bind-key)
+                        )
+               )
+
+        (:name test-case-mode
+               :after (lambda ()
+                        (add-hook 'find-file-hook 'enable-test-case-mode-if-test)
+                        (add-hook 'compilation-finish-functions 'test-case-compilation-finish-run-all)
+                        (global-set-key [C-f11] (lambda ()
+                                                  (interactive)
+                                                  (test-case-run-all)
+                                                  (test-case-echo-failure-mode t)
+                                                  ))
+                        (add-hook 'test-case-result-mode-hook 'test-case-echo-failure-mode)
+                        )
+               )
 
         (:name autopair
                :after (lambda ()
-                        (autopair-global-mode 1)
-                        )
+                        ;; (autopair-global-mode 1)
+                        (add-hook 'find-file-hook 'autopair-mode))
                )
+
+        (:name doxymacs
+               :after (lambda ()
+                        (add-hook 'c-mode-common-hook 'doxymacs-mode)
+                        (defun my-doxymacs-font-lock-hook ()
+                          (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+                              (doxymacs-font-lock)))
+                        (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)))
+
+        (:name filladapt
+               :features filladapt
+               :after (lambda ()
+                        ;; (setq-default filladapt-mode t)
+                        (add-hook 'c-mode-common-hook 'c-setup-filladapt)
+                        ))
 
         ;; Ruby/HTML files
         (:name rhtml-mode
                :after (lambda ()
-                        (rinari-launch)
-                        )
+                        (rinari-launch))
                )
 
         ;; M-x with IDO
@@ -43,16 +90,14 @@
                         (global-set-key (kbd "M-x") 'smex)
                         (global-set-key (kbd "M-X") 'smex-major-mode-commands)
                         ;; This is your old M-x.
-                        (global-set-key (kbd "C-c M-x") 'execute-extended-command)
-                        )
+                        (global-set-key (kbd "C-c M-x") 'execute-extended-command))
                )
 
         (:name iedit
                :after (lambda ()
                         (global-set-key (kbd "C-;") 'iedit-mode)
                         (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
-                        (setq iedit-occurrence-face isearch-face)
-                        )
+                        (setq iedit-occurrence-face isearch-face))
                )
 
         (:name zencoding-mode
@@ -81,8 +126,7 @@
                ;; re-define `C-x o' to `switch-window' because
                ;; it doesn't work the first time...
                :after (lambda ()
-                        (global-set-key (kbd "C-x o") 'switch-window)
-                        )
+                        (global-set-key (kbd "C-x o") 'switch-window))
                )
 
         (:name yasnippet
@@ -110,8 +154,8 @@
 
                         ;; Fix the promp on X, the default was ugly.
                         (require 'dropdown-list)
-                        (setq yas/prompt-functions '(yas/dropdown-prompt
-                                                     yas/ido-prompt
+                        (setq yas/prompt-functions '(yas/ido-prompt
+                                                     yas/dropdown-prompt
                                                      yas/completing-prompt
                                                      yas/no-prompt))
                         ))
@@ -142,6 +186,17 @@
                :type git
                :url "https://github.com/brianjcj/auto-complete-clang.git"
                :features auto-complete-clang)
+
+        (:name ac-slime                 ;auto-complete for SLIME
+               :post-init (lambda ()
+                            (require 'ac-slime)
+                            (add-hook 'slime-mode-hook 'set-up-slime-ac)
+                            (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+                            (add-hook 'slime-connected-hook
+                                      (lambda ()
+                                        ;; replace `yas/expand' by `auto-complete' ?
+                                        ;; (define-key slime-mode-map (kbd "TAB") 'yas/expand)
+                                        (define-key slime-repl-mode-map (kbd "TAB") 'yas/expand)))))
         ))
 
 ;; Initialize el-get packages
@@ -170,6 +225,7 @@ in auto-complete sources."
         (add-hook (convert-mode-name-to-hook mode) 'sarcasm-enable-ac-and-yas))
       '(c-mode c++-mode emacs-lisp-mode lisp-mode lua-mode
                sh-mode org-mode perl-mode css-mode html-mode
-               nxml-mode python-mode ruby-mode snippet-mode))
+               nxml-mode python-mode ruby-mode snippet-mode
+               slime-mode slime-repl-mode))
 
 (provide 'sarcasm-el-get)

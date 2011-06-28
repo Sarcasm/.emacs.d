@@ -2,6 +2,8 @@
 ;; usage:
 ;; (require 'sarcasm-org)
 
+(add-to-list 'auto-mode-alist '("TODO" . org-mode))
+
 (setq org-log-done t
       org-src-fontify-natively t ;display specific mode colors in src block
       org-agenda-files '("~/Org")

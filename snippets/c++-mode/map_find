@@ -2,7 +2,7 @@
 # name : it = map.find(value) ... if (it != end()) { ... }
 # contributor : Guillaume Papin
 # --
-std::map<${1:T}, ${2:U}> >::const_iterator ${3:it} = ${4:map}.find(${5:value});
+std::map<${1:T}, ${2:U}>::const_iterator ${3:it} = ${4:map}.find(${5:key});
 if ($3 != $4.end())
   {
     $0

@@ -15,6 +15,7 @@
     ("EXCEPTION"	"#include <exception>")
     ("LIST"		"#include <list>")
     ("MAP"		"#include <map>")
+    ("MANIP"		"#include <iomanip>")
     ("QUEUE"		"#include <queue>")
     ("SET"		"#include <set>")
     ("SSTR"		"#include <sstream>")

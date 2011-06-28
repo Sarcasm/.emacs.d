@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name : def name() ... end
+# contributor : Guillaume Papin
+# --
+#
+# $1
+#
+def $2
+ $0
+end

@@ -9,4 +9,12 @@
 (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
 
+(defun sarcasm-ruby-mode-hook ()
+  "Additionnal ruby mode settings."
+  (auto-fill-mode 1)
+  (fixme-and-todo-font-lock)
+)
+
+(add-hook 'ruby-mode-hook 'sarcasm-ruby-mode-hook)
+
 (provide 'sarcasm-ruby)

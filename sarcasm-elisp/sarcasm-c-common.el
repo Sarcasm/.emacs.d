@@ -12,6 +12,8 @@
   ;; Highlights suspicious C and C++ constructions
   (global-cwarn-mode 1)
 
+  ;; (auto-fill-mode 1)
+
   ;; (c-toggle-auto-newline 1) ;not so handy when autopair is enable
 
   ;; It's better like that (School like tab alignement...)
@@ -31,6 +33,11 @@
                                                (save-buffer 0)
                                                (compile "make -k re")
                                                ))
+
+  (font-lock-add-keywords nil
+                          '(("\\<\\(FIXME\\):" 1 font-lock-warning-face t)))
+  (font-lock-add-keywords nil
+                          '(("\\<\\(TODO\\):" 1 font-lock-keyword-face t)))
   )
 
 (add-hook 'c-mode-common-hook 'sarcasm-c-mode-common-hook)

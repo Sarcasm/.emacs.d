@@ -17,6 +17,8 @@
       ;; Sentences end with one space when M-q `fill-paragraph' is called
       sentence-end-double-space nil
 
+      compilation-auto-jump-to-first-error t
+
       ;; C-k kills whole line and newline if at beginning of line
       kill-whole-line t)
 

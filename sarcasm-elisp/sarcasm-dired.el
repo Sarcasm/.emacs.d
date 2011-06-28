@@ -5,6 +5,8 @@
 ;; Load Dired Extra
 (require 'dired-x)
 
+(setq dired-recursive-deletes 'top)
+
 ;; Always enable `dired-omit-mode'
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 

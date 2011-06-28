@@ -17,7 +17,7 @@ Search for man(2) and man(3) by default."
   (if (file-exists-p (concat "/usr/share/man/man2/" NAME ".2.gz"))
       (man (concat NAME "(2)"))
     (if (file-exists-p (concat "/usr/share/man/man3/" NAME ".3.gz"))
-	(man (concat NAME "(3)"))
+        (man (concat NAME "(3)"))
       (man NAME)))
   )
 
@@ -84,5 +84,60 @@ otherwise assume it's compile previous error."
   arg lines up."
   (interactive "*p")
   (move-text-internal (- arg)))
+
+(defun slime-stumpwm-repl ()
+  "Start SLIME and open the StumpWM directory."
+  (interactive)
+  ;; (autopair-mode nil)                 ;due to post-command-hook issues
+  (let* ((stumpwm-config-dir "~/.stumpwm.d/")
+         (slime-stumpwm-buffer-name "*slime-repl sbcl*")
+         (stumpwm-buffer (get-buffer slime-stumpwm-buffer-name)))
+    (find-file-other-window stumpwm-config-dir)
+    (if stumpwm-buffer
+        (switch-to-buffer stumpwm-buffer)
+      (slime-connect "127.0.0.1" "4005")
+      ;; After the cool animation :P
+      (run-at-time 4 nil (lambda ()
+                           (slime-repl-set-package "stumpwm")
+                           (slime-cd stumpwm-config-dir)
+                           ))
+      ))
+  )
+
+(defun fixme-and-todo-font-lock ()
+  "Add a coloration for TODO: and FIXME: keywords."
+  (font-lock-add-keywords nil
+                          '(("\\<\\(FIXME\\):" 1 font-lock-warning-face t)))
+  (font-lock-add-keywords nil
+                          '(("\\<\\(TODO\\):" 1 font-lock-keyword-face t)))
+  )
+
+
+;; W window urgent hint handling
+;; source: http://www.linux.org.ru/forum/development/4076070
+;; usage:
+;; urgent [ON]:
+;; (x-urgent-hint (selected-frame) t)
+;; urgent [OFF]
+;; (x-urgent-hint (selected-frame) nil)
+(defun x-wm-hints (frame &optional source)
+  (mapcar '(lambda (field)
+             (if (consp field)
+                 (+ (lsh (car field) 16) (cdr field))
+               field))
+          (x-window-property
+           "WM_HINTS" frame "WM_HINTS"
+           (if source
+               source
+             (string-to-number (frame-parameter frame 'outer-window-id)))
+           nil t)))
+
+(defun x-urgent-hint (frame arg)
+  (let* ((wm-hints (x-wm-hints frame))
+         (flags (car wm-hints)))
+    (setcar wm-hints (if arg
+                         (logior flags #x00000100)
+                       (logand flags #xFFFFFEFF)))
+    (x-change-window-property "WM_HINTS" wm-hints frame "WM_HINTS" 32 t)))
 
 (provide 'sarcasm-utils)
