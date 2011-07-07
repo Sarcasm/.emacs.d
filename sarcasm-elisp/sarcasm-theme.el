@@ -31,6 +31,9 @@
 (deftheme sarcasm
   "Created 2011-04-10.")
 
+;; Change the font to your needs
+(set-default-font "DejaVu Sans Mono-10")
+
 (let* ((black "black")
        (white "white")
        (red "firebrick")
@@ -89,6 +92,7 @@
 
    ;; Flymake
    `(flymake-errline ((t (:background ,dark-grey :foreground ,soft-white :underline ,dark-red))))
+   `(flymake-warnline ((t (:background ,dark-grey :underline ,soft-blue))))
 
    ;; C-x m
    `(message-header-name ((t (:foreground ,orange :bold t))))
