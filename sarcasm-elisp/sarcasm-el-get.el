@@ -24,6 +24,7 @@
         flymake-ruby        ;flymake for ruby
         magit               ;control git from Emacs
         fringe-helper       ;useful with test-case-mode
+        emacschrome
 
         (:name lua-mode
                :type git
@@ -76,6 +77,8 @@
                :after (lambda ()
                         ;; (setq-default filladapt-mode t)
                         (add-hook 'c-mode-common-hook 'c-setup-filladapt)
+                        (add-hook 'c-mode-common-hook 'auto-fill-mode)
+                        (add-hook 'c-mode-common-hook 'filladapt-mode)
                         ))
 
         ;; Ruby/HTML files
