@@ -36,6 +36,12 @@
                                 (previous-error)
                                 )))
 
+;; Irony point/mark
+(global-set-key (kbd "C-c 8 i") (lambda ()
+                                  ;; #x061x in hexa or REVERSED QUESTION MARK
+                                  (ucs-insert 1567)
+                                  ))
+
 ;; Magit
 (global-set-key (kbd "C-c x m") 'magit-status)
 ;; Imagine:
