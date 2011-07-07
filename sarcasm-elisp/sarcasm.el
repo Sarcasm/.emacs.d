@@ -6,6 +6,9 @@
 (defconst sarcasm-load-path "~/.emacs.d/sarcasm-elisp"
   "Default path for Sarcasm config files.")
 
+;; Go to the projects root directory by default
+(setq default-directory "/mnt/media/projects/")
+
 (setq user-mail-address "guillaume.papin@epitech.eu"
       ;; user-full-name "Guillaume Papin"
       inhibit-startup-screen t	      ;do not display a startup screen
@@ -18,6 +21,7 @@
       sentence-end-double-space nil
 
       compilation-auto-jump-to-first-error t
+      compilation-scroll-output t
 
       ;; C-k kills whole line and newline if at beginning of line
       kill-whole-line t)
@@ -50,7 +54,7 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 
-;; whenever an external process changes a file underneath emacs, and there
+;; Whenever an external process changes a file underneath emacs, and there
 ;; was no unsaved changes in the corresponding buffer, just revert its
 ;; content to reflect what's on-disk.
 ;; source: https://github.com/dimitri/emacs-kicker/blob/master/init.el
