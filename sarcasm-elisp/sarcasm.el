@@ -9,6 +9,9 @@
 ;; Go to the projects root directory by default
 (setq default-directory "/mnt/media/projects/")
 
+;; Change the font to your needs
+(set-default-font "DejaVu Sans Mono-10")
+
 (setq user-mail-address "guillaume.papin@epitech.eu"
       ;; user-full-name "Guillaume Papin"
       inhibit-startup-screen t	      ;do not display a startup screen
