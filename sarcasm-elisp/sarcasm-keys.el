@@ -38,6 +38,7 @@
 
 ;; Irony point/mark
 (global-set-key (kbd "C-c 8 i") (lambda ()
+                                  (interactive)
                                   ;; #x061x in hexa or REVERSED QUESTION MARK
                                   (ucs-insert 1567)
                                   ))
