@@ -34,6 +34,9 @@
                                                (compile "make -k re")
                                                ))
 
+  (define-key c-mode-base-map (kbd "C-c r") 'semantic-symref-rename-local-variable)
+  (define-key c-mode-base-map (kbd "C-c j") 'semantic-complete-jump-local)
+
   (font-lock-add-keywords nil
                           '(("\\<\\(FIXME\\):" 1 font-lock-warning-face t)))
   (font-lock-add-keywords nil
