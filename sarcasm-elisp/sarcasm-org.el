@@ -63,6 +63,7 @@ change the dictionnary to the corresponding language."
    (org    . t)
    (latex  . t)
    (python . t)
+   (dot    . t)
    ))
 
 ;; It's really annoying to enter 'yes' every time I export a org-file
