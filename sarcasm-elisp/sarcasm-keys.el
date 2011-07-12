@@ -52,7 +52,11 @@
 ;; remove '-' and...HEY !!! It's '>' and '<' !
 (add-hook 'magit-mode-hook (lambda ()
                              (define-key magit-mode-map (kbd ">") 'magit-push)
-                             (define-key magit-mode-map (kbd "<") 'magit-pull)))
+                             (define-key magit-mode-map (kbd "<") 'magit-pull)
+                             (define-key magit-mode-map (kbd "C-o")
+                               (lambda ()
+                                 (interactive)
+                                 (magit-visit-item (universal-argument))))))
 
 ;; Enable / Disable Fly{make,spell} mode
 (when (fboundp 'flymake-mode)
