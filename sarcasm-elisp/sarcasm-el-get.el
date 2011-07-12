@@ -24,7 +24,14 @@
         flymake-ruby        ;flymake for ruby
         magit               ;control git from Emacs
         fringe-helper       ;useful with test-case-mode
-        emacschrome
+
+
+        (:name emacschrome
+               :features edit-server
+               :post-init (lambda ()
+                            (edit-server-start)
+                            )
+               )
 
         (:name lua-mode
                :type git
