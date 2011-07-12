@@ -9,8 +9,13 @@
 ;; Go to the projects root directory by default
 (setq default-directory "/mnt/media/projects/")
 
-;; Change the font to your needs
-(set-default-font "DejaVu Sans Mono-10")
+;; I don't understand why, but the following doesn't work
+;; ;; Change the font to your needs
+;; (set-default-font "DejaVu Sans Mono-10")
+;; So in ~/.Xdefaults / ~/.Xresources
+;;
+;; Emacs.FontBackend: xft
+;; Emacs.font: DejaVu Sans Mono-10
 
 (setq user-mail-address "guillaume.papin@epitech.eu"
       ;; user-full-name "Guillaume Papin"
