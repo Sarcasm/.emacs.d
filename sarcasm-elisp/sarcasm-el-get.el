@@ -234,8 +234,8 @@ in auto-complete sources."
 (mapc (lambda (mode)
         (add-hook (convert-mode-name-to-hook mode) 'sarcasm-enable-ac-and-yas))
       '(c-mode c++-mode emacs-lisp-mode lisp-mode lua-mode
-               sh-mode org-mode perl-mode css-mode html-mode
-               nxml-mode python-mode ruby-mode snippet-mode
-               slime-mode slime-repl-mode))
+               sh-mode perl-mode css-mode html-mode nxml-mode
+               python-mode ruby-mode snippet-mode slime-mode
+               slime-repl-mode))
 
 (provide 'sarcasm-el-get)
