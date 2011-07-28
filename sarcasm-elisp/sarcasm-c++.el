@@ -27,37 +27,12 @@
     ))
 
 (add-hook 'c++-mode-hook
-          (lambda ()
-            (subword-mode)              ;C-c C-w to toggle
-            (define-key c++-mode-map (kbd "M-TAB") 'ac-complete-clang)
+          '(lambda ()
+             (subword-mode)             ;C-c C-w to toggle
 
-            (define-key c++-mode-map (kbd "C-c t") 'c++-open-decl-or-def-other-window)
-            ;; (setq ac-sources (append '(ac-source-clang) ac-sources))
-          ))
+             ;; No additional indentation for members of a namespace.
+             (c-set-offset 'innamespace 0)
 
-(defun c++-open-decl-or-def-other-window ()
-  "Open the declaration (Class.hh) or the definition (Class.cpp)
-of the current file in other window.
-
-Create the file if it doesn't exist.
-
-File.hh => File.cpp
-File.cpp => File.hh"
-  (interactive)
-  (let ((file buffer-file-name))
-    (if (not file)
-        (message "Coulnd't retrieve buffer filename.")
-      (let ((ext (file-name-extension file)))
-        (cond
-         ((string= ext "hh")
-          (find-file-other-window (concat (file-name-sans-extension file) ".cpp")))
-         ((string= ext "cpp")
-          (find-file-other-window (concat (file-name-sans-extension file) ".hh")))
-         (t (message "Invalid filename, extension .hh or .cpp expected."))
-         )
-        )
-      )
-    )
-  )
+             (define-key c++-mode-map (kbd "M-TAB") 'ac-complete-clang)))
 
 (provide 'sarcasm-c++)

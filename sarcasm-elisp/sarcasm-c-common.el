@@ -41,7 +41,15 @@
                           '(("\\<\\(FIXME\\):" 1 font-lock-warning-face t)))
   (font-lock-add-keywords nil
                           '(("\\<\\(TODO\\):" 1 font-lock-keyword-face t)))
-  )
+
+
+  ;; Note (from find-file.el comments):
+  ;; SEARCHING is carried out in a set of directories specified by the
+  ;; `ff-search-directories' variable:
+  ;;
+  ;;     ("." "../../src" "../include/*" "/usr/local/*/src/*" "$PROJECT/src")
+  (setq ff-always-in-other-window t)
+  (define-key c++-mode-map (kbd "C-c t") 'ff-find-other-file))
 
 (add-hook 'c-mode-common-hook 'sarcasm-c-mode-common-hook)
 
