@@ -3,7 +3,7 @@
 ;; Load personnal config
 ;; (load (expand-file-name "~/.emacs.d/sarcasm-elisp/sarcasm.el"))
 
-(defconst sarcasm-load-path "~/.emacs.d/sarcasm-elisp"
+(defconst *sarcasm-load-path* "~/.emacs.d/sarcasm-elisp"
   "Default path for Sarcasm config files.")
 
 ;; Go to the projects root directory by default
@@ -22,8 +22,9 @@
       inhibit-startup-screen t	      ;do not display a startup screen
       autopair-autowrap t             ;wrap the region with the paired characters
       mouse-yank-at-point t           ;paste at cursor position
-      gdb-many-windows t              ;use gdb-many-windows by default
       scroll-preserve-screen-position t ;restore cursor after PgUp/PgDown
+
+      align-to-tab-stop nil             ;align with spaces
 
       ;; Sentences end with one space when M-q `fill-paragraph' is called
       sentence-end-double-space nil
@@ -37,6 +38,12 @@
 (setq-default indent-tabs-mode nil	;remove tabulations
               ;; show-trailing-whitespace t
 	      )
+
+;; http://www.emacswiki.org/emacs/SavePlace
+;; note: This is useful when =C-x C-v= is done
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file "~/.emacs.d/places")
 
 ;; Thanks http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
 ;; note: Slash for directory
@@ -85,13 +92,13 @@
 
 ;; Gnus starting file
 (setq gnus-init-file                    ;it will try the suffix .el[c]
-      (concat (file-name-as-directory sarcasm-load-path) "sarcasm-gnus"))
+      (concat (file-name-as-directory *sarcasm-load-path*) "sarcasm-gnus"))
 
 ;; Emacs perso load path
 (add-to-list 'load-path "~/.emacs.d/elisp")
 
 ;; Add Sarcasm directory to default path
-(add-to-list 'load-path sarcasm-load-path)
+(add-to-list 'load-path *sarcasm-load-path*)
 
 ;; Narrowing is convenient
 (put 'widen 'disabled nil)
@@ -115,6 +122,7 @@ activate compile)
 (require 'sarcasm-c)			;C stuff
 (require 'sarcasm-c++)			;C++ stuff
 (require 'sarcasm-flymake)              ;flymake stuff
+(require 'sarcasm-makefile)             ;Makefile stuff
 (require 'sarcasm-lua)                  ;Lua stuff
 (require 'sarcasm-ruby)			;Ruby stuff
 (require 'sarcasm-lisp)			;Lisp stuff
@@ -127,13 +135,15 @@ activate compile)
 ;; (require 'sarcasm-session)           ;restoring Emacs at startup
 (require 'sarcasm-backup)               ;backup files handling
 (require 'sarcasm-dired)                ;dired stuff
+(require 'sarcasm-insert)               ;auto-insert stuff
+(require 'sarcasm-comment)              ;Comment settings
 (require 'sarcasm-netsoul)              ;NetSoul stuff
 
 ;; Custom settings
 (setq custom-file
-      (concat (file-name-as-directory sarcasm-load-path) "sarcasm-custom.el"))
+      (concat (file-name-as-directory *sarcasm-load-path*) "sarcasm-custom.el"))
 (load custom-file)
 
 ;; Color theme
-(setq custom-theme-directory sarcasm-load-path)
+(setq custom-theme-directory *sarcasm-load-path*)
 (load-theme 'sarcasm)

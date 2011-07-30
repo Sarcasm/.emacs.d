@@ -13,6 +13,17 @@
 ;; Sources:
 ;; - http://ubuntuforums.org/showpost.php?p=8943092&postcount=3
 ;; - http://superuser.com/questions/214295/emacs-how-to-choose-good-custom-key-bindings
+(global-set-key [f5] (lambda (arg)
+                       "Open Emacs user configuration directory
+in dired. With a prefix argument open the file containing the
+el-get configuration."
+                       (interactive "P")
+                       (if arg
+                           (find-file
+                            (concat (file-name-as-directory *sarcasm-load-path*)
+                                    "sarcasm-el-get.el"))
+                         (dired *sarcasm-load-path*))))
+
 
 (global-set-key (kbd "C-c i") 'imenu)
 ;; xscope has [C-c s] for prefix
@@ -20,28 +31,31 @@
 (global-set-key (kbd "C-c b") 'shell)   ;b for bash...
 (global-set-key (kbd "C-x c") 'whitespace-cleanup)
 (global-set-key (kbd "C-c f") 'folding-mode)
+(global-set-key (kbd "C-c p") 'sarcasm-path-to-kill-ring)
+
+;; Found on Stack Overflow
+;; http://stackoverflow.com/questions/2091881/emacs-font-sizing-with-ctrl-key-and-mouse-scroll/2092158#2092158
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
 ;; For compilation buffer
 (global-set-key (kbd "M-n") (lambda ()
                               (interactive)
                               (if flymake-mode
                                   (flymake-goto-next-error)
-                                (next-error)
-                                )))
+                                (next-error))))
 
 (global-set-key (kbd "M-p")  (lambda ()
-                              (interactive)
-                              (if flymake-mode
-                                  (flymake-goto-prev-error)
-                                (previous-error)
-                                )))
+                               (interactive)
+                               (if flymake-mode
+                                   (flymake-goto-prev-error)
+                                 (previous-error))))
 
 ;; Irony point/mark
 (global-set-key (kbd "C-c 8 i") (lambda ()
                                   (interactive)
                                   ;; #x061x in hexa or REVERSED QUESTION MARK
-                                  (ucs-insert 1567)
-                                  ))
+                                  (ucs-insert 1567)))
 
 ;; Magit
 (global-set-key (kbd "C-c x m") 'magit-status)
@@ -50,13 +64,13 @@
 ;; push: local -> server
 ;; pull: local <- server
 ;; remove '-' and...HEY !!! It's '>' and '<' !
-(add-hook 'magit-mode-hook (lambda ()
-                             (define-key magit-mode-map (kbd ">") 'magit-push)
-                             (define-key magit-mode-map (kbd "<") 'magit-pull)
-                             (define-key magit-mode-map (kbd "C-o")
-                               (lambda ()
-                                 (interactive)
-                                 (magit-visit-item (universal-argument))))))
+(add-hook 'magit-mode-hook '(lambda ()
+                              (define-key magit-mode-map (kbd ">") 'magit-push)
+                              (define-key magit-mode-map (kbd "<") 'magit-pull)
+                              (define-key magit-mode-map (kbd "C-o")
+                                (lambda ()
+                                  (interactive)
+                                  (magit-visit-item t)))))
 
 ;; Enable / Disable Fly{make,spell} mode
 (when (fboundp 'flymake-mode)

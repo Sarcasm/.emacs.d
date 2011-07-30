@@ -96,7 +96,7 @@ otherwise assume it's compile previous error."
     (if stumpwm-buffer
         (switch-to-buffer stumpwm-buffer)
       (slime-connect "127.0.0.1" "4005")
-      ;; After the cool animation :P
+      ;; ~After the animation
       (run-at-time 4 nil (lambda ()
                            (slime-repl-set-package "stumpwm")
                            (slime-cd stumpwm-config-dir)
@@ -139,5 +139,35 @@ otherwise assume it's compile previous error."
                          (logior flags #x00000100)
                        (logand flags #xFFFFFEFF)))
     (x-change-window-property "WM_HINTS" wm-hints frame "WM_HINTS" 32 t)))
+
+(defun sarcasm-path-to-kill-ring (&optional absolute)
+  "Save the current path of the buffer into the kill ring.
+
+With a prefix argument give the absolute path (symlink
+resolved)."
+  (interactive "P")
+  (let ((pathname (if (eq major-mode 'dired-mode)
+                      dired-directory
+                    buffer-file-name)))
+    (if (not pathname)
+        (message "No filename associated with this buffer.")
+      (let ((final-path (if absolute
+                            (or (file-truename pathname) pathname)
+                          pathname)))
+        (kill-new final-path)
+        (message "\"%s\" added to kill ring" final-path)))))
+
+;; From kde-emacs
+;; file : kde-emacs-utils.el
+; Makes ',' insert ', '
+(defun sarcasm-insert-comma (arg)
+  (interactive "*P")
+  (let* ((ch (char-after))
+         (spacep (not (or (eq ch ? )
+                          (c-in-literal)
+                          arg))))
+    (self-insert-command (prefix-numeric-value arg))
+    (if spacep
+	(insert " "))))
 
 (provide 'sarcasm-utils)

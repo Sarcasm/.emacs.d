@@ -38,8 +38,8 @@
   (if (desktop-in-use-p) (desktop-save-in-desktop-dir)))
 ;; Can be switched off with (cancel-timer *sarcasm-desktop-saver-timer*)
 (add-hook 'after-init-hook
-          (lambda ()
-            (setq *sarcasm-desktop-saver-timer*
-                  (run-with-timer 5 300 'autosave-desktop))))
+          '(lambda ()
+             (setq *sarcasm-desktop-saver-timer*
+                   (run-with-timer 5 300 'autosave-desktop))))
 
 (provide 'sarcasm-session)

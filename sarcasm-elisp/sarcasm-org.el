@@ -7,20 +7,27 @@
 (setq org-log-done t
       org-src-fontify-natively t ;display specific mode colors in src block
       org-agenda-files '("~/Org")
-      )
+      org-archive-location "archives/%s_archive::"
+      org-insert-mode-line-in-empty-file t)
 
 ;; Org-Mode global keybindings
-(define-key global-map (kbd "C-c o l") 'org-store-link)
 (define-key global-map (kbd "C-c o a") 'org-agenda)
+(define-key global-map (kbd "C-c o l") 'org-store-link)
+(define-key global-map (kbd "C-c o o") 'org-open-at-point-global)
+(define-key global-map (kbd "C-c o i") 'org-insert-link-global)
 
 (add-hook 'org-mode-hook
-	  (lambda ()
-            (auto-fill-mode 1)
-	    (define-key org-mode-map [f7] 'org-flyspell-mode-and-dictionary)
-            ;; Babel handle 'C' not 'c'...ok, in fact babel doesn't
-            ;; know how to execute 'C' use 'c++' instead.
-            (add-to-list 'org-src-lang-modes '("C" . c))
-	    ))
+	  '(lambda ()
+             (auto-fill-mode 1)
+             (define-key org-mode-map [f7] 'org-flyspell-mode-and-dictionary)
+
+             (setq org-agenda-start-with-follow-mode t)
+             ;; Like in *grep* buffers
+             (define-key org-agenda-mode-map (kbd "C-c C-f") 'org-agenda-follow-mode)
+
+             ;; Babel handle 'C' not 'c'...ok, in fact babel doesn't
+             ;; know how to execute 'C' use 'c++' instead.
+             (add-to-list 'org-src-lang-modes '("C" . c))))
 
 ;; Make windmove work in Org-Mode:
 (add-hook 'org-shiftup-final-hook    'windmove-up)
@@ -63,8 +70,7 @@ change the dictionnary to the corresponding language."
    (org    . t)
    (latex  . t)
    (python . t)
-   (dot    . t)
-   ))
+   (dot    . t)))
 
 ;; It's really annoying to enter 'yes' every time I export a org-file
 ;; with ditaa diagrams. It's dangerous on Shell script for example,

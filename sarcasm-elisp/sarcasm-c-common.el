@@ -16,23 +16,26 @@
 
   ;; (c-toggle-auto-newline 1) ;not so handy when autopair is enable
 
-  ;; It's better like that (School like tab alignement...)
-  (setq align-indent-before-aligning    t
-        align-to-tab-stop               t)
+  (setq align-indent-before-aligning t)
+
+  ;; (c-toggle-auto-newline 1)
+  ;; (c-toggle-hungry-state 1)
 
   ;; Adding a final newline when none are present. If I'm right the C
   ;; mode already do this automatically because it defined the
   ;; variable `mode-require-final-newline' to t.
   ;; (set (make-local-variable 'require-final-newline) t)
 
+  (define-key c-mode-base-map [?,] 'sarcasm-insert-comma)
+
   (define-key c-mode-base-map (kbd "C-c m") 'c-man-at-point)
   (define-key c-mode-base-map (kbd "M-n") 'flymake-or-compile-next-error)
   (define-key c-mode-base-map (kbd "M-p") 'flymake-or-compile-prev-error)
-  (define-key c-mode-base-map (kbd "C-c c") '(lambda ()
-                                               (interactive)
-                                               (save-buffer 0)
-                                               (compile "make -k re")
-                                               ))
+  (define-key c-mode-base-map (kbd "C-c c") (lambda ()
+                                              (interactive)
+                                              (save-buffer 0)
+                                              (compile "make -k re")
+                                              ))
 
   (define-key c-mode-base-map (kbd "C-c r") 'semantic-symref-rename-local-variable)
   (define-key c-mode-base-map (kbd "C-c j") 'semantic-complete-jump-local)

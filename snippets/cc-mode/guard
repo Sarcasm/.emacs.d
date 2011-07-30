@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name : #ifndef _FILE_EXT_... #define...
+# contributor : Guillaume Papin
+# --
+#ifndef ${1:`(sarcasm-format-include-guard)`}
+#define $1
+
+$0
+
+#endif /* !$1 */

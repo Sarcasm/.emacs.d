@@ -17,7 +17,7 @@
 
 ;; usage:
 ;; In init file:
-;; (setq custom-theme-directory sarcasm-load-path)
+;; (setq custom-theme-directory *sarcasm-load-path*)
 ;; (load-theme 'sarcasm)
 ;; Or after init:
 ;; M-x `load-theme' RET sarcasm RET

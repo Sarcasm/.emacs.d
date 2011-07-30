@@ -8,7 +8,7 @@
 (setq dired-recursive-deletes 'top)
 
 ;; Always enable `dired-omit-mode'
-(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+(add-hook 'dired-mode-hook '(lambda () (dired-omit-mode 1)))
 
 ;; List of files to omit (can be a regexp, will be surrounded by ^ and
 ;; $). `dired-omit-localp' should be set to NO-DIR
@@ -36,5 +36,11 @@
              '(if (string= "index.html" file)
                   (concat browse-url-generic-program " " file)
                 (concat browse-url-generic-program " " file)))))
+
+(require 'dired-details)
+(define-key dired-mode-map "/" 'dired-details-toggle)
+;; or to just this, if you set ‘dired-details-hidden-string’ to ""
+;; instead of "[...]":
+(setq dired-details-hidden-string "")
 
 (provide 'sarcasm-dired)

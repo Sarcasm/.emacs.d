@@ -18,6 +18,9 @@
 	  '(lambda ()
 	     (semantic-mode)
 
+             ;; School require that
+             (setq align-to-tab-stop t)
+
              (define-key c-mode-map (kbd "M-TAB") 'ac-complete-clang)
 
              (when (boundp 'auto-complete-mode)

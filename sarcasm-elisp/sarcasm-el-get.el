@@ -6,7 +6,7 @@
 (require 'el-get)
 
 (add-to-list 'el-get-recipe-path
-             (concat (file-name-as-directory sarcasm-load-path)
+             (concat (file-name-as-directory *sarcasm-load-path*)
                      "sarcasm-recipes"))
 
 (setq el-get-sources
@@ -24,14 +24,20 @@
         flymake-ruby        ;flymake for ruby
         magit               ;control git from Emacs
         fringe-helper       ;useful with test-case-mode
-
+        dired-details       ;allow to only show filenames in dired buffer
+        ace-jump-mode       ;a quick cursor jump mode for Emacs
 
         (:name emacschrome
                :features edit-server
                :post-init (lambda ()
-                            (edit-server-start)
-                            )
-               )
+                            (edit-server-start)))
+
+        (:name ace-jump-mode
+               :after (lambda ()
+                        (setq ace-jumpace-jump-mode-case-sensitive-search nil)
+                        ;; I never used `zap-to-char', if I need it
+                        ;; M-x zap[TAB] should be enough
+                        (global-set-key (kbd "M-z") 'ace-jump-mode)))
 
         (:name lua-mode
                :type git
@@ -39,8 +45,7 @@
                :features lua-mode
                :post-init (lambda ()
                             (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
-                            (autoload 'lua-mode "lua-mode" "Lua editing mode." t))
-               )
+                            (autoload 'lua-mode "lua-mode" "Lua editing mode." t)))
 
         (:name yari  ;Ri documentation in Emacs
                :features yari
@@ -48,9 +53,7 @@
                         (defun ri-bind-key ()
                           ;; (local-set-key (kbd "C-h v") 'yari-anything)
                           (local-set-key (kbd "C-c f") 'yari))
-                        (add-hook 'ruby-mode-hook 'ri-bind-key)
-                        )
-               )
+                        (add-hook 'ruby-mode-hook 'ri-bind-key)))
 
         (:name test-case-mode
                :after (lambda ()
@@ -61,18 +64,20 @@
                                                   (test-case-run-all)
                                                   (test-case-echo-failure-mode t)
                                                   ))
-                        (add-hook 'test-case-result-mode-hook 'test-case-echo-failure-mode)
-                        )
-               )
+                        (add-hook 'test-case-result-mode-hook 'test-case-echo-failure-mode)))
 
         (:name autopair
                :after (lambda ()
                         ;; (autopair-global-mode 1)
-                        (add-hook 'find-file-hook 'autopair-mode))
-               )
+                        (add-hook 'find-file-hook 'autopair-mode)))
 
         (:name doxymacs
+               ;; Use an alternative url (a fork with really minor
+               ;; changes)
+               :url "git://github.com/Sarcasm/doxymacs.git"
                :after (lambda ()
+                        (setq doxymacs-command-character "\\")
+
                         (add-hook 'c-mode-common-hook 'doxymacs-mode)
                         (defun my-doxymacs-font-lock-hook ()
                           (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
@@ -85,14 +90,12 @@
                         ;; (setq-default filladapt-mode t)
                         (add-hook 'c-mode-common-hook 'c-setup-filladapt)
                         (add-hook 'c-mode-common-hook 'auto-fill-mode)
-                        (add-hook 'c-mode-common-hook 'filladapt-mode)
-                        ))
+                        (add-hook 'c-mode-common-hook 'filladapt-mode)))
 
         ;; Ruby/HTML files
         (:name rhtml-mode
                :after (lambda ()
-                        (rinari-launch))
-               )
+                        (rinari-launch)))
 
         ;; M-x with IDO
         (:name smex
@@ -100,26 +103,22 @@
                         (global-set-key (kbd "M-x") 'smex)
                         (global-set-key (kbd "M-X") 'smex-major-mode-commands)
                         ;; This is your old M-x.
-                        (global-set-key (kbd "C-c M-x") 'execute-extended-command))
-               )
+                        (global-set-key (kbd "C-c M-x") 'execute-extended-command)))
 
         (:name iedit
                :after (lambda ()
                         (global-set-key (kbd "C-;") 'iedit-mode)
                         (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
-                        (setq iedit-occurrence-face isearch-face))
-               )
+                        (setq iedit-occurrence-face isearch-face)))
 
         (:name zencoding-mode
                ;; https://github.com/rooney/zencoding
                ;; http://www.emacswiki.org/emacs/ZenCoding
                :after (lambda ()
-                        (add-hook 'sgml-mode-hook 'zencoding-mode) ;auto-start on any markup modes
-                        ))
+                        (add-hook 'sgml-mode-hook 'zencoding-mode))) ;auto-start on any markup modes
 
         (:name offlineimap              ;OfflineIMAP inside Emacs
-               :after (add-hook 'gnus-before-startup-hook 'offlineimap)
-               )
+               :after (add-hook 'gnus-before-startup-hook 'offlineimap))
 
         ;; Move buffer with C-S-<arrow key>
         (:name buffer-move
@@ -128,16 +127,13 @@
                         (global-set-key (kbd "<C-S-up>")     'buf-move-up)
                         (global-set-key (kbd "<C-S-down>")   'buf-move-down)
                         (global-set-key (kbd "<C-S-left>")   'buf-move-left)
-                        (global-set-key (kbd "<C-S-right>")  'buf-move-right)
-                        )
-               )
+                        (global-set-key (kbd "<C-S-right>")  'buf-move-right)))
 
         (:name switch-window
                ;; re-define `C-x o' to `switch-window' because
                ;; it doesn't work the first time...
                :after (lambda ()
-                        (global-set-key (kbd "C-x o") 'switch-window))
-               )
+                        (global-set-key (kbd "C-x o") 'switch-window)))
 
         (:name yasnippet
                :type svn
@@ -147,7 +143,6 @@
                ;; correct task seems to be 'rake compile'
                :build ("rake compile")
                :features yasnippet
-               ;; :post-init (lambda ()
                :after (lambda ()
                         ;; from here: https://github.com/blastura/dot-emacs/blob/master/init.el
                         ;; (add-hook 'yas/after-exit-snippet-hook
@@ -167,8 +162,7 @@
                         (setq yas/prompt-functions '(yas/ido-prompt
                                                      yas/dropdown-prompt
                                                      yas/completing-prompt
-                                                     yas/no-prompt))
-                        ))
+                                                     yas/no-prompt))))
 
         (:name autocomplete
                :type git
@@ -185,9 +179,7 @@
 
                             ;; Enable auto-completion with tab in Org-Mode
                             ;; http://permalink.gmane.org/gmane.emacs.orgmode/37064
-                            (define-key ac-complete-mode-map [tab] 'ac-expand)
-                            )
-               )
+                            (define-key ac-complete-mode-map [tab] 'ac-expand)))
 
         (:name auto-complete-extension
                :type emacswiki)
@@ -203,11 +195,10 @@
                             (add-hook 'slime-mode-hook 'set-up-slime-ac)
                             (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
                             (add-hook 'slime-connected-hook
-                                      (lambda ()
-                                        ;; replace `yas/expand' by `auto-complete' ?
-                                        ;; (define-key slime-mode-map (kbd "TAB") 'yas/expand)
-                                        (define-key slime-repl-mode-map (kbd "TAB") 'yas/expand)))))
-        ))
+                                      '(lambda ()
+                                         ;; replace `yas/expand' by `auto-complete' ?
+                                         ;; (define-key slime-mode-map (kbd "TAB") 'yas/expand)
+                                         (define-key slime-repl-mode-map (kbd "TAB") 'yas/expand)))))))
 
 ;; Initialize el-get packages
 (el-get)
@@ -228,8 +219,7 @@ in auto-complete sources."
   (setq ac-sources (append ac-sources '(ac-source-yasnippet)))
   ;; This is certainly not the good place for that...but for the
   ;; moment it's ok
-  (setq show-trailing-whitespace t)
-  )
+  (setq show-trailing-whitespace t))
 
 (mapc (lambda (mode)
         (add-hook (convert-mode-name-to-hook mode) 'sarcasm-enable-ac-and-yas))
