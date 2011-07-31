@@ -86,6 +86,7 @@
    `(trailing-whitespace ((t (:background ,dark-grey))))
    `(show-paren-match ((t (:background ,yellow :foreground ,dark-grey :bold t))))
    `(highlight ((t (:background ,dark-grey))))
+   `(secondary-selection ((t (:background ,dark-grey))))
 
    ;; Flymake
    `(flymake-errline ((t (:background ,dark-grey :foreground ,soft-white :underline ,dark-red))))
