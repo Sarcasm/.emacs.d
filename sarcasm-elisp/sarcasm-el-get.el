@@ -34,7 +34,7 @@
         (:name ace-jump-mode       ;a quick cursor jump mode for Emacs
                :features ace-jump-mode
                :after (lambda ()
-                        (setq ace-jumpace-jump-mode-case-sensitive-search nil)
+                        (setq ace-jump-mode-case-sensitive-search nil)
                         ;; ;; I never used `zap-to-char', if I need it
                         ;; ;; M-x zap[TAB] should be enough
                         (global-set-key (kbd "M-z") 'ace-jump-mode)))
