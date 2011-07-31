@@ -19,7 +19,7 @@
 	     (semantic-mode)
 
              ;; School require that
-             (setq align-to-tab-stop t)
+             (setq indent-tabs-mode t)
 
              (define-key c-mode-map (kbd "M-TAB") 'ac-complete-clang)
 

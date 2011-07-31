@@ -24,8 +24,6 @@
       mouse-yank-at-point t           ;paste at cursor position
       scroll-preserve-screen-position t ;restore cursor after PgUp/PgDown
 
-      align-to-tab-stop nil             ;align with spaces
-
       ;; Sentences end with one space when M-q `fill-paragraph' is called
       sentence-end-double-space nil
 
