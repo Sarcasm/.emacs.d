@@ -25,18 +25,18 @@
         magit               ;control git from Emacs
         fringe-helper       ;useful with test-case-mode
         dired-details       ;allow to only show filenames in dired buffer
-        ace-jump-mode       ;a quick cursor jump mode for Emacs
 
         (:name emacschrome
                :features edit-server
-               :post-init (lambda ()
-                            (edit-server-start)))
+               :after (lambda ()
+                        (edit-server-start)))
 
-        (:name ace-jump-mode
+        (:name ace-jump-mode       ;a quick cursor jump mode for Emacs
+               :features ace-jump-mode
                :after (lambda ()
                         (setq ace-jumpace-jump-mode-case-sensitive-search nil)
-                        ;; I never used `zap-to-char', if I need it
-                        ;; M-x zap[TAB] should be enough
+                        ;; ;; I never used `zap-to-char', if I need it
+                        ;; ;; M-x zap[TAB] should be enough
                         (global-set-key (kbd "M-z") 'ace-jump-mode)))
 
         (:name lua-mode
