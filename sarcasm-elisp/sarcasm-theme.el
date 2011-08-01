@@ -128,7 +128,7 @@
    `(magit-log-tag-label ((t (:box t))))
    `(magit-log-head-label-bisect-good ((t (:background ,green :box t))))
    `(magit-log-head-label-bisect-bad ((t (:background ,red :box t))))
-   `(magit-log-head-label-remote ((t (:background ,soft-gold, :box t))))
+   `(magit-log-head-label-remote ((t (:background ,soft-gold :box t))))
    '(magit-log-head-label-tags ((t (:inherit (magit-log-tag-label)))))
    `(magit-log-head-label-local ((t (:foreground ,soft-white :background ,dark-grey
                                                  :box t))))
@@ -158,7 +158,7 @@
    ;; Org-Mode & Babel
    `(org-todo ((t (:bold t :foreground ,red))))
    `(org-done ((t (:bold t :foreground ,green))))
-   `(org-document-info org-document-title ((t (:foreground ,orange))))
+   `(org-document-info ((t (:foreground ,orange))))
    `(org-document-title ((t (:foreground ,orange))))
    `(org-document-info ((t (:foreground ,cyan))))
    `(org-document-info-keyword ((t (:foreground ,dark-orange))))
