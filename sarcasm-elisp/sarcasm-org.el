@@ -8,7 +8,8 @@
       org-src-fontify-natively t ;display specific mode colors in src block
       org-agenda-files '("~/Org")
       org-archive-location "archives/%s_archive::"
-      org-insert-mode-line-in-empty-file t)
+      org-insert-mode-line-in-empty-file t
+      org-src-window-setup 'other-window)
 
 ;; Org-Mode global keybindings
 (define-key global-map (kbd "C-c o a") 'org-agenda)
