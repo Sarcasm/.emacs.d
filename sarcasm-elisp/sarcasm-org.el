@@ -9,7 +9,8 @@
       org-agenda-files '("~/Org")
       org-archive-location "archives/%s_archive::"
       org-insert-mode-line-in-empty-file t
-      org-src-window-setup 'other-window)
+      org-src-window-setup 'other-window
+      org-startup-with-inline-images t)
 
 ;; Org-Mode global keybindings
 (define-key global-map (kbd "C-c o a") 'org-agenda)
