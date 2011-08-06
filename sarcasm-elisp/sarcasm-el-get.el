@@ -25,6 +25,7 @@
         magit               ;control git from Emacs
         fringe-helper       ;useful with test-case-mode
         dired-details       ;allow to only show filenames in dired buffer
+        auctex              ;*TeX integrated environment
 
         (:name emacschrome
                :features edit-server

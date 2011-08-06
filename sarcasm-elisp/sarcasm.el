@@ -116,6 +116,7 @@ activate compile)
 (require 'sarcasm-keys)			;global keybindings
 (require 'sarcasm-rcirc)		;rcirc settings
 (require 'sarcasm-org)			;Org-Mode settings
+(require 'sarcasm-org-latex)            ;Org-Mode LaTex export config
 (require 'sarcasm-c-common)		;C/C++ common stuff
 (require 'sarcasm-c)			;C stuff
 (require 'sarcasm-c++)			;C++ stuff
