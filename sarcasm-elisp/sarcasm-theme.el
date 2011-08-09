@@ -116,7 +116,7 @@
    `(magit-section-title ((t (:background ,dark-red :foreground ,white))))
    `(magit-diff-add ((t (:foreground ,green))))
    `(magit-diff-del ((t (:foreground ,dark-red))))
-   `(magit-diff-none ((t (:inherit diff-context))))
+   `(magit-diff-none ((t (:inherit (diff-context)))))
    `(magit-branch ((t (:foreground ,pink :bold t))))
    `(magit-header ((t (:foreground ,orange :bold t))))
    `(magit-diff-hunk-header ((t (:inherit (magit-header diff-hunk-header)))))
