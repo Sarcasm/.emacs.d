@@ -31,7 +31,10 @@
       compilation-scroll-output t
 
       ;; C-k kills whole line and newline if at beginning of line
-      kill-whole-line t)
+      kill-whole-line t
+
+      ;; Autosave each change)
+      bookmark-save-flag 1)
 
 (setq-default indent-tabs-mode nil	;remove tabulations
               ;; show-trailing-whitespace t
