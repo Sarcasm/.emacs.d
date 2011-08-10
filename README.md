@@ -18,21 +18,22 @@ Install
 -------
 The config use *el-get* (https://github.com/dimitri/el-get).
 
-In console:
+In the console:
 
     git clone git@github.com:Sarcasm/.emacs.d.git ~/.emacs.d
     emacs -Q
 
-In *scratch* buffer:
+In the *scratch* buffer:
 
-    ;; So the idea is that you copy/paste this code into your *scratch* buffer,
-    ;; hit C-j, and you have a working el-get.
-    (url-retrieve
-     "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-     (lambda (s)
-       (end-of-buffer)
-       (eval-print-last-sexp)))
-
+```lisp
+;; So the idea is that you copy/paste this code into your *scratch* buffer,
+;; hit C-j, and you have a working el-get.
+(url-retrieve
+ "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+ (lambda (s)
+   (end-of-buffer)
+   (eval-print-last-sexp)))
+```
 
 Contact
 -------
