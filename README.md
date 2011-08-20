@@ -25,15 +25,14 @@ In the console:
 
 In the *scratch* buffer:
 
-```lisp
-;; So the idea is that you copy/paste this code into your *scratch* buffer,
-;; hit C-j, and you have a working el-get.
-(url-retrieve
- "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
- (lambda (s)
-   (end-of-buffer)
-   (eval-print-last-sexp)))
-```
+    ;; So the idea is that you copy/paste this code into your *scratch* buffer,
+    ;; hit C-j, and you have a working el-get.
+    (url-retrieve
+     "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+     (lambda (s)
+       (end-of-buffer)
+       (eval-print-last-sexp)))
+
 
 Contact
 -------
