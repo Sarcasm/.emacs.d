@@ -28,6 +28,7 @@
 
   (define-key c-mode-base-map [?,] 'sarcasm-insert-comma)
 
+  (define-key c-mode-base-map [return] 'c-context-line-break)
   (define-key c-mode-base-map (kbd "C-c m") 'c-man-at-point)
   (define-key c-mode-base-map (kbd "M-n") 'flymake-or-compile-next-error)
   (define-key c-mode-base-map (kbd "M-p") 'flymake-or-compile-prev-error)
