@@ -140,6 +140,7 @@ activate compile)
 (require 'sarcasm-insert)               ;auto-insert stuff
 (require 'sarcasm-comment)              ;Comment settings
 (require 'sarcasm-netsoul)              ;NetSoul stuff
+(require 'sarcasm-uniquify)
 
 ;; Custom settings
 (setq custom-file
