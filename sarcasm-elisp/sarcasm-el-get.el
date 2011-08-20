@@ -11,21 +11,22 @@
 
 (setq el-get-sources
       '(el-get
-        xcscope xcscope+    ;CScope stuff
-        rainbow-mode        ;display string color colored
-        ;; lua-mode            ;Lua-Mode in Emacs 24 is too old
-        flymake-lua         ;flymake for Lua
-        htmlize             ;for Org-Mode HTML export of source code
-        folding             ;folding plugin
-        rinari              ;Rinari Is Not A Ruby IDE
-        haml-mode           ;Alternative to ERB
-        sass-mode           ;Alternative to CSS
-        yaml-mode           ;YAML Ain't Markup Language
-        flymake-ruby        ;flymake for ruby
-        magit               ;control git from Emacs
-        fringe-helper       ;useful with test-case-mode
-        dired-details       ;allow to only show filenames in dired buffer
-        auctex              ;*TeX integrated environment
+        xcscope xcscope+ ;CScope stuff
+        rainbow-mode     ;display string color colored
+        ;; lua-mode         ;Lua-Mode in Emacs 24 is too old
+        flymake-lua      ;flymake for Lua
+        htmlize          ;for Org-Mode HTML export of source code
+        folding          ;folding plugin
+        rinari           ;Rinari Is Not A Ruby IDE
+        haml-mode        ;Alternative to ERB
+        sass-mode        ;Alternative to CSS
+        yaml-mode        ;YAML Ain't Markup Language
+        flymake-ruby     ;flymake for ruby
+        magit            ;control git from Emacs
+        fringe-helper    ;useful with test-case-mode
+        dired-details    ;allow to only show filenames in dired buffer
+        ;; auctex           ;*TeX integrated environment
+        ;; popwin           ;Popup windows management
 
         (:name emacschrome
                :features edit-server
@@ -36,8 +37,8 @@
                :features ace-jump-mode
                :after (lambda ()
                         (setq ace-jump-mode-case-sensitive-search nil)
-                        ;; ;; I never used `zap-to-char', if I need it
-                        ;; ;; M-x zap[TAB] should be enough
+                        ;; I've never used `zap-to-char', if I need it
+                        ;; M-x zap[TAB] should be enough
                         (global-set-key (kbd "M-z") 'ace-jump-mode)))
 
         (:name lua-mode
@@ -165,41 +166,41 @@
                                                      yas/completing-prompt
                                                      yas/no-prompt))))
 
-        (:name autocomplete
-               :type git
-               :url "http://github.com/m2ym/auto-complete.git"
-               :load-path "."
-               :post-init (lambda ()
-                            (require 'auto-complete)
-                            (add-to-list 'ac-dictionary-directories (expand-file-name "dict" pdir))
-                            (require 'auto-complete-config)
-                            (ac-config-default)
-                            ;; Too many words in buffers...
-                            ;; (setq-default ac-sources
-                            ;;               (remq 'ac-source-words-in-same-mode-buffers ac-sources)
+        (:name auto-complete
+               ;; Don't override :type, otherwise the default recipe
+               ;; settings are not used.
+               ;; :type git
+               :url "https://github.com/Sarcasm/auto-complete.git" ;override the default
+               ;; Too many words in buffers...
+               ;; (setq-default ac-sources
+               ;;               (remq 'ac-source-words-in-same-mode-buffers ac-sources)
 
-                            ;; Enable auto-completion with tab in Org-Mode
-                            ;; http://permalink.gmane.org/gmane.emacs.orgmode/37064
-                            (define-key ac-complete-mode-map [tab] 'ac-expand)))
+               ;; Commented, I no longer use auto-complete in Org-Mode.
+               ;; Enable auto-completion with tab in Org-Mode
+               ;; http://permalink.gmane.org/gmane.emacs.orgmode/37064
+               ;; (define-key ac-complete-mode-map [tab] 'ac-expand)
+               ;; )
+               )
 
         (:name auto-complete-extension
                :type emacswiki)
 
-        (:name auto-complete-clang
-               :type git
-               :url "https://github.com/brianjcj/auto-complete-clang.git"
-               :features auto-complete-clang)
+        ;; (:name auto-complete-clang
+        ;;        :type git
+        ;;        :url "https://github.com/brianjcj/auto-complete-clang.git"
+        ;;        :features auto-complete-clang)
 
-        (:name ac-slime                 ;auto-complete for SLIME
-               :post-init (lambda ()
-                            (require 'ac-slime)
-                            (add-hook 'slime-mode-hook 'set-up-slime-ac)
-                            (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-                            (add-hook 'slime-connected-hook
-                                      '(lambda ()
-                                         ;; replace `yas/expand' by `auto-complete' ?
-                                         ;; (define-key slime-mode-map (kbd "TAB") 'yas/expand)
-                                         (define-key slime-repl-mode-map (kbd "TAB") 'yas/expand)))))))
+        ;; (:name ac-slime                 ;auto-complete for SLIME
+        ;;        :post-init (lambda ()
+        ;;                     (require 'ac-slime)
+        ;;                     (add-hook 'slime-mode-hook 'set-up-slime-ac)
+        ;;                     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+        ;;                     (add-hook 'slime-connected-hook
+        ;;                               '(lambda ()
+        ;;                                  ;; replace `yas/expand' by `auto-complete' ?
+        ;;                                  ;; (define-key slime-mode-map (kbd "TAB") 'yas/expand)
+        ;;                                  (define-key slime-repl-mode-map [tab] 'yas/expand)))))
+        ))
 
 ;; Initialize el-get packages
 (el-get)
@@ -217,7 +218,9 @@
 in auto-complete sources."
   (yas/minor-mode-on)
   (auto-complete-mode)
-  (setq ac-sources (append ac-sources '(ac-source-yasnippet)))
+  ;; Already present by default
+  ;; (setq ac-sources (append ac-sources '(ac-source-yasnippet)))
+
   ;; This is certainly not the good place for that...but for the
   ;; moment it's ok
   (setq show-trailing-whitespace t))
