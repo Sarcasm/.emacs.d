@@ -170,4 +170,20 @@ resolved)."
     (if spacep
 	(insert " "))))
 
+(defun sarcasm-escape-quotes (start end)
+  "Add a backspace before each quote found in region."
+  (interactive "*r")
+  (goto-char start)
+  (while (search-forward "\"" end t)
+    (setq end (+ end 1))
+    (replace-match "\\\"" nil t)))
+
+(defun sarcasm-unescape-quotes (start end)
+  "Replace each escaped quote in the region with a simple quote."
+  (interactive "*r")
+  (goto-char start)
+  (while (search-forward "\\\"" end t)
+    (setq end (- end 1))
+    (replace-match "\"" nil t)))
+
 (provide 'sarcasm-utils)

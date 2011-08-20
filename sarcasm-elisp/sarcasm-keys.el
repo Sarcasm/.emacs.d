@@ -96,4 +96,10 @@ el-get configuration."
 ;; SLIME / StumpWM binding
 (global-set-key (kbd "C-c x s") 'slime-stumpwm-repl)
 
+(global-set-key (kbd "C-c x \"") '(lambda (arg begin end)
+                                    (interactive "*P\nr")
+                                    (if arg
+                                        (sarcasm-unescape-quotes begin end)
+                                        (sarcasm-escape-quotes begin end))))
+
 (provide 'sarcasm-keys)
