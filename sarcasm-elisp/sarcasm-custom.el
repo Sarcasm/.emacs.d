@@ -1,9 +1,9 @@
 ;; Custom settings -- Guillaume Papin
 ;; usage:
-;; (setq custom-file
-;;       (concat (file-name-as-directory *sarcasm-load-path*)
-;;               "sarcasm-custom.el"))
-;; (load custom-file)
+;;
+;;    (setq custom-file (concat (concat *sarcasm-directory*
+;;                                      "sarcasm-custom.el"))
+;;    (load custom-file)
 ;;
 ;; note: the file in is initial state is good, changes made by the
 ;; time for safe variable values for example are not interesting to
