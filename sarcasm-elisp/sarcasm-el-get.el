@@ -5,9 +5,8 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get/"))
 (require 'el-get)
 
-(add-to-list 'el-get-recipe-path
-             (concat (file-name-as-directory *sarcasm-load-path*)
-                     "sarcasm-recipes"))
+(add-to-list 'el-get-recipe-path (concat *sarcasm-directory*
+                                         "sarcasm-recipes"))
 
 (setq el-get-sources
       '(el-get
@@ -27,6 +26,10 @@
         dired-details    ;allow to only show filenames in dired buffer
         ;; auctex           ;*TeX integrated environment
         ;; popwin           ;Popup windows management
+
+        (:name eproject
+               :after (lambda ()
+                        (require 'sarcasm-eproject)))
 
         (:name emacschrome
                :features edit-server
@@ -180,7 +183,8 @@
                ;; http://permalink.gmane.org/gmane.emacs.orgmode/37064
                ;; (define-key ac-complete-mode-map [tab] 'ac-expand)
                ;; )
-               )
+               :after (lambda ()
+                        (setq ac-ignore-case nil)))
 
         (:name auto-complete-extension
                :type emacswiki)
