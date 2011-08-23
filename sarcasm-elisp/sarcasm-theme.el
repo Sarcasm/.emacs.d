@@ -17,8 +17,10 @@
 
 ;; usage:
 ;; In init file:
-;; (setq custom-theme-directory *sarcasm-load-path*)
-;; (load-theme 'sarcasm)
+;;
+;;     (setq custom-theme-directory *sarcasm-directory*)
+;;     (load-theme 'sarcasm)
+;;
 ;; Or after init:
 ;; M-x `load-theme' RET sarcasm RET
 
@@ -170,4 +172,4 @@
 ;; no-byte-compile: t
 ;; End:
 
-;;; sarcasm-theme.el  ends here
+;;; sarcasm-theme.el ends here

@@ -8,8 +8,7 @@ point."
   (interactive)
   (if mark-active
       (align (region-beginning) (region-end))
-    (align-current))
-  )
+    (align-current)))
 
 (defun c-man (NAME)
   "Find the C manual page corresponding to the function NAME.
@@ -18,8 +17,7 @@ Search for man(2) and man(3) by default."
       (man (concat NAME "(2)"))
     (if (file-exists-p (concat "/usr/share/man/man3/" NAME ".3.gz"))
         (man (concat NAME "(3)"))
-      (man NAME)))
-  )
+      (man NAME))))
 
 (defun c-man-at-point ()
   "Find a C man page with the current word if present, otherwise
@@ -29,8 +27,7 @@ require input from user."
     (setq cur-word (read-from-minibuffer "Man Page: ")))
   (if (string= "" cur-word)
       (message "No man args given")
-    (c-man cur-word))
-  )
+    (c-man cur-word)))
 
 ;; Miscellaneous functions for compilation
 (defun flymake-or-compile-next-error ()
@@ -39,8 +36,7 @@ otherwise assume it's compile next error."
   (interactive)
   (if flymake-mode
       (flymake-goto-next-error)
-    (next-error))
-  )
+    (next-error)))
 
 (defun flymake-or-compile-prev-error ()
   "If Flymake mode is enable then go to the previous Flymake error,
@@ -48,8 +44,7 @@ otherwise assume it's compile previous error."
   (interactive)
   (if flymake-mode
       (flymake-goto-prev-error)
-    (previous-error))
-  )
+    (previous-error)))
 
 ;; Source: http://groups.google.com/group/gnu.emacs.help/browse_thread/thread/75dd91fd45742d54?pli=1
 (defun move-text-internal (arg)
@@ -99,19 +94,14 @@ otherwise assume it's compile previous error."
       ;; ~After the animation
       (run-at-time 4 nil (lambda ()
                            (slime-repl-set-package "stumpwm")
-                           (slime-cd stumpwm-config-dir)
-                           ))
-      ))
-  )
+                           (slime-cd stumpwm-config-dir))))))
 
 (defun fixme-and-todo-font-lock ()
   "Add a coloration for TODO: and FIXME: keywords."
   (font-lock-add-keywords nil
                           '(("\\<\\(FIXME\\):" 1 font-lock-warning-face t)))
   (font-lock-add-keywords nil
-                          '(("\\<\\(TODO\\):" 1 font-lock-keyword-face t)))
-  )
-
+                          '(("\\<\\(TODO\\):" 1 font-lock-keyword-face t))))
 
 ;; W window urgent hint handling
 ;; source: http://www.linux.org.ru/forum/development/4076070
@@ -146,9 +136,12 @@ otherwise assume it's compile previous error."
 With a prefix argument give the absolute path (symlink
 resolved)."
   (interactive "P")
-  (let ((pathname (if (eq major-mode 'dired-mode)
-                      dired-directory
-                    buffer-file-name)))
+  ;; Pathname stuff stolen from `eproject--buffer-file-name'.
+  (let ((pathname (or (buffer-file-name)
+                      (and (eq major-mode 'dired-mode)
+                           (expand-file-name (if (consp dired-directory)
+                                                 (car dired-directory)
+                                               dired-directory))))))
     (if (not pathname)
         (message "No filename associated with this buffer.")
       (let ((final-path (if absolute

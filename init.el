@@ -1,9 +1,11 @@
 ;; Load personnal config
-(load-file (expand-file-name "~/.emacs.d/sarcasm-elisp/sarcasm.el"))
+(load (concat user-emacs-directory
+              (file-name-as-directory "sarcasm-elisp")
+              "sarcasm.el"))
 
 ;; Basic Epitech files provide:
 ;; - headers
-;; - few keys
+;; - few keybindings (school headers mainly)
 (let ((std-file (expand-file-name "~/.emacs.d/elisp/std.el"))
       (std-comment-file (expand-file-name "~/.emacs.d/elisp/std_comment.el")))
   (when (and (file-exists-p std-comment-file)

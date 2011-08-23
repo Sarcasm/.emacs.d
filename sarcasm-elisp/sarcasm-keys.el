@@ -19,11 +19,9 @@ in dired. With a prefix argument open the file containing the
 el-get configuration."
                        (interactive "P")
                        (if arg
-                           (find-file
-                            (concat (file-name-as-directory *sarcasm-load-path*)
-                                    "sarcasm-el-get.el"))
-                         (dired *sarcasm-load-path*))))
-
+                           (find-file (concat *sarcasm-directory*
+                                              "sarcasm-el-get.el"))
+                         (dired *sarcasm-directory*))))
 
 (global-set-key (kbd "C-c i") 'imenu)
 ;; xscope has [C-c s] for prefix

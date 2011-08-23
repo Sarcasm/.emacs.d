@@ -1,9 +1,17 @@
 ;; Emacs init file -- Guillaume Papin
 ;; usage:
-;; Load personnal config
-;; (load (expand-file-name "~/.emacs.d/sarcasm-elisp/sarcasm.el"))
+;;
+;; In the file "~/.emacs.d/init.el" (or "~/.emacs") put:
+;;
+;;    (load (concat user-emacs-directory
+;;                  (file-name-as-directory "sarcasm-elisp")
+;;                  "sarcasm.el"))
+;;
 
-(defconst *sarcasm-load-path* "~/.emacs.d/sarcasm-elisp"
+(defconst *sarcasm-load-path* (concat user-emacs-directory "sarcasm-elisp")
+  "Default path for Sarcasm config files.")
+
+(defconst *sarcasm-directory* (file-name-as-directory *sarcasm-load-path*)
   "Default path for Sarcasm config files.")
 
 ;; Go to the projects root directory by default
@@ -44,16 +52,33 @@
 ;; note: This is useful when =C-x C-v= is done
 (require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file "~/.emacs.d/places")
+(setq save-place-file (concat user-emacs-directory "places"))
 
 ;; Thanks http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
 ;; note: Slash for directory
-(setq completion-ignored-extensions '(".o"
+(setq completion-ignored-extensions '(".o" ".a" ".so"
 				      ".elc"
+                                      ".class" ".dll"
 				      "~"
 				      ".git/"
 				      ".gitignore"
 				      ".svn/"))
+
+(defconst sarcasm-ignored-files '("GPATH" "GRTAGS" "GTAGS"
+                                  ".git" ".gitignore"
+                                  "core" "vgcore")
+  "A list of filename and directory to ignore (no directory
+separator should be involved).
+
+note: at this time this variable is used for making the
+`dired-omit-files' and some `eproject' project type.")
+
+(defconst sarcasm-ignored-files-re '("cscope\\.\\w+"
+                                     ;; coredump and valgrind coredump
+                                     "\\(?:\\vg\\)?core\\.[[:digit:]]+")
+  "See `sarcasm-ignored-files'.
+
+There only difference is that each filename should be a regexp.")
 
 ;; This sets the coding system priority and the default input method
 ;; and sometimes other things.
@@ -91,12 +116,8 @@
 ; Automatically 'chmod' scripts as they are saved
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-;; Gnus starting file
-(setq gnus-init-file                    ;it will try the suffix .el[c]
-      (concat (file-name-as-directory *sarcasm-load-path*) "sarcasm-gnus"))
-
 ;; Emacs perso load path
-(add-to-list 'load-path "~/.emacs.d/elisp")
+(add-to-list 'load-path (concat user-emacs-directory "elisp"))
 
 ;; Add Sarcasm directory to default path
 (add-to-list 'load-path *sarcasm-load-path*)
@@ -142,11 +163,15 @@ activate compile)
 (require 'sarcasm-netsoul)              ;NetSoul stuff
 (require 'sarcasm-uniquify)
 
+ ;; Gnus starting file (another way to say "(require 'sarcasm-gnus)")
+(setq gnus-init-file (concat *sarcasm-directory*
+                             "sarcasm-gnus")) ;it will try the suffix .el[c]
+
 ;; Custom settings
-(setq custom-file
-      (concat (file-name-as-directory *sarcasm-load-path*) "sarcasm-custom.el"))
+(setq custom-file (concat *sarcasm-directory*
+                          "sarcasm-custom.el"))
 (load custom-file)
 
 ;; Color theme
-(setq custom-theme-directory *sarcasm-load-path*)
+(setq custom-theme-directory *sarcasm-directory*)
 (load-theme 'sarcasm)

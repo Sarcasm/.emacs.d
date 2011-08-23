@@ -6,8 +6,8 @@
 (auto-insert-mode 1)
 
 ;; Auto-insert Stuff
-(setq auto-insert-directory (concat (file-name-as-directory *sarcasm-load-path*)
-                                    "insert/"))
+(setq auto-insert-directory (concat *sarcasm-directory*
+                                    (file-name-as-directory "insert")))
 
 ;; If you don't want to be prompted before insertion
 ;; (setq-default auto-insert-query nil)
@@ -40,7 +40,6 @@ example (in .dir-locals.el file):
    (\"server/directory\"
     (nil
      (sarcasm-sub-project-name . \"server\"))))"
-
   (let ((filename (file-name-nondirectory (file-name-sans-extension buffer-file-name)))
         (ext (file-name-extension buffer-file-name))
         (prefix (if (and (boundp 'sarcasm-project-name)
@@ -55,7 +54,8 @@ example (in .dir-locals.el file):
                               (upcase (concat "_" prefix filename "_" ext "_")))))
 
 (defun sarcasm-generate-include-guard ()
-  "Generate an include guard (should be in a C/C++ file)."
+  "Generate an include guard (should be in a C/C++ file), used by
+`auto-insert-mode'."
   (insert "guard")
   (yas/expand))
 
