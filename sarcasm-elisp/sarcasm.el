@@ -41,6 +41,8 @@
       ;; C-k kills whole line and newline if at beginning of line
       kill-whole-line t
 
+      save-abbrevs 'silently       ;don't want to answer yes everytime
+
       ;; Autosave each change)
       bookmark-save-flag 1)
 
@@ -50,8 +52,8 @@
 
 ;; http://www.emacswiki.org/emacs/SavePlace
 ;; note: This is useful when =C-x C-v= is done
-(require 'saveplace)
 (setq-default save-place t)
+(require 'saveplace)
 (setq save-place-file (concat user-emacs-directory "places"))
 
 ;; Thanks http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
@@ -66,7 +68,10 @@
 
 (defconst sarcasm-ignored-files '("GPATH" "GRTAGS" "GTAGS"
                                   ".git" ".gitignore"
-                                  "core" "vgcore")
+                                  ;; core.clj was ignored in `dired-omit-files'
+                                  ;; "core"
+                                  "vgcore"
+                                  ".newsrc-dribble")
   "A list of filename and directory to ignore (no directory
 separator should be involved).
 
@@ -92,7 +97,26 @@ There only difference is that each filename should be a regexp.")
 (winner-mode 1)
 ;; Replace selection
 (delete-selection-mode 1)
+
+;; Since Emacs 24
+;; stolen from: https://github.com/bbatsov/emacs-dev-kit/blob/master/misc-config.el
+(if (>= emacs-major-version 24)
+    (progn
+      (electric-pair-mode t)
+      (electric-indent-mode t)
+      ;; Example, insert a newline after semicolon
+      ;; (setq electric-layout-rules '((?; . after)))
+      (electric-layout-mode t))
+  ;; ;; autopair mode
+  ;; (require 'autopair)
+  ;; (autopair-global-mode)
+  ;; (setq autopair-autowrap t)
+  ;; (setq autopair-blink nil)
+  )
+
 ;; Highlight current line
+(if (boundp 'global-hl-line-sticky-flag) ;introduced in emacs 24.1
+    (setq global-hl-line-sticky-flag t))
 (global-hl-line-mode 1)
 
 ;; Whenever an external process changes a file underneath emacs, and there
@@ -106,7 +130,7 @@ There only difference is that each filename should be a regexp.")
 (show-paren-mode 1)
 
 ;; Emacs external `url browser' (usefull in Org-Mode)
-(setq browse-url-generic-program "chromium-browser")
+(setq browse-url-generic-program "chromium")
 (setq browse-url-browser-function '(("^file:" . browse-file-url)
 				    ("."      . browse-url-generic)))
 
@@ -128,15 +152,15 @@ There only difference is that each filename should be a regexp.")
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 (put 'org-narrow-to-subtree 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
 
 (defadvice narrow-to-region (after narrow-to-region-unmark
 activate compile)
   "Disable selection after `narrow-to-region'"
-  (deactivate-mark)
-)
+  (deactivate-mark))
 
-(require 'sarcasm-el-get)               ;el-get packages and config
 (require 'sarcasm-utils)		;utility functions
+(require 'sarcasm-el-get)               ;el-get packages and config
 (require 'sarcasm-keys)			;global keybindings
 (require 'sarcasm-rcirc)		;rcirc settings
 (require 'sarcasm-org)			;Org-Mode settings
@@ -159,9 +183,11 @@ activate compile)
 (require 'sarcasm-backup)               ;backup files handling
 (require 'sarcasm-dired)                ;dired stuff
 (require 'sarcasm-insert)               ;auto-insert stuff
-(require 'sarcasm-comment)              ;Comment settings
+(require 'sarcasm-comment)              ;Comments settings
 (require 'sarcasm-netsoul)              ;NetSoul stuff
-(require 'sarcasm-uniquify)
+(require 'sarcasm-uniquify)             ;Uniquify buffer names
+(require 'sarcasm-mode-line)            ;Mode-Line content
+(require 'sarcasm-gud)                  ;Debugger settings
 
  ;; Gnus starting file (another way to say "(require 'sarcasm-gnus)")
 (setq gnus-init-file (concat *sarcasm-directory*

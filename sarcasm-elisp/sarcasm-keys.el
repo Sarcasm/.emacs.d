@@ -13,10 +13,11 @@
 ;; Sources:
 ;; - http://ubuntuforums.org/showpost.php?p=8943092&postcount=3
 ;; - http://superuser.com/questions/214295/emacs-how-to-choose-good-custom-key-bindings
-(global-set-key [f5] (lambda (arg)
-                       "Open Emacs user configuration directory
-in dired. With a prefix argument open the file containing the
-el-get configuration."
+(global-set-key [f5]
+                (lambda (arg)
+                  ;; Open Emacs user configuration directory in dired.
+                  ;; With a prefix argument open the file containing
+                  ;; the el-get configuration.
                        (interactive "P")
                        (if arg
                            (find-file (concat *sarcasm-directory*
@@ -52,8 +53,8 @@ el-get configuration."
 ;; Irony point/mark
 (global-set-key (kbd "C-c 8 i") (lambda ()
                                   (interactive)
-                                  ;; #x061x in hexa or REVERSED QUESTION MARK
-                                  (ucs-insert 1567)))
+                                  ;; #x2E2E in hexa or REVERSED QUESTION MARK
+                                  (ucs-insert 11822)))
 
 ;; Magit
 (global-set-key (kbd "C-c x m") 'magit-status)

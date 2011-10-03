@@ -10,7 +10,8 @@
       org-archive-location "archives/%s_archive::"
       org-insert-mode-line-in-empty-file t
       org-src-window-setup 'other-window
-      org-startup-with-inline-images t)
+      org-startup-with-inline-images t
+      org-hide-emphasis-markers t)
 
 ;; Org-Mode global keybindings
 (define-key global-map (kbd "C-c o a") 'org-agenda)
@@ -21,6 +22,7 @@
 (add-hook 'org-mode-hook
 	  '(lambda ()
              (auto-fill-mode 1)
+             (setq show-trailing-whitespace t)
              (define-key org-mode-map [f7] 'org-flyspell-mode-and-dictionary)
 
              (setq org-agenda-start-with-follow-mode t)
@@ -29,7 +31,8 @@
 
              ;; Babel handle 'C' not 'c'...ok, in fact babel doesn't
              ;; know how to execute 'C' use 'c++' instead.
-             (add-to-list 'org-src-lang-modes '("C" . c))))
+             (add-to-list 'org-src-lang-modes '("C" . c))
+             (org-save-place-fix)))
 
 ;; Make windmove work in Org-Mode:
 (add-hook 'org-shiftup-final-hook    'windmove-up)
@@ -54,6 +57,13 @@ change the dictionnary to the corresponding language."
 	  ))
     (flyspell-mode -1)))
 
+(defun org-save-place-fix ()
+  "When save place restore the cursor in a folded headline it's a
+little buggy."
+  (when (outline-invisible-p)
+    (save-excursion
+      (outline-previous-visible-heading 1)
+      (org-show-subtree))))
 
 		      ;; === Org-Babel stuff ===
 

@@ -32,9 +32,9 @@
 (ido-mode 1)
 (ido-everywhere 1)
 
-(add-to-list 'ido-ignore-files "\\.gitignore")
-(add-to-list 'ido-ignore-files "cscope\\.\\w+")
-(add-to-list 'ido-ignore-files "GPATH\\|GRTAGS\\|GTAGS")
+(add-to-list 'ido-ignore-files (regexp-opt sarcasm-ignored-files))
+(setq ido-ignore-files (append ido-ignore-files
+                               sarcasm-ignored-files-re))
 
 ;; ibuffer settings
 ;; Thx: http://martinowen.net/blog/2010/02/tips-for-emacs-ibuffer.html
@@ -44,12 +44,30 @@
                   (interactive)
                   (ibuffer t)))
 
+;; Enlarge the default limit for buffer name
+(add-to-list 'ibuffer-formats '(mark
+                                modified
+                                " "
+                                (name 25 25 :left :elide)
+                                " "
+                                (size 9 -1 :right)
+                                " "
+                                (mode 16 16 :left :elide)
+                                " " filename-and-process))
+
 (setq ibuffer-saved-filter-groups
       '(("default"
 
-         ("Interactive" (or (name . "\*scratch\*")
+         ("Interactive" (or (mode . lisp-interaction-mode)
                             (name . "\*compilation\*")
+                            (name . "\*Customize\*")
                             (name . "\*grep\*")))
+
+         ("Dired" (mode . dired-mode))
+
+         ;; Need to be before "Programming" otherwise
+         ;; `emacs-lisp-mode' will match.
+         ("Emacs config" (filename . ".emacs.d/sarcasm-elisp"))
 
          ("Org-Mode" (mode . org-mode))
 
@@ -61,15 +79,16 @@
                             (mode . python-mode)
                             (mode . emacs-lisp-mode)))
 
-         ("Dired" (mode . dired-mode))
-
-         ("Emacs config" (or (filename . ".emacs.d/sarcasm-elisp")
-                             (filename . "emacs-config")))
-
-         ("Magit" (name . "\*magit"))
+         ("Gnus" (or (mode . gnus-group-mode)
+                     (mode . gnus-server-mode)
+                     (mode . gnus-summary-mode)
+                     (mode . gnus-browse-mode)
+                     (mode . gnus-article-mode)))
 
          ("Mail" (or (mode . message-mode)
                      (mode . mail-mode)))
+
+         ("Magit" (name . "\*magit"))
 
          ("IRC" (or (mode . erc-mode)
                     (mode . rcirc-mode)))
@@ -84,5 +103,15 @@
           '(lambda ()
              (ibuffer-auto-mode 1)      ;auto update
              (ibuffer-switch-to-saved-filter-groups "default")))
+
+(require 'ibuf-ext)
+(add-to-list 'ibuffer-never-show-predicates (regexp-opt sarcasm-ignored-files))
+(setq ibuffer-never-show-predicates (append ibuffer-never-show-predicates
+                                            sarcasm-ignored-files-re))
+
+;; Gnus specific buffers
+(add-to-list 'ibuffer-never-show-predicates "\*nnimap ")
+(add-to-list 'ibuffer-never-show-predicates "\*imap log\*")
+(add-to-list 'ibuffer-never-show-predicates "\*gnus trace\*")
 
 (provide 'sarcasm-interactively)

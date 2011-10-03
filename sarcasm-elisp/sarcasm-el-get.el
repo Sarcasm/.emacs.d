@@ -3,7 +3,13 @@
 ;; (require 'sarcasm-el-get)
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get/"))
-(require 'el-get)
+
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+   (lambda (s)
+     (end-of-buffer)
+     (eval-print-last-sexp))))
 
 (add-to-list 'el-get-recipe-path (concat *sarcasm-directory*
                                          "sarcasm-recipes"))
@@ -18,14 +24,117 @@
         folding          ;folding plugin
         rinari           ;Rinari Is Not A Ruby IDE
         haml-mode        ;Alternative to ERB
-        sass-mode        ;Alternative to CSS
         yaml-mode        ;YAML Ain't Markup Language
         flymake-ruby     ;flymake for ruby
         magit            ;control git from Emacs
         fringe-helper    ;useful with test-case-mode
         dired-details    ;allow to only show filenames in dired buffer
         ;; auctex           ;*TeX integrated environment
-        ;; popwin           ;Popup windows management
+        calfw
+
+        (:name anything
+               :after (lambda ()
+                        ;; (setq anything-command-map-prefix-key "C-c u")
+                        (require 'anything-config)
+                        (require 'anything-match-plugin)
+                        ;; http://emacs-fu.blogspot.com/2011/09/finding-just-about-anything.html
+                        ))
+
+        (:name sass-mode                ;Alternative to CSS
+               :after (lambda ()
+                        ;; I use the shell command 'compass compile'
+                        (setq scss-compile-at-save nil)))
+
+        ;; clojure-mode
+        ;; swank-clojure
+
+        ;; (:name slime
+        ;;        :type apt-get
+        ;;        :after (lambda ()
+        ;;                 (slime-setup)
+        ;;                 ;; (slime-setup '(slime-repl))
+        ;;                 ))
+
+        ;; Popup windows management
+        ;; (:name popwin
+        ;;        :after (lambda ()
+        ;;                 (setq display-buffer-function 'popwin:display-buffer)))
+
+        (:name org-jekyll
+               :type git
+               :url "git://github.com/Sarcasm/org-jekyll.git" ;override the default
+               :after (lambda ()
+                        (require 'org-publish)
+
+                        ;; (setq org-jekyll-lang-subdirs '(("en" . "publish-blog/blog/")
+                        ;;                                 ("es" . "publish-bitacora/bitacora/")))
+
+                        ;; For publishing see:
+                        ;; http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
+
+                        ;; Generate htmlize css with `org-export-htmlize-generate-css'
+                        ;; And use 'css with htmlize with `org-export-htmlize-output-type'
+
+                        (setq org-export-htmlize-output-type 'css)
+
+                        (setq sarcasm-org-directory "~/Org/")
+                        (setq sarcasm-jekyll-directory "~/Org/jekyll/")
+
+                        ;; Post titles should be <h1> not <h2>
+                        ;; FIXME: links are removed ?
+                        (setq org-export-html-toplevel-hlevel 1)
+
+                        ;; http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
+                        (add-to-list 'org-publish-project-alist
+                                     (list "org-jekyll"
+                                           :base-directory sarcasm-org-directory
+                                           :recursive t
+                                           :base-extension "org"
+                                           :publishing-directory sarcasm-jekyll-directory
+                                           ;; :site-root "http://sarcasm.github.com"
+                                           ;;
+                                           ;; :site-root is your
+                                           ;; blog's site name, like
+                                           ;; "http://juanreyero.com".
+                                           ;; Used to build the
+                                           ;; entries' titles as
+                                           ;; absolute links. If not
+                                           ;; set the links will be
+                                           ;; relative, and will
+                                           ;; appear broken in some
+                                           ;; feeds aggregators and in
+                                           ;; Google Buzz.
+                                           :publishing-function 'org-publish-org-to-html
+                                           :section-numbers nil
+                                           :headline-levels 5
+                                           :table-of-contents nil
+                                           :body-only t
+                                           :auto-index nil
+
+                                           :auto-preamble t
+                                           :auto-postamble nil
+
+                                           :html-preamble nil
+                                           :html-postamble nil
+
+                                           ;;:style ,(slurp-file-to-string
+                                           ;;         "~/cjr/jr/style/org/in-header.html")
+                                           ;;:preamble ,(slurp-file-to-string
+                                           ;;            "~/cjr/open/org/preamble.html")
+                                           ;;:postamble ,(slurp-file-to-string
+                                           ;;            "~/cjr/jr/style/org/postamble.html")
+                                           ))
+
+                                     (list "org-img"
+                                           :base-directory sarcasm-org-directory
+                                           :recursive t
+                                           ;; :exclude "^publish"
+                                           :base-extension "jpg\\|gif\\|png"
+                                           :publishing-directory sarcasm-jekyll-directory
+                                           :publishing-function 'org-publish-attachment)
+
+                        (add-to-list 'org-publish-project-alist
+                                     '("sarcasm" :components ("org-jekyll" "org-img")))))
 
         (:name eproject
                :after (lambda ()
@@ -40,9 +149,13 @@
                :features ace-jump-mode
                :after (lambda ()
                         (setq ace-jump-mode-case-sensitive-search nil)
+                        (setq ace-jump-mode-move-keys
+                              (nconc (loop for i from ?a to ?z collect i)
+                                     (loop for i from ?0 to ?9 collect i)
+                                     (loop for i from ?A to ?Z collect i)))
                         ;; I've never used `zap-to-char', if I need it
                         ;; M-x zap[TAB] should be enough
-                        (global-set-key (kbd "M-z") 'ace-jump-mode)))
+                        (global-set-key (kbd "C-,") 'ace-jump-mode)))
 
         (:name lua-mode
                :type git
@@ -71,10 +184,12 @@
                                                   ))
                         (add-hook 'test-case-result-mode-hook 'test-case-echo-failure-mode)))
 
+        ;; In Emacs 24 there is a 'better' `electric-pair-mode'
         (:name autopair
-               :after (lambda ()
-                        ;; (autopair-global-mode 1)
-                        (add-hook 'find-file-hook 'autopair-mode)))
+               ;;        :after (lambda ()
+               ;;                 ;; (autopair-global-mode 1)
+               ;;                 (add-hook 'find-file-hook 'autopair-mode))
+               )
 
         (:name doxymacs
                ;; Use an alternative url (a fork with really minor
@@ -122,8 +237,8 @@
                :after (lambda ()
                         (add-hook 'sgml-mode-hook 'zencoding-mode))) ;auto-start on any markup modes
 
-        (:name offlineimap              ;OfflineIMAP inside Emacs
-               :after (add-hook 'gnus-before-startup-hook 'offlineimap))
+        ;; (:name offlineimap              ;OfflineIMAP inside Emacs
+        ;;        :after (add-hook 'gnus-before-startup-hook 'offlineimap))
 
         ;; Move buffer with C-S-<arrow key>
         (:name buffer-move
@@ -184,6 +299,8 @@
                ;; (define-key ac-complete-mode-map [tab] 'ac-expand)
                ;; )
                :after (lambda ()
+                        (add-to-list 'ac-trigger-commands 'sarcasm-insert-comma)
+                        (add-to-list 'ac-trigger-commands 'newline-and-indent)
                         (setq ac-ignore-case nil)))
 
         (:name auto-complete-extension

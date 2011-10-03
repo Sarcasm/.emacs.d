@@ -1,4 +1,4 @@
-;; Comment settings (style, ...) -- Guillaume Papin
+;; Comments settings (style, ...) -- Guillaume Papin
 ;; usage:
 ;; (require 'sarcasm-comment)
 
