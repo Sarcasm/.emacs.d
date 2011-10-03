@@ -15,6 +15,7 @@
 (setq dired-omit-localp 'no-dir         ;see doc
       dired-omit-files (concat (and dired-omit-files
                                     (concat dired-omit-files "\\|"))
+                               "^\\.\\|"
                                (format "^%s\\|%s$"
                                        (regexp-opt sarcasm-ignored-files)
                                        (mapconcat 'identity
