@@ -2,6 +2,9 @@
 ;; usage:
 ;; (require 'sarcasm-flymake)
 
+(require 'flymake)
+
+;; Don't like the window that 'pops' when flymake can't be enabled.
 (setq flymake-gui-warnings-enabled nil)
 
 ;; Add syntax checking for C++ headers files.
