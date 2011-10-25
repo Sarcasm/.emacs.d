@@ -114,7 +114,7 @@
                :after (lambda ()
                         (global-set-key (kbd "C-;") 'iedit-mode)
                         (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
-                        (setq iedit-occurrence-face isearch-face)))
+                        (setq iedit-occurrence-face 'isearch)))
 
         (:name zencoding-mode
                ;; https://github.com/rooney/zencoding
