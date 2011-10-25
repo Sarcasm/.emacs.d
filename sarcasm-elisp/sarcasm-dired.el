@@ -7,6 +7,9 @@
 
 (setq dired-recursive-deletes 'top)
 
+;; Add the -h option (display size in the human readable form).
+(setq dired-listing-switches "-alh")
+
 ;; Always enable `dired-omit-mode'
 (add-hook 'dired-mode-hook '(lambda () (dired-omit-mode 1)))
 
