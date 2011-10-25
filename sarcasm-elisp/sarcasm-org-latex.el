@@ -102,7 +102,7 @@
         ;; ("xetex" "hyperref" nil)
         ;; - urlcolor for external links
         ;; - linkcolor for internal links (i.e. the TOC)
-        ("xetex,colorlinks=true,urlcolor=BlueViolet,linkcolor=BlueViolet" "hyperref" nil)))
+        ("xetex,colorlinks=true,urlcolor=BlueViolet,linkcolor=BlueViolet,unicode=true" "hyperref" nil)))
 
 (setq org-export-latex-classes
       (cons '("sarcasm-article"
