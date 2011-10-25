@@ -25,9 +25,10 @@
 ;; M-x `load-theme' RET sarcasm RET
 
 ;; Note:
+;; M-x `list-faces-display' RET
+;; http://www.gnu.org/software/libtool/manual/emacs/Standard-Faces.html
 ;; http://elpa.gnu.org/themes/
 ;; http://git.naquadah.org/?p=naquadah-theme.git;a=blob_plain;f=naquadah-theme.el;hb=HEAD
-
 ;;; Code:
 
 (deftheme sarcasm
@@ -64,23 +65,10 @@
    `(default ((t (:background ,background :foreground ,foreground))))
    `(cursor ((t (:background ,soft-gold :foreground ,red :bold t))))
    `(region ((t (:background ,blue :foreground ,soft-white))))
-   `(mode-line ((t (:background ,dark-grey :foreground ,bright-grey :italic t
-                                :box (:line-width 1 :color ,grey)))))
-   `(mode-line-inactive ((t (:background ,dark-grey :foreground ,bright-grey :italic nil  :box nil))))
-   `(mode-line-buffer-id ((t (:bold t :foreground ,pink :italic nil))))
    `(header-line ((t (:background ,dark-red :foreground ,white))))
    `(fringe ((t (:background ,background))))
    `(minibuffer-prompt ((t (:foreground ,blue :bold t))))
-   `(font-lock-builtin-face ((t (:foreground ,soft-blue)))) ;includes statements, elisp properties, ...
-   `(font-lock-comment-face ((t (:foreground ,red :italic t))))
-   `(font-lock-constant-face ((t (:foreground ,pink :bold t))))
-   `(font-lock-function-name-face ((t (:foreground ,soft-blue :bold t))))
-   `(font-lock-keyword-face ((t (:foreground ,cyan :bold t))))
-   `(font-lock-string-face ((t (:foreground ,violet))))
-   `(font-lock-type-face ((t (:foreground ,dark-orange :bold t))))
-   `(font-lock-variable-name-face ((t (:foreground ,pink)))) ;define, variable name, ...
-   `(font-lock-warning-face ((t (:foreground ,red :bold t)))) ;cwarn-mode
-   `(isearch ((t (:background ,pink :foreground "black"))))
+   `(isearch ((t (:background ,pink :foreground ,black))))
    `(lazy-highlight ((t (:background ,orange :foreground ,background))))
    `(link ((t (:foreground ,soft-blue :underline t))))
    `(link-visited ((t (:foreground ,blue :underline t))))
@@ -89,6 +77,43 @@
    `(show-paren-match ((t (:background ,yellow :foreground ,dark-grey :bold t))))
    `(highlight ((t (:background ,dark-grey))))
    `(secondary-selection ((t (:background ,dark-grey))))
+   ;; Mode line
+   `(mode-line ((t (:background ,dark-grey :foreground ,bright-grey :italic t
+                                :box (:line-width 1 :color ,grey)))))
+   `(mode-line-inactive ((t (:background ,dark-grey :foreground ,bright-grey :italic nil  :box nil))))
+   `(mode-line-buffer-id ((t (:bold t :foreground ,pink :italic nil))))
+   `(mode-line-emphasis ((t (:bold t))))
+   `(mode-line-highlight ((t (:background ,grey :foreground ,white
+                                          :box (:line-width 1 :color ,grey)))))
+   `(shadow ((t (:foreground ,bright-grey))))
+
+   ;; TODO: from tango-theme.el
+   `(escape-glyph ((t (:foreground ,red))))
+   `(success ((t (:foreground ,green))))
+   `(warning ((t (:foreground ,orange))))
+   `(error ((t (:foreground ,red))))
+   ;; Flyspell
+   `(flyspell-duplicate ((t (:underline ,orange))))
+   `(flyspell-incorrect ((t (:underline ,red))))
+
+
+   ;; see:
+   ;; [[info:elisp#Faces%20for%20Font%20Lock][info: Faces for Font Lock]]
+   ;; http://www.gnu.org/s/emacs/manual/html_node/elisp/Faces-for-Font-Lock.html
+   `(font-lock-builtin-face ((t (:foreground ,soft-blue)))) ;includes statements, elisp properties, ..
+   `(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face))))
+   `(font-lock-comment-face ((t (:foreground ,red :italic t))))
+   `(font-lock-constant-face ((t (:foreground ,pink :bold t))))
+   `(font-lock-doc-face ((t (:inherit font-lock-string-face :italic t)))) ;i.e: elisp docstring
+   `(font-lock-function-name-face ((t (:foreground ,soft-blue :bold t))))
+   `(font-lock-keyword-face ((t (:foreground ,cyan :bold t))))
+   ;; Color the 'n' character in an '#ifndef' directive
+   ;; `font-lock-negation-char-face'
+   `(font-lock-preprocessor-face ((t (:foreground ,dark-orange :bold t))))
+   `(font-lock-string-face ((t (:foreground ,violet))))
+   `(font-lock-type-face ((t (:foreground ,dark-orange :bold t))))
+   `(font-lock-variable-name-face ((t (:foreground ,pink)))) ;define, variable name, ...
+   `(font-lock-warning-face ((t (:foreground ,red :bold t)))) ;cwarn-mode, ###autoloads
 
    ;; Flymake
    `(flymake-errline ((t (:background ,dark-grey :foreground ,soft-white :underline ,dark-red))))
@@ -100,6 +125,9 @@
    `(message-header-other ((t (:foreground ,blue))))
    `(message-separator ((t (:foreground ,red))))
    `(message-header-subject ((t (:foreground ,green :bold t))))
+   ;; TODO: (stolen from misterioso-theme.el)
+   ;; `(message-header-cc ((,class (:foreground "#e67128"))))
+   ;; `(message-cited-text ((,class (:foreground "#74af68"))))
 
    ;; ERC
    `(erc-prompt-face ((t (:background ,background :foreground ,orange :bold t))))
@@ -160,11 +188,36 @@
    ;; Org-Mode & Babel
    `(org-todo ((t (:bold t :foreground ,red))))
    `(org-done ((t (:bold t :foreground ,green))))
+   `(org-hide ((t (:foreground ,background))))
    `(org-document-info ((t (:foreground ,orange))))
    `(org-document-title ((t (:foreground ,orange))))
    `(org-document-info ((t (:foreground ,cyan))))
    `(org-document-info-keyword ((t (:foreground ,dark-orange))))
-   ))
+
+   ;; Auto-Complete
+   `(ac-completion-face ((t (:foreground ,soft-blue :underline ,blue))))
+   ;; TODO:
+   '(ac-candidate-face ((t :background "NavajoWhite1" :foreground "tomato4")))
+   '(ac-selection-face ((t (:background "NavajoWhite3" :foreground "tomato4" :bold t))))
+   ;; `(ac-gtags-candidate-face ((t (:background ,blue :foreground ,white))))
+   ;; `(ac-gtags-selection-face ((t (:background ,blue :foreground ,white :bold t))))
+   ;; `(ac-yasnippet-candidate-face ((t (:background ,dark-red :foreground ,white))))
+   ;; `(ac-yasnippet-selection-face ((t (:background ,dark-orange :foreground ,white :bold t))))
+
+   ;; TODO: Gnus
+   ;; see: [[file:/usr/share/emacs/24.0.50/etc/themes/tango-theme.el::`(flyspell-duplicate%20((,class%20(:underline%20,orange-1))))][Tango]]
+
+;; Ansi colors (*Shell*, ...)
+(custom-theme-set-variables
+ 'sarcasm
+ `(ansi-color-names-vector [,black
+                            ,red
+                            ,green
+                            ,yellow
+                            ,blue
+                            ,pink
+                            ,cyan
+                            ,white]))))
 
 (provide-theme 'sarcasm)
 

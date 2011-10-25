@@ -7,6 +7,9 @@
 
 (setq dired-recursive-deletes 'top)
 
+;; Add the -h option (display size in the human readable form).
+(setq dired-listing-switches "-alh")
+
 ;; Always enable `dired-omit-mode'
 (add-hook 'dired-mode-hook '(lambda () (dired-omit-mode 1)))
 
@@ -15,6 +18,7 @@
 (setq dired-omit-localp 'no-dir         ;see doc
       dired-omit-files (concat (and dired-omit-files
                                     (concat dired-omit-files "\\|"))
+                               "^\\.\\|"
                                (format "^%s\\|%s$"
                                        (regexp-opt sarcasm-ignored-files)
                                        (mapconcat 'identity

@@ -20,13 +20,14 @@
         ;; (file pattern . description) . action (see `auto-insert-alist').
         (("\\.[hH]\\(h\\|pp\\)?$" . "C / C++ header") . sarcasm-generate-include-guard)
         ;;TODO: a function who ask for the kind of project, C/C++ library...
-        (("\\Makefile" . "Makefile") . "config.mk")))
+        (("\\.eproject" . "project configuration file") . "dot.eproject")
+        (("Makefile" . "Makefile") . "config.mk")))
 
 ;; Add `sarcasm-auto-insert-alist' in `auto-insert-alist'.
 (dolist (elem sarcasm-auto-insert-alist)
   (add-to-list 'auto-insert-alist elem))
 
-(defun sarcasm-format-include-guard ()
+(defun sarcasm-format-include-guard-fallback ()
   "Generate an include guard string with a project and subproject
 name if `sarcasm-project-name' and `sarcasm-sub-project-name' are
 defined.
@@ -50,8 +51,28 @@ example (in .dir-locals.el file):
                                 sarcasm-sub-project-name "_")
                       (concat sarcasm-project-name "_"))
                   "")))
-    (replace-regexp-in-string "[^A-Z_]" "_"
+    (replace-regexp-in-string "[^A-Z0-9_]" "_"
                               (upcase (concat "_" prefix filename "_" ext "_")))))
+
+(defun sarcasm-format-include-guard ()
+  "If not in a project (see `eproject-mode') use
+  `sarcasm-format-include-guard-fallback'.
+
+Format an include guard, in 2 parts:
+        - the project name
+        - the filename mapping (see `eproject--shorten-filename')
+
+example, with the following information:
+  project name:     my server
+  shorten filename: utils/pthread/mutex.hh
+
+the result will be: _MY_SERVER_UTILS_PTHREAD_MUTEX_HH_
+"
+  (if (and (featurep 'eproject) eproject-mode)
+      (let ((filename (car (eproject--shorten-filename buffer-file-name))))
+        (replace-regexp-in-string "[^A-Z0-9_]" "_"
+                                  (upcase (concat "_" (eproject-name) "_" filename "_"))))
+    (sarcasm-format-include-guard-fallback)))
 
 (defun sarcasm-generate-include-guard ()
   "Generate an include guard (should be in a C/C++ file), used by

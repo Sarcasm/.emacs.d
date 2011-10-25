@@ -3,9 +3,9 @@
 ;; (require 'sarcasm-semantic)
 
 ;; Enable support for GNU Global
-(require 'semantic/db-global)
-(semanticdb-enable-gnu-global-databases 'c-mode)
-(semanticdb-enable-gnu-global-databases 'c++-mode)
+;; (require 'semantic/db-global)
+;; (semanticdb-enable-gnu-global-databases 'c-mode)
+;; (semanticdb-enable-gnu-global-databases 'c++-mode)
 
 ;; (global-semantic-idle-scheduler-mode 1)
 ;; ;; (global-semantic-idle-completions-mode 1)

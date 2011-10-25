@@ -1,0 +1,4 @@
+;; Example for Irony mode configuration
+;; :includes '("." "utils")
+;; :extra-flags '("-Weverything")
+;; :config-commands '("pkg-config --cflags sdl")
