@@ -58,25 +58,25 @@ change the dictionnary to the corresponding language."
 		      ;; === Org-Babel stuff ===
 
 ;; Babel Mode for Org-Mode (enable code interpretation during export)
-(require 'ob)
-;; ditaa path
-(setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(when (require 'ob nil t)
+  ;; ditaa path
+  (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
-;; Active Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((C	   . t)
-   (ditaa  . t)
-   (sh	   . t)
-   (R	   . t)
-   (org    . t)
-   (latex  . t)
-   (python . t)
-   (dot    . t)))
+  ;; Active Babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C	   . t)
+     (ditaa  . t)
+     (sh	   . t)
+     (R	   . t)
+     (org    . t)
+     (latex  . t)
+     (python . t)
+     (dot    . t)))
 
-;; It's really annoying to enter 'yes' every time I export a org-file
-;; with ditaa diagrams. It's dangerous on Shell script for example,
-;; should be used with caution.
-(setq org-confirm-babel-evaluate nil)
+  ;; It's really annoying to enter 'yes' every time I export a org-file
+  ;; with ditaa diagrams. It's dangerous on Shell script for example,
+  ;; should be used with caution.
+  (setq org-confirm-babel-evaluate nil))
 
 (provide 'sarcasm-org)
