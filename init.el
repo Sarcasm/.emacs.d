@@ -12,6 +12,3 @@
              (file-exists-p std-file))
     (load-file std-comment-file)
     (load-file std-file)))
-
-(add-to-list 'load-path "/mnt/media/projects/CodeWorker/kooc/tools/")
-(require 'codeworker)
