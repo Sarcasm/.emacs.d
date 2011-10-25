@@ -31,6 +31,7 @@
         dired-details    ;allow to only show filenames in dired buffer
         ;; auctex           ;*TeX integrated environment
         calfw
+        markdown-mode
 
         (:name anything
                :after (lambda ()
