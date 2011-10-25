@@ -26,6 +26,8 @@
         dired-details    ;allow to only show filenames in dired buffer
         ;; auctex           ;*TeX integrated environment
         ;; popwin           ;Popup windows management
+        org-mode
+        markdown-mode
 
         (:name eproject
                :after (lambda ()
@@ -207,7 +209,7 @@
         ))
 
 ;; Initialize el-get packages
-(el-get)
+(el-get 'sync)
 
 ;; "Addons" to the YASnippet config and auto-complete
 
