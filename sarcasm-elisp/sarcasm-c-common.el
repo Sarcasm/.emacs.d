@@ -15,11 +15,9 @@
   ;; (auto-fill-mode 1)
 
   ;; (c-toggle-auto-newline 1) ;not so handy when autopair is enable
+  (c-toggle-hungry-state 1) ;delete all preceding whitespace on [delete]
 
   (setq align-indent-before-aligning t)
-
-  ;; (c-toggle-auto-newline 1)
-  ;; (c-toggle-hungry-state 1)
 
   ;; Adding a final newline when none are present. If I'm right the C
   ;; mode already do this automatically because it defined the
