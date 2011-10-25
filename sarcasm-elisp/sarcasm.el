@@ -42,7 +42,11 @@
       kill-whole-line t
 
       ;; Autosave each change)
-      bookmark-save-flag 1)
+      bookmark-save-flag 1
+
+      ;; Use Window system clipboard
+      x-select-enable-clipboard t
+      yank-pop-change-selection t)
 
 (setq-default indent-tabs-mode nil	;remove tabulations
               ;; show-trailing-whitespace t
