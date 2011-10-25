@@ -135,10 +135,13 @@
 (setq org-export-latex-default-class "sarcasm-article")
 
 ;; Construct the exporting command (3 runs like the default).
-(setq org-latex-to-pdf-process nil)
-(dotimes (_ 3)
-  (push (concat sarcasm-tex2pdf-engine
-                " -interaction nonstopmode -output-directory %o %f")
-        org-latex-to-pdf-process))
+(let ((process-pdf-cmd (concat sarcasm-tex2pdf-engine
+                               " -interaction nonstopmode -output-directory "
+                               (if (string-match-p "^6\\." org-version)
+                                   "%b %s"   ;Org-Mode 6.33x
+                                 "%o %f")))) ;Org-Mode 7.7
+  (setq org-latex-to-pdf-process nil)
+  (dotimes (_ 3)
+    (push process-pdf-cmd org-latex-to-pdf-process)))
 
 (provide 'sarcasm-org-latex)
