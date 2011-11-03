@@ -61,12 +61,14 @@ otherwise assume it's compile previous error."
       (exchange-point-and-mark)
       (setq deactivate-mark nil)))
    (t
-    (beginning-of-line)
-    (when (or (> arg 0) (not (bobp)))
-      (forward-line)
-      (when (or (< arg 0) (not (eobp)))
-        (transpose-lines arg))
-      (forward-line -1)))))
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg))
+        (forward-line -1))
+      (move-to-column column)))))
 
 (defun move-text-down (arg)
   "Move region (transient-mark-mode active) or current line
