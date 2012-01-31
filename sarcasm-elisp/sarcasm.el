@@ -68,10 +68,13 @@
 				      "~"
 				      ".git/"
 				      ".gitignore"
+				      ".hg/"
+				      ".hgignore"
 				      ".svn/"))
 
 (defconst sarcasm-ignored-files '("GPATH" "GRTAGS" "GTAGS"
                                   ".git" ".gitignore"
+                                  ".hg" ".hgignore"
                                   ;; core.clj was ignored in `dired-omit-files'
                                   ;; "core"
                                   "vgcore"
