@@ -67,7 +67,7 @@
 (defun init-sarcasm-cc-project ()
   "Initialize a project, set the compile command, the cppcheck
 command, etc."
-  (let ((make-cmd "make -B -j4 -k "))
+  (let ((make-cmd "make -j4 -k "))
     (set (make-local-variable 'compile-command)
          (if (file-exists-p "Makefile")
              make-cmd
