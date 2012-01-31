@@ -1,0 +1,7 @@
+(:name eclim
+       :website "https://github.com/senny/emacs-eclim"
+       :description "Brings some of the great Eclipse features to Emacs developers."
+       :type git
+       :url "git://github.com/senny/emacs-eclim.git"
+       :load ("vendor/decompile.el")
+       :features eclim)
