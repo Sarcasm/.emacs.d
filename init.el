@@ -1,3 +1,9 @@
+(when (equal system-type 'windows-nt)
+  (let ((windows-git-path "c:/Program Files (x86)/Git/bin/"))
+    (when (file-exists-p windows-git-path)
+      (setenv "PATH" (concat windows-git-path ";" (getenv "PATH")))
+      (setq exec-path (cons windows-git-path exec-path)))))
+
 ;; Load personnal config
 (load (concat user-emacs-directory
               (file-name-as-directory "sarcasm-elisp")

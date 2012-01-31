@@ -15,7 +15,8 @@
   "Default path for Sarcasm config files.")
 
 ;; Go to the projects root directory by default
-(setq default-directory "/mnt/media/projects/")
+(when (file-exists-p "/mnt/media/projects/")
+  (setq default-directory "/mnt/media/projects/"))
 
 ;; I don't understand why, but the following doesn't work
 ;; ;; Change the font to your needs
