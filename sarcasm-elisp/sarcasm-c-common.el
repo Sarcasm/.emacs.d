@@ -7,7 +7,8 @@
   "Hooks run for C/C++ and friends mode."
 
   ;; GTags Mode
-  (gtags-mode 1)
+  (when (featurep 'gtags)
+    (gtags-mode 1))
 
   ;; Highlights suspicious C and C++ constructions
   (global-cwarn-mode 1)

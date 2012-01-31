@@ -2,6 +2,8 @@
 ;; usage:
 ;; (require 'sarcasm-interactively)
 
+(require 'ibuffer)
+
 ;; (iswitchb-mode 1)
 
 ;; Iswitchb with Arrow-keys
