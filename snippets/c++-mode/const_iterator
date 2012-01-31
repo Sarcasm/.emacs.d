@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name : for (T::const_iterator it = var.begin(); it != var.end(); ++it) { ... }
 # contributor : Guillaume Papin
+# key: const_iterator
 # --
 for (${1:T}::const_iterator ${2:it} = ${3:var}.begin();
     $2 != $3.end(); ++it)

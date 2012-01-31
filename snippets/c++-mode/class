@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 #name : class Name { ... }
 # contributor : Guillaume Papin
+# key: class
 # --
 class ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}
 {

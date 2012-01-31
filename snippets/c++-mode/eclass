@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name : class Exception : public std::exception { ... }
 # contributor : Guillaume Papin
+# key: eclass
 # --
 class ${1:E`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`} : public std::exception
 {

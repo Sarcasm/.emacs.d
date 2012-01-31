@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name : std::clog << ... << std::endl;
 # contributor : Guillaume Papin
+# key: clog
 # --
 std::clog << ${1:...} << std::endl;

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name : for (T::iterator it = var.begin(); it != var.end(); ++it) { ... }
 # contributor : Guillaume Papin
+# key: iterator
 # --
 for (${1:T}::iterator ${2:it} = ${3:var}.begin();
     $2 != $3.end(); ++it)

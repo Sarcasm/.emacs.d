@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name : namespace N {...}
 # contributor : Guillaume Papin
+# key: ns
 # --
 namespace ${1:Name} {
   $0

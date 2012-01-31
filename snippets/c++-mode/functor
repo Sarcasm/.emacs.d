@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name : struct Functor { void operator()(...) {...} }
 # contributor : Guillaume Papin
+# key: functor
 # --
 struct  ${1:Functor} {
   $3    $2_;

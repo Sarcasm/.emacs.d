@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name : for_each(begin(), end(), Functor/Function);
 # contributor : Guillaume Papin
+# key: for_each
 # --
 std::for_each(${1:var}.begin(), $1.end(), ${2:Functor});$0
