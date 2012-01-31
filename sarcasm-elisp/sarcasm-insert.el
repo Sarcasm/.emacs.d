@@ -52,7 +52,7 @@ example (in .dir-locals.el file):
                       (concat sarcasm-project-name "_"))
                   "")))
     (replace-regexp-in-string "[^A-Z0-9_]" "_"
-                              (upcase (concat "_" prefix filename "_" ext "_")))))
+                              (upcase (concat prefix filename "_" ext "_")))))
 
 (defun sarcasm-format-include-guard ()
   "If not in a project (see `eproject-mode') use
@@ -67,11 +67,20 @@ example, with the following information:
   shorten filename: utils/pthread/mutex.hh
 
 the result will be: _MY_SERVER_UTILS_PTHREAD_MUTEX_HH_
+
+As said here: http://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Include_Guard_Macro
+don't add an underscore at the begining of the define.
+
+> Programmers often have their include guard macros start with
+  one or more underscores, followed by uppercase letters, even
+  though such identifiers are officially reserved for the
+  implementation of the compiler and the Standard Library,
+  according to the C++ Standard (ISO/IEC 14882:2003).
 "
   (if (and (featurep 'eproject) eproject-mode)
       (let ((filename (car (eproject--shorten-filename buffer-file-name))))
         (replace-regexp-in-string "[^A-Z0-9_]" "_"
-                                  (upcase (concat "_" (eproject-name) "_" filename "_"))))
+                                  (upcase (concat (eproject-name) "_" filename "_"))))
     (sarcasm-format-include-guard-fallback)))
 
 (defun sarcasm-generate-include-guard ()
