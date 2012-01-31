@@ -15,10 +15,10 @@
       org-hide-leading-stars t)
 
 ;; Org-Mode global keybindings
-(define-key global-map (kbd "C-c o a") 'org-agenda)
-(define-key global-map (kbd "C-c o l") 'org-store-link)
-(define-key global-map (kbd "C-c o o") 'org-open-at-point-global)
-(define-key global-map (kbd "C-c o i") 'org-insert-link-global)
+(define-key mode-specific-map (kbd "o a") 'org-agenda)
+(define-key mode-specific-map (kbd "o l") 'org-store-link)
+(define-key mode-specific-map (kbd "o o") 'org-open-at-point-global)
+(define-key mode-specific-map (kbd "o i") 'org-insert-link-global)
 
 (add-hook 'org-mode-hook
 	  '(lambda ()
@@ -76,13 +76,14 @@ little buggy."
   ;; Active Babel languages
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((C	   . t)
+   '((C      . t)
      (ditaa  . t)
-     (sh	   . t)
-     (R	   . t)
+     (sh     . t)
+     (R      . t)
      (org    . t)
      (latex  . t)
      (python . t)
+     (sql    . t)
      (dot    . t)))
 
   ;; It's really annoying to enter 'yes' every time I export a org-file

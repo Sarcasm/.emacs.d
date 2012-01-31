@@ -24,13 +24,13 @@
                                               "sarcasm-el-get.el"))
                          (dired *sarcasm-directory*))))
 
-(global-set-key (kbd "C-c i") 'imenu)
+(define-key mode-specific-map (kbd "i") 'imenu)
 ;; xscope has [C-c s] for prefix
 ;; (global-set-key (kbd "C-c s") 'shell)
-(global-set-key (kbd "C-c b") 'shell)   ;b for bash...
+(define-key mode-specific-map (kbd "b") 'shell) ;b for bash...
 (global-set-key (kbd "C-x c") 'whitespace-cleanup)
-(global-set-key (kbd "C-c f") 'folding-mode)
-(global-set-key (kbd "C-c p") 'sarcasm-path-to-kill-ring)
+(define-key mode-specific-map (kbd "f") 'folding-mode)
+(define-key mode-specific-map (kbd "p") 'sarcasm-path-to-kill-ring)
 
 ;; Found on Stack Overflow
 ;; http://stackoverflow.com/questions/2091881/emacs-font-sizing-with-ctrl-key-and-mouse-scroll/2092158#2092158
@@ -51,13 +51,17 @@
                                  (previous-error))))
 
 ;; Irony point/mark
-(global-set-key (kbd "C-c 8 i") (lambda ()
-                                  (interactive)
-                                  ;; #x2E2E in hexa or REVERSED QUESTION MARK
-                                  (ucs-insert 11822)))
+(define-key mode-specific-map (kbd "8 i")
+  (lambda ()
+    (interactive)
+    ;; #x2E2E in hexa or REVERSED QUESTION MARK
+    (ucs-insert 11822)))
+
+;; AHG
+(define-key mode-specific-map (kbd "x a") 'ahg-status)
 
 ;; Magit
-(global-set-key (kbd "C-c x m") 'magit-status)
+(define-key mode-specific-map (kbd "x m") 'magit-status)
 ;; Imagine:
 ;; LOCAL <-> SERVER
 ;; push: local -> server
@@ -75,7 +79,7 @@
 (when (fboundp 'flymake-mode)
   (global-set-key (kbd "M-RET") 'flymake-mode))
 
-(global-set-key (kbd "C-c x f") 'flyspell-prog-mode) ;FIXME: maybe flyspell-mode ?
+(define-key mode-specific-map (kbd "x f") 'flyspell-prog-mode) ;FIXME: maybe flyspell-mode ?
 
 ;; Make window switching a little easier. C-x-o is a pain.
 ;; Easy window switching with M-x windmove-{left,right,down,up} RET
@@ -83,22 +87,23 @@
 (windmove-default-keybindings)		; Shit + arrows (by default)
 
 ;; Align with keyboard !
-(global-set-key (kbd "C-c a") 'align-region-or-current)
-(global-set-key (kbd "C-c A") 'align-regexp)
+(define-key mode-specific-map (kbd "a") 'align-region-or-current)
+(define-key mode-specific-map (kbd "A") 'align-regexp)
 
 ;; M-<left> and M-<right> like the Ecplise IDE functionnality
 (define-key esc-map [up]   'move-text-up)
 (define-key esc-map [down] 'move-text-down)
-(global-set-key (kbd "M-<up>")	 'move-text-up)
+(global-set-key (kbd "M-<up>")   'move-text-up)
 (global-set-key (kbd "M-<down>") 'move-text-down)
 
 ;; SLIME / StumpWM binding
-(global-set-key (kbd "C-c x s") 'slime-stumpwm-repl)
+(define-key mode-specific-map (kbd "x s") 'slime-stumpwm-repl)
 
-(global-set-key (kbd "C-c x \"") '(lambda (arg begin end)
-                                    (interactive "*P\nr")
-                                    (if arg
-                                        (sarcasm-unescape-quotes begin end)
-                                        (sarcasm-escape-quotes begin end))))
+(define-key mode-specific-map (kbd "x \"")
+  (lambda (arg begin end)
+    (interactive "*P\nr")
+    (if arg
+        (sarcasm-unescape-quotes begin end)
+      (sarcasm-escape-quotes begin end))))
 
 (provide 'sarcasm-keys)

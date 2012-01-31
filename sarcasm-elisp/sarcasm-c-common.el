@@ -48,7 +48,13 @@
   ;;
   ;;     ("." "../../src" "../include/*" "/usr/local/*/src/*" "$PROJECT/src")
   (setq ff-always-in-other-window t)
-  (define-key c++-mode-map (kbd "C-c t") 'ff-find-other-file))
+  (define-key c-mode-base-map (kbd "C-c t") 'ff-find-other-file)
+
+  ;; FIXME:
+  ;; (setq cc-other-file-alist (cons '("\\.cpp" . ("\\.hh"))
+  ;;                                 (cons '("\\.hh" . ("\\.cpp"))
+  ;;                                       cc-other-file-alist)))
+)
 
 (add-hook 'c-mode-common-hook 'sarcasm-c-mode-common-hook)
 

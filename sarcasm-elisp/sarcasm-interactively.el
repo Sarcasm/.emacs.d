@@ -44,6 +44,8 @@
                   (interactive)
                   (ibuffer t)))
 
+(require 'ibuffer)
+
 ;; Enlarge the default limit for buffer name
 (add-to-list 'ibuffer-formats '(mark
                                 modified

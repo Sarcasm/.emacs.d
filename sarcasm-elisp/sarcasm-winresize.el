@@ -8,7 +8,7 @@
 (defconst win-resize-value 4
  "The number of lines or columns for a resizement operation.")
 
-(global-set-key (kbd "C-c w") 'iresize-mode)
+(define-key mode-specific-map (kbd "w") 'iresize-mode)
 (global-set-key [M-S-up]      'win-resize-up)
 (global-set-key [M-S-down]    'win-resize-down)
 (global-set-key [M-S-left]    'win-resize-left)

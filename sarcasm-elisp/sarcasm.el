@@ -20,13 +20,14 @@
 ;; I don't understand why, but the following doesn't work
 ;; ;; Change the font to your needs
 ;; (set-default-font "DejaVu Sans Mono-10")
+;; (set-frame-font "DejaVu Sans Mono-10")
 ;; So in ~/.Xdefaults / ~/.Xresources
 ;;
 ;; Emacs.FontBackend: xft
 ;; Emacs.font: DejaVu Sans Mono-10
 
 (setq user-mail-address "guillaume.papin@epitech.eu"
-      ;; user-full-name "Guillaume Papin"
+      user-full-name "Guillaume Papin"
       inhibit-startup-screen t	      ;do not display a startup screen
       autopair-autowrap t             ;wrap the region with the paired characters
       mouse-yank-at-point t           ;paste at cursor position
@@ -54,11 +55,19 @@
               ;; show-trailing-whitespace t
 	      )
 
+;; Emacs external `url browser' (usefull in Org-Mode)
+(setq-default browse-url-generic-program "chromium")
+(setq browse-url-generic-program "chromium")
+(setq browse-url-browser-function '(("^file:" . browse-url-generic)
+				    ("."      . browse-url-generic)))
+
 ;; http://www.emacswiki.org/emacs/SavePlace
 ;; note: This is useful when =C-x C-v= is done
 (setq-default save-place t)
 (require 'saveplace)
 (setq save-place-file (concat user-emacs-directory "places"))
+
+(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
 ;; Thanks http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
 ;; note: Slash for directory
@@ -136,11 +145,6 @@ There only difference is that each filename should be a regexp.")
 (require 'paren)
 (show-paren-mode 1)
 
-;; Emacs external `url browser' (usefull in Org-Mode)
-(setq browse-url-generic-program "chromium")
-(setq browse-url-browser-function '(("^file:" . browse-file-url)
-				    ("."      . browse-url-generic)))
-
  ;; Go to the next page automatically in Doc-View
 (setq doc-view-continuous t)
 
@@ -170,8 +174,6 @@ activate compile)
 (require 'sarcasm-el-get)               ;el-get packages and config
 (require 'sarcasm-keys)			;global keybindings
 (require 'sarcasm-rcirc)		;rcirc settings
-(require 'sarcasm-org)			;Org-Mode settings
-(require 'sarcasm-org-latex)            ;Org-Mode LaTex export config
 (require 'sarcasm-c-common)		;C/C++ common stuff
 (require 'sarcasm-c)			;C stuff
 (require 'sarcasm-c++)			;C++ stuff
