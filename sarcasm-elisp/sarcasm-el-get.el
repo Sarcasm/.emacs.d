@@ -23,17 +23,41 @@
         htmlize          ;for Org-Mode HTML export of source code
         folding          ;folding plugin
         rinari           ;Rinari Is Not A Ruby IDE
-        haml-mode        ;Alternative to ERB
-        yaml-mode        ;YAML Ain't Markup Language
+        ;; haml-mode        ;Alternative to ERB
+        ;; yaml-mode        ;YAML Ain't Markup Language
         flymake-ruby     ;flymake for ruby
         magit            ;control git from Emacs
         fringe-helper    ;useful with test-case-mode
         dired-details    ;allow to only show filenames in dired buffer
         ;; auctex           ;*TeX integrated environment
         ;; popwin           ;Popup windows management
-        org-mode
         markdown-mode
         calfw
+        ahg
+        auto-complete-extension
+        lua-mode
+
+        (:name glsl-mode
+               :after (lambda ()
+                        (autoload 'glsl-mode "glsl-mode" nil t)
+                        (add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+                        (add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))))
+
+        (:name eclim
+               :after (lambda ()
+                        ;; (require 'eclim)
+                        ;; (setq eclim-auto-save t)
+                        ;; (global-eclim-mode)
+                        ;; (require 'ac-emacs-eclim-source)
+                        ;; (add-hook 'eclim-mode-hook
+                        ;;           (lambda ()
+                        ;;             (add-to-list 'ac-sources 'ac-source-emacs-eclim)))
+                        ))
+
+        (:name org-mode
+               :after (lambda ()
+                        (require 'sarcasm-org) ;Org-Mode settings
+                        (require 'sarcasm-org-latex))) ;Org-Mode LaTex export config
 
         (:name anything
                :after (lambda ()
@@ -43,10 +67,10 @@
                         ;; http://emacs-fu.blogspot.com/2011/09/finding-just-about-anything.html
                         ))
 
-        (:name sass-mode                ;Alternative to CSS
-               :after (lambda ()
-                        ;; I use the shell command 'compass compile'
-                        (setq scss-compile-at-save nil)))
+        ;; (:name sass-mode                ;Alternative to CSS
+        ;;        :after (lambda ()
+        ;;                 ;; I use the shell command 'compass compile'
+        ;;                 (setq scss-compile-at-save nil)))
 
         ;; clojure-mode
         ;; swank-clojure
@@ -80,8 +104,10 @@
 
                         (setq org-export-htmlize-output-type 'css)
 
-                        (setq sarcasm-org-directory "~/Org/")
-                        (setq sarcasm-jekyll-directory "~/Org/jekyll/")
+                        (setq sarcasm-org-directory (expand-file-name "~/Org/")
+
+                              sarcasm-jekyll-directory (expand-file-name
+                                                        "~/projects/Perso/sarcasm.github.com/"))
 
                         ;; Post titles should be <h1> not <h2>
                         ;; FIXME: links are removed ?
@@ -160,13 +186,13 @@
                         ;; M-x zap[TAB] should be enough
                         (global-set-key (kbd "C-,") 'ace-jump-mode)))
 
-        (:name lua-mode
-               :type git
-               :url "https://github.com/immerrr/lua-mode.git"
-               :features lua-mode
-               :post-init (lambda ()
-                            (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
-                            (autoload 'lua-mode "lua-mode" "Lua editing mode." t)))
+        ;; (:name lua-mode
+        ;;        :type git
+        ;;        :url "https://github.com/immerrr/lua-mode.git"
+        ;;        :features lua-mode
+        ;;        :post-init (lambda ()
+        ;;                     (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
+        ;;                     (autoload 'lua-mode "lua-mode" "Lua editing mode." t)))
 
         (:name yari  ;Ri documentation in Emacs
                :features yari
@@ -205,7 +231,13 @@
                         (defun my-doxymacs-font-lock-hook ()
                           (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
                               (doxymacs-font-lock)))
-                        (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)))
+                        (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
+
+                        (add-to-list 'doxymacs-doxygen-dirs
+                                     '("/C\\+\\+/babel/"
+                                       "~/projects/C++/babel/build/doc/babel.tag"
+                                       "file:///mnt/media/projects/C++/babel/build/doc/html"))))
 
         (:name filladapt
                :features filladapt
@@ -259,13 +291,13 @@
                         (global-set-key (kbd "C-x o") 'switch-window)))
 
         (:name yasnippet
-               :type svn
-               :url "http://yasnippet.googlecode.com/svn/trunk/"
-               ;; El-get default rule compile *.el, but with
-               ;; yasnippet-debug.el it failed. In the Rakefile the
-               ;; correct task seems to be 'rake compile'
-               :build ("rake compile")
-               :features yasnippet
+               ;; :type git
+               ;; :url "git://github.com/capitaomorte/yasnippet.git"
+               ;; ;; El-get default rule compile *.el, but with
+               ;; ;; yasnippet-debug.el it failed. In the Rakefile the
+               ;; ;; correct task seems to be 'rake compile'
+               ;; :build ("rake compile")
+               ;; :features yasnippet
                :after (lambda ()
                         ;; from here: https://github.com/blastura/dot-emacs/blob/master/init.el
                         ;; (add-hook 'yas/after-exit-snippet-hook
@@ -306,9 +338,6 @@
                         (add-to-list 'ac-trigger-commands 'newline-and-indent)
                         (setq ac-ignore-case nil)))
 
-        (:name auto-complete-extension
-               :type emacswiki)
-
         ;; (:name auto-complete-clang
         ;;        :type git
         ;;        :url "https://github.com/brianjcj/auto-complete-clang.git"
@@ -341,7 +370,7 @@
   "Enable `auto-complete' and `yasnippet'. Also add snippet names
 in auto-complete sources."
   (yas/minor-mode-on)
-  (auto-complete-mode)
+  (auto-complete-mode 1)
   ;; Already present by default
   ;; (setq ac-sources (append ac-sources '(ac-source-yasnippet)))
 
