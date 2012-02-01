@@ -369,7 +369,7 @@
 (defun sarcasm-enable-ac-and-yas ()
   "Enable `auto-complete' and `yasnippet'. Also add snippet names
 in auto-complete sources."
-  (yas/minor-mode-on)
+  ;; (yas/minor-mode-on)
   (auto-complete-mode 1)
   ;; Already present by default
   ;; (setq ac-sources (append ac-sources '(ac-source-yasnippet)))
