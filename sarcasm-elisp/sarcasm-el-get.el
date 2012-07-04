@@ -31,11 +31,16 @@
         dired-details    ;allow to only show filenames in dired buffer
         ;; auctex           ;*TeX integrated environment
         ;; popwin           ;Popup windows management
-        markdown-mode
         calfw
         ahg
         auto-complete-extension
         lua-mode
+
+        (:name markdown-mode
+               :after (lambda ()
+                        (add-hook 'markdown-mode-hook
+                                  (lambda ()
+                                    (setq show-trailing-whitespace t)))))
 
         (:name glsl-mode
                :after (lambda ()
@@ -88,8 +93,6 @@
         ;;                 (setq display-buffer-function 'popwin:display-buffer)))
 
         (:name org-jekyll
-               :type git
-               :url "git://github.com/Sarcasm/org-jekyll.git" ;override the default
                :after (lambda ()
                         (require 'org-publish)
 
@@ -221,9 +224,6 @@
                )
 
         (:name doxymacs
-               ;; Use an alternative url (a fork with really minor
-               ;; changes)
-               :url "git://github.com/Sarcasm/doxymacs.git"
                :after (lambda ()
                         (setq doxymacs-command-character "\\")
 
@@ -369,10 +369,12 @@
 (defun sarcasm-enable-ac-and-yas ()
   "Enable `auto-complete' and `yasnippet'. Also add snippet names
 in auto-complete sources."
-  ;; (yas/minor-mode-on)
+  (yas/minor-mode-on) ;if not set before (auto-complete-mode 1), overlay persist after an expansion
   (auto-complete-mode 1)
   ;; Already present by default
   ;; (setq ac-sources (append ac-sources '(ac-source-yasnippet)))
+
+  (goto-address-prog-mode 1)
 
   ;; This is certainly not the good place for that...but for the
   ;; moment it's ok
