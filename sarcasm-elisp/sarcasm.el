@@ -50,7 +50,11 @@
 
       ;; Use Window system clipboard
       x-select-enable-clipboard t
-      yank-pop-change-selection t)
+      yank-pop-change-selection t
+
+      ;; Case-insensitive `find-file'
+      read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
 
 (setq-default indent-tabs-mode nil	;remove tabulations
               ;; show-trailing-whitespace t
