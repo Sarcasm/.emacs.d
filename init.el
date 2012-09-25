@@ -29,3 +29,26 @@
              (file-exists-p std-file))
     (load-file std-comment-file)
     (load-file std-file)))
+
+(when (file-exists-p "/usr/share/emacs/share-lisp/")
+  (add-to-list 'load-path "/usr/share/emacs/share-lisp/")
+  (load "ninja-mode"))
+
+(let ((ledger-path (concat user-emacs-directory
+			   (file-name-as-directory "ledger"))))
+  (when (file-exists-p ledger-path)
+    (add-to-list 'load-path ledger-path)
+    (require 'ledger)
+    (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode))))
+
+;; Use `C-x 8 E' as a shortcut to get the euro sign (C-x 8 RET "EURO SIGN")
+(require 'iso-transl)
+(define-key 'iso-transl-ctl-x-8-map "E" [?€])
+
+;; For libRocket configuration file (syntax based on HTML and CSS)
+;; see: http://librocket.com
+
+;; http://librocket.com/wiki/documentation/RML
+(add-to-list 'auto-mode-alist '("\\.rml\\'" . html-mode))
+;; http://librocket.com/wiki/documentation/RCSS
+(add-to-list 'auto-mode-alist '("\\.rcss\\'" . css-mode))
