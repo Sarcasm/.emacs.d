@@ -13,7 +13,7 @@
 (setq package-archives '(("ELPA"      . "http://tromey.com/elpa/")
 			 ("gnu"	      . "http://elpa.gnu.org/packages/")
 			 ("Marmalade" . "http://marmalade-repo.org/packages/")
-			 ;; ("Org-mode" . "http://orgmode.org/pkg/daily/")
-			 ))
+                         ("Org-Mode" . "http://orgmode.org/elpa/")
+                         ))
 
 (provide 'sarcasm-elpa)

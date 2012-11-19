@@ -176,6 +176,11 @@ activate compile)
   (deactivate-mark))
 
 (require 'sarcasm-utils)		;utility functions
+
+;; ELPA should be used use at the beginning, so dependent package will
+;; be configured correctly.
+(require 'sarcasm-elpa)			;ELPA (Emacs Lisp Package Archive) stuff
+
 (require 'sarcasm-el-get)               ;el-get packages and config
 (require 'sarcasm-keys)			;global keybindings
 (require 'sarcasm-rcirc)		;rcirc settings
@@ -187,7 +192,6 @@ activate compile)
 (require 'sarcasm-lua)                  ;Lua stuff
 (require 'sarcasm-ruby)			;Ruby stuff
 (require 'sarcasm-lisp)			;Lisp stuff
-(require 'sarcasm-elpa)			;ELPA (Emacs Lisp Package Archive) stuff
 (require 'sarcasm-gtags)                ;GTags stuff
 (require 'sarcasm-semantic)             ;General Semantic stuff
 (require 'sarcasm-ac)                   ;Auto-complete stuff
