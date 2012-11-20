@@ -34,6 +34,15 @@ In the *scratch* buffer:
        (eval-print-last-sexp)))
 
 
-Contact
--------
-Guillaume Papin - guillaume.papin@epitech.eu
+Configuration
+-------------
+You can optionally create an identity file where mail address, user
+full name, etc, are recommended to be set.
+
+An example of the content of this file can be:
+
+    $ cat sarcasm-identity.el
+    (setq user-mail-address "firstname.lastname@gmail.com"
+          user-full-name    "Firstname Lastname")
+    (provide 'sarcasm-identity)
+    $
