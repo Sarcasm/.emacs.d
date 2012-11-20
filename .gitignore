@@ -14,3 +14,4 @@
 /elpa/archives/gnu/archive-contents
 /places
 *.elc
+/sarcasm-elisp/sarcasm-identity.el

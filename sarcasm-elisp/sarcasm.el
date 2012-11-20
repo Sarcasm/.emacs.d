@@ -27,9 +27,7 @@
 ;; Emacs.FontBackend: xft
 ;; Emacs.font: DejaVu Sans Mono-10
 
-(setq user-mail-address "guillaume.papin@epitech.eu"
-      user-full-name "Guillaume Papin"
-      inhibit-startup-screen t	      ;do not display a startup screen
+(setq inhibit-startup-screen t	      ;do not display a startup screen
       autopair-autowrap t             ;wrap the region with the paired characters
       mouse-yank-at-point t           ;paste at cursor position
       scroll-preserve-screen-position t ;restore cursor after PgUp/PgDown
@@ -174,6 +172,18 @@ There only difference is that each filename should be a regexp.")
 activate compile)
   "Disable selection after `narrow-to-region'"
   (deactivate-mark))
+
+;; Load the identity file where mail address, user full name, etc, are
+;; recommended to be set if the file exists.
+;;
+;; An example of the content of this file can be:
+;;
+;;    $ cat sarcasm-identity.el
+;;    (setq user-mail-address "firstname.lastname@gmail.com"
+;;          user-full-name    "Firstname Lastname")
+;;    (provide 'sarcasm-identity)
+;;    $
+(require 'sarcasm-identity nil t)
 
 (require 'sarcasm-utils)		;utility functions
 
