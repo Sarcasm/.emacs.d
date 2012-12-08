@@ -76,6 +76,7 @@
 ;; note: Slash for directory
 (setq completion-ignored-extensions '(".o" ".a" ".so"
 				      ".elc"
+                                      ".pyc"
                                       ".class" ".dll"
 				      "~"
 				      ".git/"
