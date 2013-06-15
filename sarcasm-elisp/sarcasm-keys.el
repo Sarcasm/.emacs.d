@@ -60,21 +60,6 @@
 ;; AHG
 (define-key mode-specific-map (kbd "x a") 'ahg-status)
 
-;; Magit
-(define-key mode-specific-map (kbd "x m") 'magit-status)
-;; Imagine:
-;; LOCAL <-> SERVER
-;; push: local -> server
-;; pull: local <- server
-;; remove '-' and...HEY !!! It's '>' and '<' !
-(add-hook 'magit-mode-hook '(lambda ()
-                              (define-key magit-mode-map (kbd ">") 'magit-push)
-                              (define-key magit-mode-map (kbd "<") 'magit-pull)
-                              (define-key magit-mode-map (kbd "C-o")
-                                (lambda ()
-                                  (interactive)
-                                  (magit-visit-item t)))))
-
 ;; Enable / Disable Fly{make,spell} mode
 (when (fboundp 'flymake-mode)
   (global-set-key (kbd "M-RET") 'flymake-mode))

@@ -50,4 +50,10 @@ in auto-complete sources."
                python-mode ruby-mode snippet-mode slime-mode
                slime-repl-mode))
 
+(when (require 'cmake-mode nil t)
+  (setq auto-mode-alist
+        (append '(("CMakeLists\\.txt\\'" . cmake-mode)
+                  ("\\.cmake\\'" . cmake-mode))
+                auto-mode-alist)))
+
 (provide 'sarcasm-el-get)

@@ -154,7 +154,9 @@ resolved)."
 
 ;; From kde-emacs
 ;; file : kde-emacs-utils.el
-; Makes ',' insert ', '
+;; Makes ',' insert ', '
+;; Note: Might be interesting to use something similar to
+;;       `c-scope-operator' who use `insert-and-inherit'.
 (defun sarcasm-insert-comma (arg)
   (interactive "*P")
   (let* ((ch (char-after))

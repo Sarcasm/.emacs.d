@@ -14,8 +14,8 @@
 
 (add-hook 'c-mode-hook
 	  '(lambda ()
-             ;; School require that
-             (setq indent-tabs-mode t)
+             ;; School requires that
+             ;; (setq indent-tabs-mode t)
              ;; (define-key c-mode-map (kbd "M-TAB") 'ac-complete-clang)
              ))
 

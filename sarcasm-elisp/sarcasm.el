@@ -202,6 +202,7 @@ activate compile)
 (require 'sarcasm-makefile)             ;Makefile stuff
 (require 'sarcasm-lua)                  ;Lua stuff
 (require 'sarcasm-ruby)			;Ruby stuff
+(require 'sarcasm-python)               ;Python stuff
 (require 'sarcasm-lisp)			;Lisp stuff
 (require 'sarcasm-gtags)                ;GTags stuff
 (require 'sarcasm-semantic)             ;General Semantic stuff
@@ -217,6 +218,9 @@ activate compile)
 (require 'sarcasm-uniquify)             ;Uniquify buffer names
 (require 'sarcasm-mode-line)            ;Mode-Line content
 (require 'sarcasm-gud)                  ;Debugger settings
+(require 'sarcasm-org)                  ;Org-Mode settings
+;; (require 'sarcasm-org-latex)            ;Org-Mode LaTex export config
+(require 'sarcasm-irony)                ;Irony-Mode stuff
 
  ;; Gnus starting file (another way to say "(require 'sarcasm-gnus)")
 (setq gnus-init-file (concat *sarcasm-directory*

@@ -106,11 +106,14 @@
 
 (setq org-export-latex-classes
       (cons '("sarcasm-article"
-              "\\documentclass[11pt,a4paper]{article}
+              "\\documentclass[12pt,a4paper]{report}
  [DEFAULT-PACKAGES]
  [PACKAGES]
  [EXTRA]
 \\definecolor{mintedbg}{rgb}{0.95,0.95,0.95}
+
+\\usepackage[a4paper,includeall,bindingoffset=0cm,margin=2cm,
+            marginparsep=0cm,marginparwidth=0cm]{geometry}
 
 \\defaultfontfeatures{Scale=MatchLowercase,Mapping=tex-text}
 \\setromanfont[Mapping={tex-text},Numbers={OldStyle},Ligatures={Common}]{Linux Libertine O}

@@ -73,6 +73,13 @@ little buggy."
   ;; ditaa path
   (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
+  ;; Code evaluation of C++ source with the name 'c++' doesn't work
+  ;; but the fontify-source works. For 'C++' fontify doesn't work but
+  ;; code evaluations works. This line allows babel to works with
+  ;; 'c++' for code evaluation.
+  (unless (fboundp 'org-babel-execute:c++)
+    (defalias 'org-babel-execute:c++ 'org-babel-execute:cpp))
+
   ;; Active Babel languages
   (org-babel-do-load-languages
    'org-babel-load-languages
