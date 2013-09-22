@@ -64,3 +64,14 @@
 (setq vc-handled-backends nil)
 ;; (remove-hook 'find-file-hooks 'vc-find-file-hook)
 ;; (delete 'Git vc-handled-backends)
+
+;; LLVM stuff
+(when (file-exists-p "~/GSoC/llvm/utils/emacs")
+  (add-to-list 'load-path "~/GSoC/llvm/utils/emacs")
+  (require 'tablegen-mode))
+
+(require 'js-beautify)
+(defun js-beautify-default-keybindings ()
+  (local-set-key (kbd "C-S-f") 'js-beautify))
+(add-hook 'js-mode-hook 'js-beautify-default-keybindings)
+(add-hook 'javascript-mode-hook 'js-beautify-default-keybindings)

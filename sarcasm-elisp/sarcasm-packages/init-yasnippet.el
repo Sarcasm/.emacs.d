@@ -5,8 +5,8 @@
 (mapc 'yas/load-directory yas/snippet-dirs)
 
 ;; Fix the promp on X, the default was ugly.
-(require 'dropdown-list)
-(setq yas/prompt-functions '(yas/ido-prompt
-                             yas/dropdown-prompt
-                             yas/completing-prompt
-                             yas/no-prompt))
+(when (require 'dropdown-list nil t)
+  (setq yas/prompt-functions '(yas/ido-prompt
+                               yas/dropdown-prompt
+                               yas/completing-prompt
+                               yas/no-prompt)))

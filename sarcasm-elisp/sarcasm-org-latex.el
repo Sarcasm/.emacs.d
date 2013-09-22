@@ -15,6 +15,8 @@
 (unless (boundp 'org-export-latex-classes)
   (setq org-export-latex-classes nil))
 
+(add-to-list 'auto-mode-alist '("\\.lco\\'" . latex-mode))
+
 (defvar sarcasm-tex2pdf-engine "xelatex"
   "The engine use to convert TeX file to PDF.")
 

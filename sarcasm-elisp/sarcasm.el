@@ -15,8 +15,8 @@
   "Default path for Sarcasm config files.")
 
 ;; Go to the projects root directory by default
-(when (file-exists-p "/mnt/media/projects/")
-  (setq default-directory "/mnt/media/projects/"))
+;; (when (file-exists-p "/mnt/media/projects/")
+;;   (setq default-directory "/mnt/media/projects/"))
 
 ;; I don't understand why, but the following doesn't work
 ;; ;; Change the font to your needs
@@ -109,14 +109,18 @@ There only difference is that each filename should be a regexp.")
 ;; and sometimes other things.
 (set-language-environment "UTF-8")
 
+(setenv "EDITOR" "emacsclient")
+
 ;; (menu-bar-mode -1)
 (tool-bar-mode -1) ;toolbar is visible by default on X emacs so disable it
 (blink-cursor-mode -1)                  ;it's annoying
 (scroll-bar-mode -1)
 (column-number-mode 1)		 ;print column number on the mode-line
 (winner-mode 1)
-;; Replace selection
-(delete-selection-mode 1)
+
+;; Emacs has a slightly smaller value by default but sometimes it cuts
+;; too short.
+(setq-default fill-column 80)
 
 ;; Since Emacs 24
 ;; stolen from: https://github.com/bbatsov/emacs-dev-kit/blob/master/misc-config.el
@@ -221,6 +225,8 @@ activate compile)
 (require 'sarcasm-org)                  ;Org-Mode settings
 ;; (require 'sarcasm-org-latex)            ;Org-Mode LaTex export config
 (require 'sarcasm-irony)                ;Irony-Mode stuff
+(require 'sarcasm-pcmpl-ninja)          ;Ninja pcomplete integration
+(require 'sarcasm-compilation)          ;Compilation stuff
 
  ;; Gnus starting file (another way to say "(require 'sarcasm-gnus)")
 (setq gnus-init-file (concat *sarcasm-directory*
@@ -234,3 +240,6 @@ activate compile)
 ;; Color theme
 (setq custom-theme-directory *sarcasm-directory*)
 (load-theme 'sarcasm)
+
+;; Replace selection
+(delete-selection-mode 1)

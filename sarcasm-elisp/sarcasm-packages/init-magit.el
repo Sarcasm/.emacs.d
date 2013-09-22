@@ -7,10 +7,15 @@
 ;; push: local -> server
 ;; pull: local <- server
 ;; remove '-' and...HEY !!! It's '>' and '<' !
-(add-hook 'magit-mode-hook '(lambda ()
-                              (define-key magit-mode-map (kbd ">") 'magit-push)
-                              (define-key magit-mode-map (kbd "<") 'magit-pull)
-                              (define-key magit-mode-map (kbd "C-o")
-                                (lambda ()
-                                  (interactive)
-                                  (magit-visit-item t)))))
+(add-hook 'magit-mode-hook 'sarcasm-magit-setup-keys)
+
+(defun sarcasm-magit-visit-item-other-window ()
+  (interactive)
+  (let ((current-prefix-arg '(4)))
+    (call-interactively 'magit-visit-item)))
+
+(defun sarcasm-magit-setup-keys ()
+  (define-key magit-mode-map (kbd ">") 'magit-push)
+  (define-key magit-mode-map (kbd "<") 'magit-pull)
+  (define-key magit-mode-map (kbd "C-o")
+    'sarcasm-magit-visit-item-other-window))

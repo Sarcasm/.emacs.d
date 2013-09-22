@@ -2,15 +2,15 @@
 ;; usage:
 ;; (require 'sarcasm-irony)
 
-(add-to-list 'load-path "/mnt/media/projects/Perso/irony-mode/elisp/")
+(add-to-list 'load-path "/mnt/media/projects/irony-mode/elisp/")
 
 (require 'irony)
 
 ;; The Clang installation missed the system include directory
 ;; "/usr/lib/clang/3.2/include/"
-(when (file-exists-p "/usr/lib/clang/3.2/include/")
+(when (file-exists-p "/usr/lib64/clang/3.2/include/")
   (setq irony-libclang-additional-flags
-        '("-isystem" "/usr/lib/clang/3.2/include/")))
+        '("-isystem" "/usr/lib64/clang/3.2/include/")))
 
 (irony-enable 'ac)
 ;; (setq-default ac-sources nil)
