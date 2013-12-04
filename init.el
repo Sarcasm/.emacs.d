@@ -15,13 +15,6 @@
       (setenv "PATH" (concat windows-git-path ";" (getenv "PATH")))
       (setq exec-path (cons windows-git-path exec-path)))))
 
-;; Clang-Format, need to be before the load of custom
-(add-to-list 'load-path "~/.emacs.d/pieces-of-code/")
-(require 'clang-format)
-(defun clang-format-default-keybindings ()
-  (define-key c-mode-base-map (kbd "C-S-f") 'clang-format-dwim))
-(add-hook 'c++-mode-hook 'clang-format-default-keybindings)
-
 ;; Load personnal config
 (load (concat user-emacs-directory
               (file-name-as-directory "sarcasm-elisp")
@@ -60,18 +53,28 @@
 ;; http://librocket.com/wiki/documentation/RCSS
 (add-to-list 'auto-mode-alist '("\\.rcss\\'" . css-mode))
 
-;; Remove VC handling when on SSHFS
+;; Remove VC handling when because it's annoying when using SSHFS and magit is
+;; the only thing I really use for now.
 (setq vc-handled-backends nil)
 ;; (remove-hook 'find-file-hooks 'vc-find-file-hook)
 ;; (delete 'Git vc-handled-backends)
 
 ;; LLVM stuff
-(when (file-exists-p "~/GSoC/llvm/utils/emacs")
+(defun clang-format-default-keybindings ()
+  (define-key c-mode-base-map (kbd "C-S-f") 'clang-format-region))
+
+(when (file-exists-p "~/GSoC/llvm/")
+  (load "~/GSoC/llvm/tools/clang/tools/clang-format/clang-format.el")
+  (setq clang-format-binary "~/GSoC/build/bin/clang-format")
+  (add-hook 'c++-mode-hook 'clang-format-default-keybindings)
+
   (add-to-list 'load-path "~/GSoC/llvm/utils/emacs")
   (require 'tablegen-mode))
 
+(add-to-list 'load-path "~/.emacs.d/pieces-of-code/")
 (require 'js-beautify)
 (defun js-beautify-default-keybindings ()
   (local-set-key (kbd "C-S-f") 'js-beautify))
 (add-hook 'js-mode-hook 'js-beautify-default-keybindings)
+(add-hook 'js2-mode-hook 'js-beautify-default-keybindings)
 (add-hook 'javascript-mode-hook 'js-beautify-default-keybindings)

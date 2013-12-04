@@ -13,8 +13,8 @@
        (eval-print-last-sexp)))))
 
 
-;; (add-to-list 'el-get-recipe-path (concat *sarcasm-directory*
-;;                                          "sarcasm-recipes"))
+(add-to-list 'el-get-recipe-path (concat *sarcasm-directory*
+                                         "sarcasm-recipes"))
 
 (setq el-get-user-package-directory (concat *sarcasm-directory*
                                             "sarcasm-packages"))
@@ -45,7 +45,7 @@ in auto-complete sources."
 
 (mapc (lambda (mode)
         (add-hook (convert-mode-name-to-hook mode) 'sarcasm-enable-ac-and-yas))
-      '(c-mode c++-mode emacs-lisp-mode lisp-mode lua-mode
+      '(c-mode c++-mode emacs-lisp-mode lisp-mode lua-mode js2-mode js-mode
                sh-mode perl-mode css-mode html-mode nxml-mode
                python-mode ruby-mode snippet-mode slime-mode
                slime-repl-mode))

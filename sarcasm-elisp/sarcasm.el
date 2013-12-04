@@ -224,9 +224,9 @@ activate compile)
 (require 'sarcasm-gud)                  ;Debugger settings
 (require 'sarcasm-org)                  ;Org-Mode settings
 ;; (require 'sarcasm-org-latex)            ;Org-Mode LaTex export config
-(require 'sarcasm-irony)                ;Irony-Mode stuff
 (require 'sarcasm-pcmpl-ninja)          ;Ninja pcomplete integration
 (require 'sarcasm-compilation)          ;Compilation stuff
+(require 'sarcasm-js)                   ;Javascript stuff
 
  ;; Gnus starting file (another way to say "(require 'sarcasm-gnus)")
 (setq gnus-init-file (concat *sarcasm-directory*

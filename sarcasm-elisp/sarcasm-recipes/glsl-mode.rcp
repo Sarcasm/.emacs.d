@@ -1,7 +1,0 @@
-(:name glsl-mode
-       :website "http://maverick.inria.fr/~Xavier.Decoret/resources/glsl-mode/"
-       :description "This is a very simple emacs major mode to edit OpenGL Shading Language shaders."
-       :type http
-       :url "http://maverick.inria.fr/~Xavier.Decoret/resources/glsl-mode/glsl-mode.el"
-       :feature glsl-mode
-       )

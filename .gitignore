@@ -15,3 +15,4 @@
 /places
 *.elc
 /sarcasm-elisp/sarcasm-identity.el
+/session.*

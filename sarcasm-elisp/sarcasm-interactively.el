@@ -81,6 +81,9 @@
                             (mode . ruby-mode)
                             (mode . perl-mode)
                             (mode . python-mode)
+                            (mode . js-mode)
+                            (mode . js2-mode)
+                            (mode . css-mode)
                             (mode . emacs-lisp-mode)))
 
          ("Gnus" (or (mode . gnus-group-mode)
