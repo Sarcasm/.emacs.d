@@ -46,3 +46,8 @@ An example of the content of this file can be:
           user-full-name    "Firstname Lastname")
     (provide 'sarcasm-identity)
     $
+
+Changes to `custom-file` should probably be ignored by git, one can do that with
+the following command:
+
+    git update-index --assume-unchanged /path/to/sarcasm-custom.el
