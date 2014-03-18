@@ -10,11 +10,11 @@ Install
 -------
 
     git clone git@github.com:Sarcasm/.emacs.d.git ~/.emacs.d
-    emacs -Q
 
-The config uses *el-get* (https://github.com/dimitri/el-get), to install please
-refer to the project page.
-
+The config uses *el-get* (https://github.com/dimitri/el-get). Please refer to
+the project page to install it. It is recommended to install it using in a
+non-customized Emacs instance, with `emacs -Q`, otherwise the loading the
+configuration will probably results in failures as el-get won't be installed.
 
 Configuration
 -------------
