@@ -15,6 +15,13 @@
       (setenv "PATH" (concat windows-git-path ";" (getenv "PATH")))
       (setq exec-path (cons windows-git-path exec-path)))))
 
+;; Clang-Format
+(setq clang-format-binary "clang-format-3.5")
+
+(defun clang-format-default-keybindings ()
+  (define-key c-mode-base-map (kbd "C-S-f") 'clang-format-region))
+(add-hook 'c++-mode-hook 'clang-format-default-keybindings)
+
 ;; Load personnal config
 (load (concat user-emacs-directory
               (file-name-as-directory "sarcasm-elisp")
