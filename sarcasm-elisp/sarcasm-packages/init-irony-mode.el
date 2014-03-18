@@ -15,7 +15,7 @@
   ;; avoid enabling irony-mode in modes that inherits c-mode, e.g: php-mode
   (when (member major-mode irony-known-modes)
     ;; uncomment if other ac-sources are too annoying
-    ;; (setq-default ac-sources nil)
+    (setq ac-sources nil)
 
     ;; enable irony-mode
     (irony-mode 1)))
