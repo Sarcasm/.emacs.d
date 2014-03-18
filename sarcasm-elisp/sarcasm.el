@@ -61,6 +61,7 @@
 ;; Emacs external `url browser' (usefull in Org-Mode)
 (setq-default browse-url-generic-program "chromium")
 (setq browse-url-generic-program "chromium")
+;; TODO: Use the customize interface for this, it's different every damn time
 (setq browse-url-browser-function '(("^file:" . browse-url-generic)
 				    ("."      . browse-url-generic)))
 
@@ -71,6 +72,8 @@
 (setq save-place-file (concat user-emacs-directory "places"))
 
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
+;; When using C-x C-e to edit the command line
+(add-to-list 'auto-mode-alist '("\\`/tmp/zshecl[0-9]+\\'" . sh-mode))
 
 ;; Thanks http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
 ;; note: Slash for directory
