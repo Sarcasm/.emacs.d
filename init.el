@@ -85,3 +85,30 @@
 (add-hook 'js-mode-hook 'js-beautify-default-keybindings)
 (add-hook 'js2-mode-hook 'js-beautify-default-keybindings)
 (add-hook 'javascript-mode-hook 'js-beautify-default-keybindings)
+
+;; ;; Company
+;; (add-hook 'after-init-hook 'global-company-mode)
+
+;; (add-hook 'c++-mode-hook 'irony-mode)
+
+;; ;; replace the `completion-at-point' and `complete-symbol' bindings in
+;; ;; irony-mode's buffers by irony-mode's asynchronous function
+;; (defun my-irony-mode-hook ()
+;;   (define-key irony-mode-map [remap completion-at-point]
+;;     'irony-completion-at-point-async)
+;;   (define-key irony-mode-map [remap complete-symbol]
+;;     'irony-completion-at-point-async)
+;;   (define-key irony-mode-map (kbd "C-c C-b") 'irony-cdb-menu))
+;; (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+
+;; (eval-after-load 'company
+;;   '(add-to-list 'company-backends 'company-irony))
+;; (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+;; (setq company-selection-wrap-around t)
+;; (global-set-key (kbd "M-RET") 'company-complete)
+
+;; ;; For serial port, default to 115200 b/s instead of 9600
+;; (setq serial-speed-history
+;;       '("115200" ;; Given twice because 115200 b/s is the most common speed
+;;         "1200" "2400" "4800" "9600" "14400" "19200"
+;;         "28800" "38400" "57600" "115200"))

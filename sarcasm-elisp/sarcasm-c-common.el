@@ -9,6 +9,9 @@
   ;; GTags Mode
   (when (featurep 'gtags)
     (gtags-mode 1))
+  ;; ;; GTags Mode
+  ;; (when (featurep 'gtags)
+  ;;   (gtags-mode 1))
 
   ;; Highlights suspicious C and C++ constructions
   (global-cwarn-mode 1)
@@ -31,11 +34,6 @@
   (define-key c-mode-base-map (kbd "C-c m") 'c-man-at-point)
   (define-key c-mode-base-map (kbd "M-n") 'flymake-or-compile-next-error)
   (define-key c-mode-base-map (kbd "M-p") 'flymake-or-compile-prev-error)
-  (define-key c-mode-base-map (kbd "C-c c") (lambda ()
-                                              (interactive)
-                                              (save-buffer 0)
-                                              (compile "make -k re")
-                                              ))
 
   (font-lock-add-keywords nil
                           '(("\\<\\(FIXME\\):" 1 font-lock-warning-face t)))

@@ -10,10 +10,15 @@
 ;; (when (load (expand-file-name "~/.emacs.d/elpa/package.el"))
 ;;   (package-initialize))
 
-(setq package-archives '(("ELPA"      . "http://tromey.com/elpa/")
-			 ("gnu"	      . "http://elpa.gnu.org/packages/")
-			 ("Marmalade" . "http://marmalade-repo.org/packages/")
-                         ("Org-Mode" . "http://orgmode.org/elpa/")
-                         ))
+(require 'package)
+
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+(package-initialize)
 
 (provide 'sarcasm-elpa)

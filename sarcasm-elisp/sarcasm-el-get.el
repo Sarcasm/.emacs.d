@@ -29,14 +29,8 @@
   (intern (concat (symbol-name mode-name) "-hook")))
 
 ;; Enable yasnippet mode and auto-complete on few programming modes
-(defun sarcasm-enable-ac-and-yas ()
-  "Enable `auto-complete' and `yasnippet'. Also add snippet names
-in auto-complete sources."
-  (yas/minor-mode-on) ;if not set before (auto-complete-mode 1), overlay persist after an expansion
-  (auto-complete-mode 1)
-  ;; Already present by default
-  ;; (setq ac-sources (append ac-sources '(ac-source-yasnippet)))
-
+(defun sarcasm-enable-prog-mode ()
+  ;; (yas/minor-mode-on)
   (goto-address-prog-mode 1)
 
   ;; This is certainly not the good place for that...but for the
@@ -44,7 +38,7 @@ in auto-complete sources."
   (setq show-trailing-whitespace t))
 
 (mapc (lambda (mode)
-        (add-hook (convert-mode-name-to-hook mode) 'sarcasm-enable-ac-and-yas))
+        (add-hook (convert-mode-name-to-hook mode) 'sarcasm-enable-prog-mode))
       '(c-mode c++-mode emacs-lisp-mode lisp-mode lua-mode js2-mode js-mode
                sh-mode perl-mode css-mode html-mode nxml-mode
                python-mode ruby-mode snippet-mode slime-mode

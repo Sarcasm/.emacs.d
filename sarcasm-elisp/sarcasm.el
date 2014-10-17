@@ -20,8 +20,9 @@
 
 ;; I don't understand why, but the following doesn't work
 ;; ;; Change the font to your needs
-;; (set-default-font "DejaVu Sans Mono-10")
-;; (set-frame-font "DejaVu Sans Mono-10")
+(set-default-font "DejaVu Sans Mono-10")
+(set-frame-font "DejaVu Sans Mono-10")
+(setq default-frame-alist '((font . "DejaVu Sans Mono-10"))) ;for emacs --daemon
 ;; So in ~/.Xdefaults / ~/.Xresources
 ;;
 ;; Emacs.FontBackend: xft
@@ -59,9 +60,9 @@
 	      )
 
 ;; Emacs external `url browser' (usefull in Org-Mode)
-(setq-default browse-url-generic-program "chromium")
-(setq browse-url-generic-program "chromium")
 ;; TODO: Use the customize interface for this, it's different every damn time
+(setq-default browse-url-generic-program "chromium-browser")
+(setq browse-url-generic-program "chromium-browser")
 (setq browse-url-browser-function '(("^file:" . browse-url-generic)
 				    ("."      . browse-url-generic)))
 
@@ -199,7 +200,7 @@ activate compile)
 ;; be configured correctly.
 (require 'sarcasm-elpa)			;ELPA (Emacs Lisp Package Archive) stuff
 
-(require 'sarcasm-el-get)               ;el-get packages and config
+;; (require 'sarcasm-el-get)               ;el-get packages and config
 (require 'sarcasm-keys)			;global keybindings
 (require 'sarcasm-rcirc)		;rcirc settings
 (require 'sarcasm-c-common)		;C/C++ common stuff

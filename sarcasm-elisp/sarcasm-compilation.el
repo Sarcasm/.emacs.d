@@ -31,4 +31,9 @@ ICON if the name of an image under /usr/share/pixmaps or ~/.icons"
 
 (setq compilation-finish-function 'sarcasm-compilation-notify)
 
+(defun sarcasm-truncate-lines-on ()
+  (toggle-truncate-lines 1))
+
+(add-hook 'compilation-mode-hook 'sarcasm-truncate-lines-on)
+
 (provide 'sarcasm-compilation)

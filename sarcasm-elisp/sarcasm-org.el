@@ -24,6 +24,7 @@
 	  '(lambda ()
              (auto-fill-mode 1)
              (setq show-trailing-whitespace t)
+             (flyspell-mode 1)
              (define-key org-mode-map [f7] 'org-flyspell-mode-and-dictionary)
 
              (setq org-agenda-start-with-follow-mode t)

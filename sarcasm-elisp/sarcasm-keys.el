@@ -60,10 +60,6 @@
 ;; AHG
 (define-key mode-specific-map (kbd "x a") 'ahg-status)
 
-;; Enable / Disable Fly{make,spell} mode
-(when (fboundp 'flymake-mode)
-  (global-set-key (kbd "M-RET") 'flymake-mode))
-
 (define-key mode-specific-map (kbd "x f") 'flyspell-prog-mode) ;FIXME: maybe flyspell-mode ?
 
 ;; Make window switching a little easier. C-x-o is a pain.

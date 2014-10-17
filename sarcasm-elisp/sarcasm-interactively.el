@@ -38,6 +38,14 @@
 (setq ido-ignore-files (append ido-ignore-files
                                sarcasm-ignored-files-re))
 
+;; From EmacsWiki: http://www.emacswiki.org/emacs/InteractivelyDoThings#toc10
+(require 'bookmark)
+(defun ido-bookmark-jump (bname)
+  "*Switch to bookmark interactively using `ido'."
+  (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
+  (bookmark-jump bname))
+(global-set-key (kbd "C-x r b") 'ido-bookmark-jump)
+
 ;; ibuffer settings
 ;; Thx: http://martinowen.net/blog/2010/02/tips-for-emacs-ibuffer.html
 (global-set-key (kbd "C-x C-b")
@@ -63,8 +71,10 @@
       '(("default"
 
          ("Interactive" (or (mode . lisp-interaction-mode)
+                            (name . "\*Messages\*")
                             (name . "\*compilation\*")
                             (name . "\*Customize\*")
+                            (name . "\*ag search\*")
                             (name . "\*grep\*")))
 
          ("Dired" (mode . dired-mode))
@@ -86,14 +96,13 @@
                             (mode . css-mode)
                             (mode . emacs-lisp-mode)))
 
-         ("Gnus" (or (mode . gnus-group-mode)
-                     (mode . gnus-server-mode)
-                     (mode . gnus-summary-mode)
-                     (mode . gnus-browse-mode)
-                     (mode . gnus-article-mode)))
-
-         ("Mail" (or (mode . message-mode)
-                     (mode . mail-mode)))
+         ("Mail/Gnus" (or (mode . gnus-group-mode)
+                          (mode . gnus-server-mode)
+                          (mode . gnus-summary-mode)
+                          (mode . gnus-browse-mode)
+                          (mode . gnus-article-mode)
+                          (mode . message-mode)
+                          (mode . mail-mode)))
 
          ("Magit" (name . "\*magit"))
 

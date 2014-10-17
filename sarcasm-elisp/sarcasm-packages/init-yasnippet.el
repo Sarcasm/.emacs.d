@@ -1,8 +1,8 @@
-(setq yas/snippet-dirs (cons (concat el-get-dir "yasnippet/snippets")
-                             '("~/.emacs.d/snippets")))
+;; (setq yas/snippet-dirs (cons (concat el-get-dir "/yasnippet/snippets")
+;;                              '("~/.emacs.d/snippets")))
 
-;; Map `yas/load-directory' to every element
-(mapc 'yas/load-directory yas/snippet-dirs)
+;; ;; Map `yas/load-directory' to every element
+;; (mapc 'yas/load-directory yas/snippet-dirs)
 
 ;; Fix the promp on X, the default was ugly.
 (when (require 'dropdown-list nil t)
