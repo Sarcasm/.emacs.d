@@ -6,9 +6,6 @@
 (defun sarcasm-c-mode-common-hook ()
   "Hooks run for C/C++ and friends mode."
 
-  ;; GTags Mode
-  (when (featurep 'gtags)
-    (gtags-mode 1))
   ;; ;; GTags Mode
   ;; (when (featurep 'gtags)
   ;;   (gtags-mode 1))

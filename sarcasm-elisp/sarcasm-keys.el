@@ -27,7 +27,7 @@
 (define-key mode-specific-map (kbd "i") 'imenu)
 ;; xscope has [C-c s] for prefix
 ;; (global-set-key (kbd "C-c s") 'shell)
-(define-key mode-specific-map (kbd "b") 'shell) ;b for bash...
+(define-key mode-specific-map (kbd "b") 'sarcasm-serial-term)
 (global-set-key (kbd "C-x c") 'whitespace-cleanup)
 (define-key mode-specific-map (kbd "f") 'folding-mode)
 (define-key mode-specific-map (kbd "p") 'sarcasm-path-to-kill-ring)

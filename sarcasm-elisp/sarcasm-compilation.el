@@ -29,7 +29,7 @@ ICON if the name of an image under /usr/share/pixmaps or ~/.icons"
 (defun sarcasm-compilation-notify (buffer message)
   (sarcasm-desktop-notify (buffer-name buffer) message 2000 "emacs.png"))
 
-(setq compilation-finish-function 'sarcasm-compilation-notify)
+;; (setq compilation-finish-function 'sarcasm-compilation-notify)
 
 (defun sarcasm-truncate-lines-on ()
   (toggle-truncate-lines 1))
