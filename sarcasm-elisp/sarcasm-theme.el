@@ -208,8 +208,7 @@
    ;; see: [[file:/usr/share/emacs/24.0.50/etc/themes/tango-theme.el::`(flyspell-duplicate%20((,class%20(:underline%20,orange-1))))][Tango]]
 
 ;; Ansi colors (*Shell*, ...)
-(custom-theme-set-variables
- 'sarcasm
+(custom-theme-set-variables 'sarcasm
  `(ansi-color-names-vector [,black
                             ,red
                             ,green
