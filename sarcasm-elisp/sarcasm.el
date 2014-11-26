@@ -232,6 +232,8 @@ activate compile)
 (require 'sarcasm-js)                   ;Javascript stuff
 (require 'sarcasm-serial-term)          ;Serial terminal specifics
 
+(require 'sarcasm-irony)                ;Irony-Mode development stuff
+
  ;; Gnus starting file (another way to say "(require 'sarcasm-gnus)")
 (setq gnus-init-file (concat *sarcasm-directory*
                              "sarcasm-gnus")) ;it will try the suffix .el[c]
@@ -247,69 +249,3 @@ activate compile)
 
 ;; Replace selection
 (delete-selection-mode 1)
-
-;; Yasnippet
-(when (or (featurep 'yasnippet)
-          (featurep 'yasnippet-autoloads))
-  (yas-global-mode 1)
-
-  (defun sarcasm-disable-yas ()
-    (yas-minor-mode -1))
-  (add-hook 'term-mode-hook 'sarcasm-disable-yas))
-
-;; Company
-(when (or (featurep 'company)
-          (featurep 'company-autoloads))
-  (add-hook 'after-init-hook 'global-company-mode)
-  (global-set-key (kbd "M-RET") 'company-complete)
-  (setq company-selection-wrap-around t))
-
-;; Irony mode
-;; (add-to-list 'load-path "/home/gpapin/pkg/irony/irony-mode/")
-;; (autoload 'irony-mode "irony" nil t)
-;; (require 'irony)
-
-(when (or (featurep 'irony)
-          (featurep 'irony-autoloads))
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'objc-mode-hook 'irony-mode)
-
-  ;; replace the `completion-at-point' and `complete-symbol' bindings in
-  ;; irony-mode's buffers by irony-mode's function
-  (defun my-irony-mode-hook ()
-    (define-key irony-mode-map [remap completion-at-point]
-      'irony-completion-at-point-async)
-    (define-key irony-mode-map [remap complete-symbol]
-      'irony-completion-at-point-async))
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook))
-
-;; Company-Irony
-;; (add-to-list 'load-path "/home/gpapin/pkg/irony/company-irony/")
-;; ;; (autoload 'company-irony "company-irony" nil t)
-;; (require 'company-irony)
-
-(when (or (featurep 'company-irony)
-          (featurep 'company-irony-autoloads))
-  (eval-after-load 'company
-    '(add-to-list 'company-backends 'company-irony)))
-
-;; Magit
-(when (or (featurep 'magit)
-          (featurep 'magit-autoloads))
-  (load-file (concat *sarcasm-directory* "sarcasm-packages/init-magit.el")))
-
-;; Buffer move
-(when (or (featurep 'buffer-move)
-          (featurep 'buffer-move-autoloads))
-  (load-file (concat *sarcasm-directory* "sarcasm-packages/init-buffer-move.el")))
-
-;; Markdown mode
-(when (or (featurep 'markdown-mode)
-          (featurep 'markdown-mode-autoloads))
-  (load-file (concat *sarcasm-directory* "sarcasm-packages/init-markdown-mode.el")))
-
-;; Multi-custor as a replacement to iedit
-(when (or (featurep 'multiple-cursors)
-          (featurep 'multiple-cursors-autoloads))
-  (global-set-key (kbd "C-;") 'mc/mark-all-dwim))

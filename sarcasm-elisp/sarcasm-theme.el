@@ -60,8 +60,7 @@
 
        (background soft-black)
        (foreground soft-white))
-  (custom-theme-set-faces
-   'sarcasm
+  (custom-theme-set-faces 'sarcasm
    `(default ((t (:background ,background :foreground ,foreground))))
    `(cursor ((t (:background ,soft-gold :foreground ,red :bold t))))
    `(region ((t (:background ,blue :foreground ,soft-white))))

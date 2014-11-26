@@ -16,3 +16,8 @@
 *.elc
 /sarcasm-elisp/sarcasm-identity.el
 /session.*
+/auto-save-list/
+/backup/
+/elpa/
+/eshell/
+/irony/
