@@ -245,7 +245,7 @@ activate compile)
 
 ;; Color theme
 (setq custom-theme-directory *sarcasm-directory*)
-(load-theme 'sarcasm)
+(load-theme 'sarcasm t)
 
 ;; Replace selection
 (delete-selection-mode 1)
