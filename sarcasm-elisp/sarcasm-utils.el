@@ -113,7 +113,7 @@ otherwise assume it's compile previous error."
 ;; urgent [OFF]
 ;; (x-urgent-hint (selected-frame) nil)
 (defun x-wm-hints (frame &optional source)
-  (mapcar '(lambda (field)
+  (mapcar #'(lambda (field)
              (if (consp field)
                  (+ (lsh (car field) 16) (cdr field))
                field))
