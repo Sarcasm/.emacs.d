@@ -9,7 +9,7 @@
 ;; safe-variables and co isn't interesting to be committed. To ignore local
 ;; changes to the file the following command can be entered:
 ;;
-;;      git update-index --assume-unchanged /path/to/sarcasm-custom.el
+;;      git update-index --assume-unchanged sarcasm-elisp/sarcasm-custom.el
 ;;
 
 (custom-set-variables

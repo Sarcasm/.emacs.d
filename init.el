@@ -107,8 +107,3 @@
 ;; (setq company-selection-wrap-around t)
 ;; (global-set-key (kbd "M-RET") 'company-complete)
 
-;; ;; For serial port, default to 115200 b/s instead of 9600
-;; (setq serial-speed-history
-;;       '("115200" ;; Given twice because 115200 b/s is the most common speed
-;;         "1200" "2400" "4800" "9600" "14400" "19200"
-;;         "28800" "38400" "57600" "115200"))

@@ -47,6 +47,7 @@
        (grey "gray30")
        (cyan "cornflower blue")
 
+       ;; (soft-black "grey14")
        (soft-black "grey10")
        (soft-white "white smoke")       ;"MistyRose2"
        (soft-blue "#4477aa")
