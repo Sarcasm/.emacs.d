@@ -8,7 +8,7 @@
 ;;                                yas/completing-prompt
 ;;                                yas/no-prompt)))
 
-(defconst sarcasm-snippet-dir (concat *sarcasm-directory* "sarcasm-snippets"))
+(defconst sarcasm-snippet-dir (locate-user-emacs-file "snippets"))
 
 ;; ensure the snippets dir exists
 (unless (file-exists-p sarcasm-snippet-dir)

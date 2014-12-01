@@ -232,16 +232,16 @@ activate compile)
 (require 'sarcasm-js)                   ;Javascript stuff
 (require 'sarcasm-serial-term)          ;Serial terminal specifics
 
+;; Custom settings
+(setq custom-file (concat *sarcasm-directory*
+                          "sarcasm-custom.el"))
+(load custom-file)
+
 (require 'sarcasm-irony)                ;Irony-Mode development stuff
 
  ;; Gnus starting file (another way to say "(require 'sarcasm-gnus)")
 (setq gnus-init-file (concat *sarcasm-directory*
                              "sarcasm-gnus")) ;it will try the suffix .el[c]
-
-;; Custom settings
-(setq custom-file (concat *sarcasm-directory*
-                          "sarcasm-custom.el"))
-(load custom-file)
 
 ;; Color theme
 (setq custom-theme-directory *sarcasm-directory*)

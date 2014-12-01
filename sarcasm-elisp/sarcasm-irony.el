@@ -16,8 +16,10 @@
   ;; that the configuration in sarcasm-packages/init-irony.el works seamlessly
   ;; between the developement package and the MELPA package.
   (autoload 'irony-mode "irony" nil t)
+  (autoload 'irony-cdb-menu "irony-cdb" nil t)
   (autoload 'irony-cdb-autosetup-compile-options "irony-cdb" nil t)
 
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
   (load-file (concat *sarcasm-directory* "sarcasm-packages/init-irony.el"))
 
   ;; Company Irony
