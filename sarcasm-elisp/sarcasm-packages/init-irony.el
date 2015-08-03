@@ -10,3 +10,4 @@
   (define-key irony-mode-map (kbd "C-c C-b") 'irony-cdb-menu))
 
 (add-hook 'irony-mode-hook 'sarcasm-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)

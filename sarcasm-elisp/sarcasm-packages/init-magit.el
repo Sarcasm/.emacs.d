@@ -19,3 +19,5 @@
   (define-key magit-mode-map (kbd "<") 'magit-pull)
   (define-key magit-mode-map (kbd "C-o")
     'sarcasm-magit-visit-item-other-window))
+
+(setq magit-last-seen-setup-instructions "1.4.0")

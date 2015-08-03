@@ -15,13 +15,6 @@
       (setenv "PATH" (concat windows-git-path ";" (getenv "PATH")))
       (setq exec-path (cons windows-git-path exec-path)))))
 
-;; Clang-Format
-(setq clang-format-binary "clang-format-3.5")
-
-(defun clang-format-default-keybindings ()
-  (define-key c-mode-base-map (kbd "C-S-f") 'clang-format-region))
-(add-hook 'c++-mode-hook 'clang-format-default-keybindings)
-
 ;; Load personnal config
 (load (concat user-emacs-directory
               (file-name-as-directory "sarcasm-elisp")
@@ -65,18 +58,6 @@
 (setq vc-handled-backends nil)
 ;; (remove-hook 'find-file-hooks 'vc-find-file-hook)
 ;; (delete 'Git vc-handled-backends)
-
-;; LLVM stuff
-(defun clang-format-default-keybindings ()
-  (define-key c-mode-base-map (kbd "C-S-f") 'clang-format-region))
-
-(when (file-exists-p "~/GSoC/llvm/")
-  (load "~/GSoC/llvm/tools/clang/tools/clang-format/clang-format.el")
-  (setq clang-format-binary "~/GSoC/build/bin/clang-format")
-  (add-hook 'c++-mode-hook 'clang-format-default-keybindings)
-
-  (add-to-list 'load-path "~/GSoC/llvm/utils/emacs")
-  (require 'tablegen-mode))
 
 (add-to-list 'load-path "~/.emacs.d/pieces-of-code/")
 (require 'js-beautify)
