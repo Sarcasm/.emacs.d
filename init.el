@@ -1,3 +1,11 @@
+
+;; This could be Windows-specific but since I never use VC I think it's better
+;; to disable it altogether, I just use magit in practice.
+;;
+;; Disable VC hooks
+;; http://stackoverflow.com/questions/6724471/git-slows-down-emacs-to-death-how-to-fix-this
+(setq vc-handled-backends nil)
+
 (when (equal system-type 'windows-nt)
   ;; Start emacs as a server because it seems to be impossible to have a daemonized emacs :(
   (server-start)
@@ -66,3 +74,7 @@
 (add-hook 'js-mode-hook 'js-beautify-default-keybindings)
 (add-hook 'js2-mode-hook 'js-beautify-default-keybindings)
 (add-hook 'javascript-mode-hook 'js-beautify-default-keybindings)
+
+
+(run-with-timer 2 nil #'(lambda ()
+                          (set-cursor-color "gold")))

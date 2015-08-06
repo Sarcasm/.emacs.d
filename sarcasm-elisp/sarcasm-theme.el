@@ -74,6 +74,7 @@
    `(link-visited ((t (:foreground ,blue :underline t))))
    `(button ((t (:foreground ,bright-grey :underline t)))) ;backtick links in lisp
    `(trailing-whitespace ((t (:background ,dark-grey))))
+   `(whitespace-line ((t (:background ,dark-red :underline ,dark-red))))
    `(show-paren-match ((t (:background ,yellow :foreground ,dark-grey :bold t))))
    `(highlight ((t (:background ,dark-grey))))
    `(secondary-selection ((t (:background ,dark-grey))))

@@ -122,9 +122,27 @@ There only difference is that each filename should be a regexp.")
 (column-number-mode 1)		 ;print column number on the mode-line
 (winner-mode 1)
 
+;; see http://dfan.org/blog/2009/02/19/emacs-dedicated-windows/
+(defun toggle-current-window-dedication ()
+  (interactive)
+  (let* ((window (selected-window))
+         (dedicated (window-dedicated-p window)))
+    (set-window-dedicated-p window (not dedicated))
+    (message "Window %sdedicated to %s"
+             (if dedicated "no longer " "")
+             (buffer-name))))
+
+(global-set-key [pause] 'toggle-current-window-dedication)
+
 ;; Emacs has a slightly smaller value by default but sometimes it cuts
 ;; too short.
 (setq-default fill-column 80)
+
+(defun sarcasm-show-columm-80 ()
+  (setq-local whitespace-style '(face tabs trailing lines-tail))
+  (setq-local whitespace-line-column  80)
+  (whitespace-mode 1))
+(add-hook 'prog-mode-hook 'sarcasm-show-columm-80)
 
 ;; Since Emacs 24
 ;; stolen from: https://github.com/bbatsov/emacs-dev-kit/blob/master/misc-config.el

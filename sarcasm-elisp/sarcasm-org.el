@@ -29,7 +29,7 @@
 
              (setq org-agenda-start-with-follow-mode t)
              ;; Like in *grep* buffers
-             (define-key org-agenda-mode-map (kbd "C-c C-f") 'org-agenda-follow-mode)
+             ;; (define-key org-agenda-mode-map (kbd "C-c C-f") 'org-agenda-follow-mode)
 
              ;; Babel handle 'C' not 'c'...ok, in fact babel doesn't
              ;; know how to execute 'C' use 'c++' instead.

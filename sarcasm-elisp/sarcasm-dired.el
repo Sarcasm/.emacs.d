@@ -10,8 +10,12 @@
 ;; Add the -h option (display size in the human readable form).
 (setq dired-listing-switches "-alh")
 
+(defun sarcasm-dired-mode-hook ()
+  (dired-omit-mode 1)
+  (define-key dired-mode-map "\M-o" 'dired-omit-mode))
+
 ;; Always enable `dired-omit-mode'
-(add-hook 'dired-mode-hook '(lambda () (dired-omit-mode 1)))
+(add-hook 'dired-mode-hook 'sarcasm-dired-mode-hook)
 
 (add-to-list 'dired-omit-extensions ".a")
 
