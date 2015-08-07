@@ -25,6 +25,7 @@
 ;; pre-condition is to be in a serial term process buffer
 (defun sarcasm-serial-term-update-window-size ()
   "Change process window size."
+  (interactive)
   ;; effectively calls ioctl(TIOCSWINSZ ...)
   (set-process-window-size (get-buffer-process (current-buffer))
                            (window-height)
@@ -42,6 +43,10 @@
   ;; http://unix.stackexchange.com/a/61608/88925
   ;;
   ;; What seems to work is to call 'resize ; clear' explicitely on the shell
+
+
+  ;; in case of error one can try to use stty:
+  ;; sudo stty -F/dev/ttyS0 cols 180
   )
 
 (defun sarcasm-serial-term-mode-hook ()

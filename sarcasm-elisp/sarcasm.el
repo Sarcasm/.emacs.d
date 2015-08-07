@@ -230,7 +230,7 @@ activate compile)
 (require 'sarcasm-ruby)			;Ruby stuff
 (require 'sarcasm-python)               ;Python stuff
 (require 'sarcasm-lisp)			;Lisp stuff
-(require 'sarcasm-gtags)                ;GTags stuff
+;; (require 'sarcasm-gtags)                ;GTags stuff
 (require 'sarcasm-semantic)             ;General Semantic stuff
 (require 'sarcasm-winresize)            ;window manipulations
 (require 'sarcasm-interactively)        ;minibuffer completion & co.

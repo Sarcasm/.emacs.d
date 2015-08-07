@@ -8,7 +8,7 @@
 ;; http://cvs.savannah.gnu.org/viewvc/global/gtags.el?root=global&view=markup
 ;; (add-to-list 'load-path "~/.emacs.d/global/")
 ;; (autoload 'gtags-mode "gtags" "" t)
-(defvar sarcasm-have-gtag nil)
+(defvar sarcasm-have-gtag (require 'gtags nil t))
 
 (cond
  ((file-exists-p "/usr/local/share/gtags/gtags.el") ;debian
@@ -16,9 +16,15 @@
   (load-file "/usr/local/share/gtags/gtags.el"))
  ((file-exists-p "/usr/share/gtags/gtags.el") ;archlinux
   (setq sarcasm-have-gtag t)
-  (load-file "/usr/share/gtags/gtags.el")))
+  (load-file "/usr/share/gtags/gtags.el"))
+ ((file-exists-p "/usr/share/emacs/site-lisp/global/gtags.el")
+  (setq sarcasm-have-gtag t)
+  (load-file "/usr/share/emacs/site-lisp/global/gtags.el")))
 
 (when sarcasm-have-gtag
+  ;; GTags Mode
+  (add-hook 'c-mode-hook 'gtags-mode)
+
   ;; Easy access to tags
   (define-key gtags-mode-map (kbd "C-.") 'gtags-find-tag-from-here-other-window)
   (define-key gtags-mode-map (kbd "M-.") 'gtags-find-tag-from-here)
@@ -27,13 +33,9 @@
   (defun gtags-find-tag-from-here-other-window ()
     "Find tags at point and open in other window."
     (interactive)
-    (let (tagname flag)
-      (setq tagname (gtags-current-token))
-      (when tagname
-        ;; other-window ok...but I want to stay in my current buffer
-        (save-selected-window
-          (gtags-push-context)
-          (gtags-goto-tag tagname "C" t)))))
+    (save-selected-window
+      (switch-to-buffer-other-window (current-buffer))
+      (gtags-find-tag-from-here)))
 
   ;; Come from the CEDET package
   (require 'pulse)
