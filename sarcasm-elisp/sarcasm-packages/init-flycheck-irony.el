@@ -5,4 +5,3 @@
 ;;   (add-to-list 'flycheck-checkers 'irony))
 
 ;; (add-hook 'irony-mode-hook 'sarcasm-flycheck-irony-setup)
-

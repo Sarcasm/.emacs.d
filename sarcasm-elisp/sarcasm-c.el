@@ -12,11 +12,4 @@
     ("UNI"	"#include <unistd.h>")
     ))
 
-(add-hook 'c-mode-hook
-	  '(lambda ()
-             ;; School requires that
-             ;; (setq indent-tabs-mode t)
-             ;; (define-key c-mode-map (kbd "M-TAB") 'ac-complete-clang)
-             ))
-
 (provide 'sarcasm-c)

@@ -42,8 +42,6 @@
 
              ;; No additional indentation for members of a namespace.
              ;; (c-set-style "stroustrup")
-             (c-set-offset 'innamespace 0)
-
-             (define-key c++-mode-map (kbd "M-TAB") 'ac-complete-clang)))
+             (c-set-offset 'innamespace 0)))
 
 (provide 'sarcasm-c++)
