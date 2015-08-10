@@ -5,7 +5,8 @@
 
 (defcustom sarcasm-irony-development-dir "~/projects/irony"
   "Directory that contains the irony-mode project and
-  affiliated (e.g: company-irony).")
+  affiliated (e.g: company-irony)."
+  :type 'directory)
 
 (when (file-exists-p sarcasm-irony-development-dir)
   ;; Irony mode
