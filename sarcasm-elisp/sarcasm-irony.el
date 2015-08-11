@@ -22,18 +22,6 @@
 
   (load-file (concat *sarcasm-directory* "sarcasm-packages/init-irony.el"))
 
-  ;; Flycheck Irony
-  (add-to-list 'load-path (expand-file-name "flycheck-irony"
-                                            sarcasm-irony-development-dir))
-  (require 'flycheck-irony)
-  (load-file (concat *sarcasm-directory* "sarcasm-packages/init-flycheck-irony.el"))
-
-  ;; ;; Irony Eldoc
-  ;; (add-to-list 'load-path (expand-file-name "irony-eldoc"
-  ;;                                           sarcasm-irony-development-dir))
-  ;; (require 'irony-eldoc)
-  ;; (add-hook 'irony-mode-hook 'irony-eldoc)
-
   ;; Company Irony
   (add-to-list 'load-path
                (expand-file-name "company-irony" sarcasm-irony-development-dir))
@@ -50,10 +38,11 @@
   (require 'flycheck-irony)
   (load-file (concat *sarcasm-directory* "sarcasm-packages/init-flycheck-irony.el"))
 
-  ;; Irony Eldoc
-  (add-to-list 'load-path
-               (expand-file-name "irony-eldoc" sarcasm-irony-development-dir))
-  (require 'irony-eldoc)
-  (add-hook 'irony-mode-hook 'irony-eldoc))
+  ;; ;; Irony Eldoc
+  ;; (add-to-list 'load-path
+  ;;              (expand-file-name "irony-eldoc" sarcasm-irony-development-dir))
+  ;; (require 'irony-eldoc)
+  ;; (add-hook 'irony-mode-hook 'irony-eldoc)
+  )
 
 (provide 'sarcasm-irony)
