@@ -28,9 +28,9 @@
 ;; Emacs.FontBackend: xft
 ;; Emacs.font: DejaVu Sans Mono-10
 
-(setq inhibit-startup-screen t	      ;do not display a startup screen
-      autopair-autowrap t             ;wrap the region with the paired characters
-      mouse-yank-at-point t           ;paste at cursor position
+(setq inhibit-startup-screen t       ;do not display a startup screen
+      autopair-autowrap t            ;wrap the region with the paired characters
+      mouse-yank-at-point t          ;paste at cursor position
       scroll-preserve-screen-position t ;restore cursor after PgUp/PgDown
 
       ;; Sentences end with one space when M-q `fill-paragraph' is called
@@ -42,7 +42,7 @@
       ;; C-k kills whole line and newline if at beginning of line
       kill-whole-line t
 
-      save-abbrevs 'silently       ;don't want to answer yes everytime
+      save-abbrevs 'silently            ;don't want to answer yes everytime
 
       ;; Autosave each change)
       bookmark-save-flag 1
@@ -53,11 +53,13 @@
 
       ;; Case-insensitive `find-file'
       read-file-name-completion-ignore-case t
-      read-buffer-completion-ignore-case t)
+      read-buffer-completion-ignore-case t
 
-(setq-default indent-tabs-mode nil	;remove tabulations
-              ;; show-trailing-whitespace t
-	      )
+      ;; "Smooth" mouse scrolling, one line at a time
+      mouse-wheel-scroll-amount '(1 ((shift) . 1))
+      )
+
+(setq-default indent-tabs-mode nil)     ;remove tabulations
 
 ;; Emacs external `url browser' (usefull in Org-Mode)
 ;; TODO: Use the customize interface for this, it's different every damn time

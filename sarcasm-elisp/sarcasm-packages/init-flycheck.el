@@ -18,7 +18,7 @@
           display-buffer-in-side-window)
          (side            . bottom)
          (reusable-frames . visible)
-         (window-height   . 0.33))
+         (window-height   . 0.22))
         ;; Let `display-buffer' reuse visible frames for all buffers.  This must
         ;; be the last entry in `display-buffer-alist', because it overrides any
         ;; later entry with more specific actions.
@@ -32,3 +32,14 @@
 
 ;; see available keys at window.el.gz's bottom
 (define-key ctl-x-map "4" 'sarcasm-quit-bottom-side-windows)
+
+(defun sarcasm-flycheck-hide/show-error-list ()
+  (if (flycheck-has-current-errors-p)
+      (flycheck-list-errors)
+    (let ((error-list-buffer (get-buffer flycheck-error-list-buffer)))
+      (dolist (window (window-at-side-list nil 'bottom))
+        (when (eq (window-buffer window) error-list-buffer)
+          (quit-window nil window))))))
+
+;; (add-hook 'flycheck-after-syntax-check-hook
+;;           #'sarcasm-flycheck-hide/show-error-list)

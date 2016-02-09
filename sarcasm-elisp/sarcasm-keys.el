@@ -24,7 +24,7 @@
                                               "sarcasm-el-get.el"))
                          (dired *sarcasm-directory*))))
 
-(define-key mode-specific-map (kbd "i") 'imenu)
+;; (define-key mode-specific-map (kbd "i") 'imenu)
 ;; xscope has [C-c s] for prefix
 ;; (global-set-key (kbd "C-c s") 'shell)
 (define-key mode-specific-map (kbd "b") 'sarcasm-serial-term)

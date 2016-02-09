@@ -33,9 +33,10 @@
  '(company-template-field ((t (:background "DeepSkyBlue3" :foreground "black"))))
  '(company-tooltip ((t (:background "LightSteelBlue1" :foreground "dark slate gray"))))
  '(company-tooltip-annotation ((t (:inherit company-tooltip :foreground "slate gray"))))
+ '(company-tooltip-annotation-selection ((t (:inherit company-tooltip-annotation :background "LightSteelBlue3"))))
  '(company-tooltip-common ((t (:inherit company-tooltip :underline t))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :underline t))))
  '(company-tooltip-mouse ((t (:inherit company-tooltip-selection))))
  '(company-tooltip-selection ((t (:inherit company-tooltip :background "LightSteelBlue3"))))
- '(magit-diff-del ((t (:inherit diff-removed :background "gray20" :foreground "red3"))) t))
+ '(magit-diff-del ((t (:inherit diff-removed :background "gray20" :foreground "red3")))))
 

@@ -20,6 +20,7 @@
 ;; Even without snippets this is useful for package like irony-mode that uses
 ;; yasnippet as a dynamic snippet library.
 (setq yas-snippet-dirs (list sarcasm-snippet-dir))
+(setq yas-verbosity 0)
 
 (yas-global-mode 1)
 
