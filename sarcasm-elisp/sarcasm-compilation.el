@@ -36,4 +36,26 @@ ICON if the name of an image under /usr/share/pixmaps or ~/.icons"
 
 (add-hook 'compilation-mode-hook 'sarcasm-truncate-lines-on)
 
+(global-set-key (kbd "C-c c") 'sarcasm-compile)
+
+(defvar compilation-last-buffer)
+(defun sarcasm-compile (&optional should-compile)
+  "Run the same compile as the last time.
+
+If there was no last time, or there is a prefix argument, this acts like
+M-x compile."
+  (interactive "p")
+  (if compilation-last-buffer
+      (progn
+        (set-buffer compilation-last-buffer)
+        (revert-buffer t t))
+    (call-interactively 'compile)))
+
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 (provide 'sarcasm-compilation)

@@ -121,8 +121,12 @@ There only difference is that each filename should be a regexp.")
 (tool-bar-mode -1) ;toolbar is visible by default on X emacs so disable it
 (blink-cursor-mode -1)                  ;it's annoying
 (scroll-bar-mode -1)
-(column-number-mode 1)		 ;print column number on the mode-line
+(column-number-mode 1)                  ;print column number on the mode-line
 (winner-mode 1)
+
+;; useful to get 'compile-command' between session without having to retype it
+;; everytime
+(savehist-mode 1)
 
 ;; see http://dfan.org/blog/2009/02/19/emacs-dedicated-windows/
 (defun toggle-current-window-dedication ()
@@ -142,9 +146,13 @@ There only difference is that each filename should be a regexp.")
 
 (defun sarcasm-show-columm-80 ()
   (setq-local whitespace-style '(face tabs trailing lines-tail))
-  (setq-local whitespace-line-column  80)
+  (setq-local whitespace-line-column 80)
   (whitespace-mode 1))
 (add-hook 'prog-mode-hook 'sarcasm-show-columm-80)
+
+(defun sarcasm-no-whitespace-mode ()
+  (whitespace-mode -1))
+(add-hook 'makefile-mode-hook 'sarcasm-no-whitespace-mode)
 
 ;; Since Emacs 24
 ;; stolen from: https://github.com/bbatsov/emacs-dev-kit/blob/master/misc-config.el

@@ -1,4 +1,5 @@
 (require 'rx)
+(require 'clang-format)
 
 (defun clang-format-default-keybindings ()
   (define-key c-mode-base-map (kbd "C-S-f") 'clang-format-region))

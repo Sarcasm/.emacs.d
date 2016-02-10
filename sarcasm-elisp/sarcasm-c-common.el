@@ -24,7 +24,11 @@
 
   (define-key c-mode-base-map [?,] 'sarcasm-insert-comma)
 
-  (define-key c-mode-base-map [return] 'c-context-line-break)
+  ;; c-context-line-break seems annoying in the end, I don't like the blackslash
+  ;; in preprocessor macros (clang-format works good enough in these
+  ;; situations), in C comment it does not exactly do what I like, the comment
+  ;; seems to always have a weird star on the first line
+  ;; (define-key c-mode-base-map [return] 'c-context-line-break)
   (define-key c-mode-base-map (kbd "C-c m") 'c-man-at-point)
   (define-key c-mode-base-map (kbd "M-n") 'flymake-or-compile-next-error)
   (define-key c-mode-base-map (kbd "M-p") 'flymake-or-compile-prev-error)
