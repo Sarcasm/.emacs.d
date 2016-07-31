@@ -8,5 +8,10 @@
 (add-hook 'irony-mode-hook 'sarcasm-irony-mode-hook)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
+(defun sarcasm-irony-cdb-not-found (command &rest args)
+  (when (eq command 'get-compile-options)
+    (message "Irony: compile options not found!")
+    nil))
+
 (when (eq system-type 'windows-nt)
   (setq w32-pipe-read-delay 0))
