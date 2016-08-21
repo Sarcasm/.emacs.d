@@ -52,7 +52,7 @@ example (in .dir-locals.el file):
                       (concat sarcasm-project-name "_"))
                   "")))
     (replace-regexp-in-string "[^A-Z0-9_]" "_"
-                              (upcase (concat prefix filename "_" ext "_")))))
+                              (upcase (concat prefix filename "_" ext)))))
 
 (defun sarcasm-format-include-guard ()
   "If not in a project (see `eproject-mode') use
