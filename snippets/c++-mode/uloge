@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name : UlogE << ... << std::endl;
+# contributor : Guillaume Papin
+# key: uloge
+# --
+UlogE << ${1:...} << std::endl;
