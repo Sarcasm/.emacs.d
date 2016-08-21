@@ -30,7 +30,7 @@
 (define-key mode-specific-map (kbd "b") 'sarcasm-serial-term)
 (global-set-key (kbd "C-x c") 'whitespace-cleanup)
 (define-key mode-specific-map (kbd "f") 'folding-mode)
-(define-key mode-specific-map (kbd "p") 'sarcasm-path-to-kill-ring)
+(define-key mode-specific-map [?i] 'sarcasm-path-to-kill-ring)
 
 ;; Found on Stack Overflow
 ;; http://stackoverflow.com/questions/2091881/emacs-font-sizing-with-ctrl-key-and-mouse-scroll/2092158#2092158
