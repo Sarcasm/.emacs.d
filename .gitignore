@@ -24,3 +24,6 @@
 /.mc-lists.el
 /ido.last
 anaconda-mode/
+/history
+/projectile-bookmarks.eld
+/smex-items
