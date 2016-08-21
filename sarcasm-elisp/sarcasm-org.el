@@ -27,6 +27,9 @@
              (flyspell-mode 1)
              (define-key org-mode-map [f7] 'org-flyspell-mode-and-dictionary)
 
+             ;; bring in ox-reveal if available
+             (require 'ox-reveal nil t)
+
              (setq org-agenda-start-with-follow-mode t)
              ;; Like in *grep* buffers
              ;; (define-key org-agenda-mode-map (kbd "C-c C-f") 'org-agenda-follow-mode)
