@@ -63,8 +63,8 @@
 
 ;; Emacs external `url browser' (usefull in Org-Mode)
 ;; TODO: Use the customize interface for this, it's different every damn time
-(setq-default browse-url-generic-program "chromium-browser")
-(setq browse-url-generic-program "chromium-browser")
+(setq-default browse-url-generic-program "chromium")
+(setq browse-url-generic-program "chromium")
 (setq browse-url-browser-function '(("^file:" . browse-url-generic)
 				    ("."      . browse-url-generic)))
 
@@ -149,6 +149,7 @@ There only difference is that each filename should be a regexp.")
   (setq-local whitespace-line-column 80)
   (whitespace-mode 1))
 (add-hook 'prog-mode-hook 'sarcasm-show-columm-80)
+(add-hook 'rst-mode-hook 'sarcasm-show-columm-80)
 
 (defun sarcasm-no-whitespace-mode ()
   (whitespace-mode -1))

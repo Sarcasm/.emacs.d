@@ -10,7 +10,7 @@
       org-archive-location "archives/%s_archive::"
       org-insert-mode-line-in-empty-file t
       org-src-window-setup 'other-window
-      org-startup-with-inline-images t
+      org-startup-with-inline-images nil
       org-hide-emphasis-markers t
       org-hide-leading-stars t)
 

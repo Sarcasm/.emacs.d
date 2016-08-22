@@ -21,14 +21,13 @@
  '(ansi-color-names-vector
    ["black" "firebrick" "lime green" "yellow2" "DodgerBlue2" "deep pink" "cornflower blue" "white"])
  '(c-doc-comment-style (quote ((java-mode . javadoc) (pike-mode . autodoc))))
- '(clang-format-executable "clang-format-3.8")
  '(garak-alert-methods (quote (:notify)))
  '(irony-cdb-compilation-databases
    (quote
     (irony-cdb-clang-complete irony-cdb-libclang sarcasm-irony-cdb-not-found)))
  '(magit-diff-arguments (quote ("--no-ext-diff" "-M")))
+ '(magit-diff-section-arguments (quote ("--no-ext-diff" "-M" "--diff-algorithm=patience")))
  '(magit-diff-refine-hunk t)
- '(magit-revert-buffers (quote silent) t)
  '(menu-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
