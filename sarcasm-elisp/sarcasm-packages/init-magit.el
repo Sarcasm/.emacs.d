@@ -1,5 +1,3 @@
-(setq magit-repo-dirs '("/mnt/media/projects/"))
-
 ;; Magit
 (define-key mode-specific-map (kbd "x m") 'magit-status)
 
@@ -37,3 +35,5 @@
                                                   (cons path 0))
                                                 gitdirs)))
       (call-interactively 'magit-list-repositories))))
+
+(define-key mode-specific-map (kbd "x r") 'repo-status)
