@@ -82,7 +82,7 @@
 ;; note: Slash for directory
 (setq completion-ignored-extensions '(".o" ".a" ".so"
 				      ".elc"
-                                      ".pyc"
+                                      ".pyc" "__pycache__"
                                       ".class" ".dll"
 				      "~"
 				      ".git/"
@@ -91,22 +91,23 @@
 				      ".hgignore"
 				      ".svn/"))
 
-(defconst sarcasm-ignored-files '("GPATH" "GRTAGS" "GTAGS"
-                                  ".git" ".gitignore"
-                                  ".hg" ".hgignore"
-                                  ;; core.clj was ignored in `dired-omit-files'
-                                  ;; "core"
-                                  "vgcore"
-                                  ".newsrc-dribble")
+(defvar sarcasm-ignored-files '("GPATH" "GRTAGS" "GTAGS"
+                                ".git" ".gitignore"
+                                ".hg" ".hgignore"
+                                "__pycache__"
+                                ;; core.clj was ignored in `dired-omit-files'
+                                ;; "core"
+                                "vgcore"
+                                ".newsrc-dribble")
   "A list of filename and directory to ignore (no directory
 separator should be involved).
 
 note: at this time this variable is used for making the
 `dired-omit-files' and some `eproject' project type.")
 
-(defconst sarcasm-ignored-files-re '("cscope\\.\\w+"
-                                     ;; coredump and valgrind coredump
-                                     "\\(?:\\vg\\)?core\\.[[:digit:]]+")
+(defvar sarcasm-ignored-files-re '("cscope\\.\\w+"
+                                   ;; coredump and valgrind coredump
+                                   "\\(?:\\vg\\)?core\\.[[:digit:]]+")
   "See `sarcasm-ignored-files'.
 
 There only difference is that each filename should be a regexp.")
