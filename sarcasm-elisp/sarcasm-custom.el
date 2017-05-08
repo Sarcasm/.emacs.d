@@ -21,10 +21,13 @@
  '(ansi-color-names-vector
    ["black" "firebrick" "lime green" "yellow2" "DodgerBlue2" "deep pink" "cornflower blue" "white"])
  '(c-doc-comment-style (quote ((java-mode . javadoc) (pike-mode . autodoc))))
+ '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc)))
  '(garak-alert-methods (quote (:notify)))
  '(irony-cdb-compilation-databases
    (quote
     (irony-cdb-clang-complete irony-cdb-libclang sarcasm-irony-cdb-not-found)))
+ '(ivy-mode t)
+ '(ivy-wrap t)
  '(magit-diff-arguments (quote ("--no-ext-diff" "-M")))
  '(magit-diff-section-arguments (quote ("--no-ext-diff" "-M" "--diff-algorithm=patience")))
  '(magit-diff-refine-hunk t)

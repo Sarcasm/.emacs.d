@@ -1,6 +1,8 @@
 (require 'rx)
 (require 'clang-format)
 
+(require 'clang-format)
+
 (defun clang-format-default-keybindings ()
   (define-key c-mode-base-map (kbd "C-S-f") 'clang-format-region))
 
@@ -9,6 +11,9 @@
 ;; sense to be able to override with .dir-locals.el so I'm not trying to counter
 ;; this. In case it appears to be necessary to counter it, see
 ;; http://stackoverflow.com/a/5148435/951426
+;;
+;; Detailed configuration for C styles
+;; https://github.com/stsquad/my-emacs-stuff/blob/master/my-c-mode.el#L103
 (defun sarcasm-clang-format-set-c-style ()
   (let ((orig-path (or buffer-file-name default-directory))
         vars)

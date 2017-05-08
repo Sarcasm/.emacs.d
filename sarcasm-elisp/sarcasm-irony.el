@@ -3,7 +3,7 @@
 ;; (require 'sarcasm-irony)
 ;;
 
-(defcustom sarcasm-irony-development-dir "~/projects/irony"
+(defcustom sarcasm-irony-development-dir "~/dev/ws/irony"
   "Directory that contains the irony-mode project and
   affiliated (e.g: company-irony)."
   :type 'directory)

@@ -1,1 +1,1 @@
-(add-to-list 'auto-mode-alist '(".clang-format" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.clang-format$" . yaml-mode))

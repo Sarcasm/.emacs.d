@@ -205,7 +205,6 @@ There only difference is that each filename should be a regexp.")
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 (put 'org-narrow-to-subtree 'disabled nil)
-(put 'dired-find-alternate-file 'disabled nil)
 
 (defadvice narrow-to-region (after narrow-to-region-unmark
 activate compile)

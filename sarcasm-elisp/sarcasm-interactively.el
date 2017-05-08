@@ -4,6 +4,8 @@
 
 (require 'ibuffer)
 
+;; (require 'ido)
+
 ;; (iswitchb-mode 1)
 
 ;; Iswitchb with Arrow-keys
@@ -31,8 +33,8 @@
 ;; Allow the same buffer to be open in different frames
 (setq ido-default-buffer-method 'selected-window)
 
-(ido-mode 1)
-(ido-everywhere 1)
+;; (ido-mode 1)
+;; (ido-everywhere 1)
 
 (add-to-list 'ido-ignore-files (regexp-opt sarcasm-ignored-files))
 (setq ido-ignore-files (append ido-ignore-files

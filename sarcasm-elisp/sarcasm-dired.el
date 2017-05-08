@@ -10,8 +10,11 @@
 ;; Add the -h option (display size in the human readable form).
 (setq dired-listing-switches "-alh")
 
+(defvar-local sarcasm-no-dired-omit nil)
+(put 'sarcasm-no-dired-omit 'safe-local-variable 'booleanp)
 (defun sarcasm-dired-mode-hook ()
-  (dired-omit-mode 1)
+  (unless sarcasm-no-dired-omit
+    (dired-omit-mode 1))
   (define-key dired-mode-map "\M-o" 'dired-omit-mode))
 
 ;; Always enable `dired-omit-mode'

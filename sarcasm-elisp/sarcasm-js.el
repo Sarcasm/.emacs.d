@@ -7,7 +7,8 @@
   (electric-layout-mode -1)
   (setq comment-auto-fill-only-comments t)
   (auto-fill-mode 1)
-  (filladapt-mode 1))
+  ;; (filladapt-mode 1)
+  )
 
 (add-hook 'javascript-mode-hook 'sarcasm-js-hooks)
 (add-hook 'js-mode-hook 'sarcasm-js-hooks)

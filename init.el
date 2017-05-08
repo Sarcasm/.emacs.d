@@ -1,3 +1,8 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
 
 ;; This could be Windows-specific but since I never use VC I think it's better
 ;; to disable it altogether, I just use magit in practice.
@@ -67,14 +72,18 @@
 ;; (remove-hook 'find-file-hooks 'vc-find-file-hook)
 ;; (delete 'Git vc-handled-backends)
 
-(add-to-list 'load-path "~/.emacs.d/pieces-of-code/")
-(require 'js-beautify)
-(defun js-beautify-default-keybindings ()
-  (local-set-key (kbd "C-S-f") 'js-beautify))
-(add-hook 'js-mode-hook 'js-beautify-default-keybindings)
-(add-hook 'js2-mode-hook 'js-beautify-default-keybindings)
-(add-hook 'javascript-mode-hook 'js-beautify-default-keybindings)
+;; (add-to-list 'load-path "~/.emacs.d/pieces-of-code/")
+;; (require 'js-beautify)
+;; (defun js-beautify-default-keybindings ()
+;;   (local-set-key (kbd "C-S-f") 'js-beautify))
+;; (add-hook 'js-mode-hook 'js-beautify-default-keybindings)
+;; (add-hook 'js2-mode-hook 'js-beautify-default-keybindings)
+;; (add-hook 'javascript-mode-hook 'js-beautify-default-keybindings)
 
 
-(run-with-timer 2 nil #'(lambda ()
-                          (set-cursor-color "gold")))
+(run-with-timer 2 nil (lambda ()
+                        (set-cursor-color "gold")))
+
+(put 'downcase-region 'disabled nil)
+(put 'erase-buffer 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)

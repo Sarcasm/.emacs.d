@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: :math:`expr`
+# key: :m
+# --
+:math:\`$0\`
