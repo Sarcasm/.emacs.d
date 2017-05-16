@@ -18,5 +18,5 @@
 
 (use-package multiple-cursors
   :ensure t
-  :bind (("C-;" . mc/mark-all-dwin)
+  :bind (("C-;" . mc/mark-all-dwim)
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
