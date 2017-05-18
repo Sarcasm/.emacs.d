@@ -7,6 +7,7 @@
   :functions global-company-mode
   :preface (declare-function company-mode-on "ext:company")
   :config
+  (setq company-selection-wrap-around t)
   (sarcasm-deffered-global-mode #'global-company-mode
                                 #'company-mode-on
                                 'company-mode))
