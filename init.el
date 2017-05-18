@@ -17,11 +17,15 @@
 
 (defun sarcasm-expand-etc-file-name (file)
   "Expand filename FILE relative to `sarcasm-etc-directory'."
-  (expand-file-name (convert-standard-filename file) sarcasm-etc-directory))
+  (let* ((path (expand-file-name (convert-standard-filename file) sarcasm-etc-directory)))
+    (make-directory (file-name-directory path) t)
+    path))
 
 (defun sarcasm-expand-cache-file-name (file)
   "Expand filename FILE relative to `sarcasm-cache-directory'."
-  (expand-file-name (convert-standard-filename file) sarcasm-cache-directory))
+  (let* ((path (expand-file-name (convert-standard-filename file) sarcasm-cache-directory)))
+    (make-directory (file-name-directory path) t)
+    path))
 
 (setq-default package-user-dir (sarcasm-expand-cache-file-name "elpa"))
 

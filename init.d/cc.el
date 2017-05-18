@@ -96,6 +96,7 @@
 
   (use-package company-irony
     :load-path "~/dev/ws/irony/company-irony/"
+    :after company
     :config
     (add-to-list 'company-backends 'company-irony)
     (use-package company-c-headers

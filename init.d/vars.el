@@ -20,7 +20,7 @@
  '(mouse-yank-at-point t)
  '(package-selected-packages
    (quote
-    (yasnippet ace-window company-c-headers flycheck cmake-mode buffer-move ag qml-mode dockerfile-mode ledger-mode magit use-package)))
+    (anaconda-mode py-yapf yasnippet ace-window company-c-headers flycheck cmake-mode buffer-move ag qml-mode dockerfile-mode ledger-mode magit use-package)))
  '(read-buffer-completion-ignore-case t)
  '(read-file-name-completion-ignore-case t)
  '(save-abbrevs (quote silently) nil nil "don't want to answer yes everytime")

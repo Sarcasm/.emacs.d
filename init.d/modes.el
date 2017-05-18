@@ -18,5 +18,6 @@
 
 (use-package multiple-cursors
   :ensure t
+  :init (setq-default mc/list-file (etc "multiple-cursors/lists.el"))
   :bind (("C-;" . mc/mark-all-dwim)
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
