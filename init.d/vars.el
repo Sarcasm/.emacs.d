@@ -11,6 +11,7 @@
  '(column-number-mode t)
  '(comment-style (quote extra-line))
  '(fill-column 80)
+ '(frame-resize-pixelwise t)
  '(global-hl-line-sticky-flag t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
