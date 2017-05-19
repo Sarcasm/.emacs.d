@@ -1,6 +1,6 @@
 (use-package py-yapf
   :ensure t
-  :after python-mode
+  :after python
   :defines python-mode-map
   :bind (:map python-mode-map ("C-S-f" . py-yapf-buffer)))
 
@@ -8,6 +8,7 @@
 
 (use-package anaconda-mode
   :ensure t
+  :defer t
   :config
   (add-hook 'python-mode-hook 'anaconda-mode)
   (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
