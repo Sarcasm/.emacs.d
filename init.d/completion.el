@@ -11,3 +11,8 @@
   (sarcasm-deffered-global-mode #'global-company-mode
                                 #'company-mode-on
                                 'company-mode))
+
+(use-package ivy
+  :ensure t
+  :defer 0
+  :config (ivy-mode))
