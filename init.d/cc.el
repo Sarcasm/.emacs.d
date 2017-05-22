@@ -10,10 +10,11 @@
 (use-package cc-mode
   :bind (:map c-mode-base-map
               ("C-c t" . ff-find-other-file))
-  :config
+  :preface
   (defun sarcasm-set-c++-cc-style ()
     "Personalized cc-style for c++ mode."
     (c-set-offset 'innamespace 0))
+  :config
   (add-hook 'c++-mode-hook #'sarcasm-set-c++-cc-style)
 
   (define-abbrev-table 'c-mode-abbrev-table
@@ -77,7 +78,7 @@
       (message "Irony: compile options not found!")
       nil))
   (defvar irony-server-w32-pipe-buffer-size)
-  :init 
+  :init
   (setq-default irony-cdb-compilation-databases '(irony-cdb-clang-complete
                                                   irony-cdb-libclang
                                                   sarcasm-irony-cdb-not-found))
@@ -114,4 +115,9 @@
 
   (use-package flycheck-irony
     :load-path "~/dev/ws/irony/flycheck-irony/"
-    :config (add-hook 'irony-mode-hook 'flycheck-irony-setup)))
+    :config (add-hook 'irony-mode-hook 'flycheck-irony-setup))
+
+  (use-package flycheck-clang-analyzer
+    :load-path "~/dev/ws/irony/external/flycheck-clang-analyzer"
+    :after flycheck-irony
+    :config (add-hook 'irony-mode-hook 'flycheck-clang-analyzer-setup)))
