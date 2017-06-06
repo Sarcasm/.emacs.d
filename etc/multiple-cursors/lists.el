@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        c-electric-lt-gt
         kill-rectangle
         ))
 

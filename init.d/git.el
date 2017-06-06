@@ -1,9 +1,3 @@
-;; Disable VC, `magit' is sufficient for now.
-;; It's annoying when using SSHFS
-;; and this could optimize things a bit (maybe Windows-specific).
-;; http://stackoverflow.com/questions/6724471/git-slows-down-emacs-to-death-how-to-fix-this
-(setq vc-handled-backends nil)
-
 (use-package magit
   :ensure t
   :bind (("C-c x m" . magit-status)
