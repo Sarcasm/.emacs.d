@@ -3,8 +3,12 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        c-electric-colon
         c-electric-lt-gt
+        c-electric-paren
+        c-electric-semi&comma
         kill-rectangle
+        wgrep-finish-edit
         ))
 
 (setq mc/cmds-to-run-once

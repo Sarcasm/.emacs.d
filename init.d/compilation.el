@@ -3,7 +3,11 @@
 (defun sarcasm-truncate-lines-on ()
   (toggle-truncate-lines 1))
 
-(add-hook 'compilation-mode-hook 'sarcasm-truncate-lines-on)
+(use-package compile
+  :defer t
+  :config
+  (setq compilation-scroll-output 'first-error)
+  (add-hook 'compilation-mode-hook 'sarcasm-truncate-lines-on))
 
 (defun sarcasm-compile (&optional should-compile)
   "Run the same compile as the last time.
