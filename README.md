@@ -23,3 +23,20 @@ An example of the content of this file can be:
     (setq user-mail-address "firstname.lastname@gmail.com"
           user-full-name    "Firstname Lastname")
     $
+
+Troubleshooting
+---------------
+
+Buggy cursor color on KDE
+-------------------------
+
+Comment the Emacs*Foreground key of `/usr/share/kdisplay/app-defaults/Emacs.ad`:
+
+```diff
+-Emacs*Foreground:		WINDOW_FOREGROUND
++! Emacs*Foreground:		WINDOW_FOREGROUND
+```
+
+See:
+- https://lists.gnu.org/archive/html/help-gnu-emacs/2002-04/msg00116.html
+- https://emacs.stackexchange.com/a/32764/901
