@@ -99,6 +99,7 @@
     :load-path "~/dev/ws/irony/company-irony/"
     :after company
     :config
+    (setq company-irony-ignore-case 'smart)
     (add-to-list 'company-backends 'company-irony)
     (use-package company-c-headers
       :ensure t
@@ -117,7 +118,8 @@
     :load-path "~/dev/ws/irony/flycheck-irony/"
     :config (add-hook 'irony-mode-hook 'flycheck-irony-setup))
 
-  (use-package flycheck-clang-analyzer
-    :load-path "~/dev/ws/irony/external/flycheck-clang-analyzer"
-    :after flycheck-irony
-    :config (add-hook 'irony-mode-hook 'flycheck-clang-analyzer-setup)))
+  ;; (use-package flycheck-clang-analyzer
+  ;;   :load-path "~/dev/ws/irony/external/flycheck-clang-analyzer"
+  ;;   :after flycheck-irony
+  ;;   :config (add-hook 'irony-mode-hook 'flycheck-clang-analyzer-setup))
+  )
