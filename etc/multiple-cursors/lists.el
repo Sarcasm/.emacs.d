@@ -8,6 +8,8 @@
         c-electric-paren
         c-electric-semi&comma
         kill-rectangle
+        kill-region
+        transpose-words
         wgrep-finish-edit
         ))
 
