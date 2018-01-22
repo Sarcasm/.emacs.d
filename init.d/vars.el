@@ -57,7 +57,8 @@
 
 (setq-default abbrev-file-name (cache "abbrev_defs")
               bookmark-default-file (cache "bookmarks")
-              savehist-file (cache "history"))
+              savehist-file (cache "history")
+              tramp-persistency-file-name (cache "tramp"))
 
 ;; Enable some disabled commands
 (put 'dired-find-alternate-file 'disabled nil)
