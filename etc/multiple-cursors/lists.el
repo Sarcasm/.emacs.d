@@ -7,12 +7,15 @@
         c-electric-lt-gt
         c-electric-paren
         c-electric-semi&comma
+        isearch-forward-word
         kill-rectangle
         kill-region
         transpose-words
         wgrep-finish-edit
+        yaml-electric-backspace
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        handle-switch-frame
         ))

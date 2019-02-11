@@ -29,6 +29,10 @@
  '(scroll-preserve-screen-position t nil nil "restore cursor after PgUp/PgDown")
  '(sentence-end-double-space nil nil nil "sentences end with one space when M-q `fill-paragraph' is called")
  '(tool-bar-mode nil)
+ ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=29619
+ '(xref-prompt-for-identifier
+   (quote
+    (not xref-find-definitions xref-find-definitions-other-window xref-find-definitions-other-frame xref-find-references)))
  '(yank-pop-change-selection t))
 
 (custom-set-faces

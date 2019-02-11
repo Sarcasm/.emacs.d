@@ -13,6 +13,7 @@
 
 (use-package company
   :ensure t
+  :pin melpa
   :defer 0
   :bind ("M-RET" . company-complete)
   :functions global-company-mode
@@ -21,6 +22,11 @@
   (setq company-selection-wrap-around t)
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-ignore-case nil)
+  (setq company-backends '(company-cmake
+                           company-capf
+                           company-files
+                           (company-dabbrev-code company-gtags company-etags company-keywords)
+                           company-dabbrev))
   (sarcasm-deffered-global-mode #'global-company-mode
                                 #'company-mode-on
                                 'company-mode)
