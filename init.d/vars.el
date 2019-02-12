@@ -9,30 +9,32 @@
  '(blink-cursor-mode nil)
  '(bookmark-save-flag 1)
  '(column-number-mode t)
- '(comment-style (quote extra-line))
+ '(comment-style 'extra-line)
+ '(dired-listing-switches "-alhv" nil nil "natural sorting helps sort files like fs.cpp, fs.h, fs.test.cpp together, and not fslite.h before fs.test.cpp")
  '(fill-column 80)
  '(frame-resize-pixelwise t)
  '(global-hl-line-sticky-flag t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-whole-line t nil nil "C-k kills whole line and newline if at beginning of line")
+ '(magit-diff-arguments '("--no-ext-diff" "-M" "-C"))
+ '(magit-log-arguments '("--graph" "--color" "--decorate" "-n256"))
+ '(magit-log-section-arguments '("--graph" "--color" "--decorate" "-n256"))
  '(menu-bar-mode nil)
- '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1))) nil nil "Smooth mouse scrolling, one line at a time")
+ '(mouse-wheel-scroll-amount '(1 ((shift) . 1)) nil nil "Smooth mouse scrolling, one line at a time")
  '(mouse-yank-at-point t)
  '(package-selected-packages
    (quote
     (anaconda-mode py-yapf yasnippet ace-window company-c-headers flycheck cmake-mode buffer-move ag qml-mode dockerfile-mode ledger-mode magit use-package)))
  '(read-buffer-completion-ignore-case t)
  '(read-file-name-completion-ignore-case t)
- '(save-abbrevs (quote silently) nil nil "don't want to answer yes everytime")
+ '(save-abbrevs 'silently nil nil "don't want to answer yes everytime")
  '(scroll-bar-mode nil)
  '(scroll-preserve-screen-position t nil nil "restore cursor after PgUp/PgDown")
  '(sentence-end-double-space nil nil nil "sentences end with one space when M-q `fill-paragraph' is called")
  '(tool-bar-mode nil)
- ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=29619
  '(xref-prompt-for-identifier
-   (quote
-    (not xref-find-definitions xref-find-definitions-other-window xref-find-definitions-other-frame xref-find-references)))
+   '(not xref-find-definitions xref-find-definitions-other-window xref-find-definitions-other-frame xref-find-references) nil nil "c.f. https://debbugs.gnu.org/cgi/bugreport.cgi?bug=29619")
  '(yank-pop-change-selection t))
 
 (custom-set-faces
@@ -62,7 +64,8 @@
 (setq-default abbrev-file-name (cache "abbrev_defs")
               bookmark-default-file (cache "bookmarks")
               savehist-file (cache "history")
-              tramp-persistency-file-name (cache "tramp"))
+              tramp-persistency-file-name (cache "tramp")
+              truncate-lines t)
 
 ;; Enable some disabled commands
 (put 'dired-find-alternate-file 'disabled nil)
