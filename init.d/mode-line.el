@@ -1,4 +1,5 @@
 (use-package moody
+  :ensure t
   :config
   (setq x-underline-at-descent-line t)
   (setq moody-mode-line-height 20)
