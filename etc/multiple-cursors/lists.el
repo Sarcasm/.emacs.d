@@ -7,15 +7,25 @@
         c-electric-lt-gt
         c-electric-paren
         c-electric-semi&comma
+        c-electric-slash
+        c-scope-operator
         isearch-forward-word
         kill-rectangle
         kill-region
+        multiple-cursors-mode
+        org-self-insert-command
         transpose-words
+        undefined
         wgrep-finish-edit
         yaml-electric-backspace
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        clang-format-region
+        compile-goto-error
         handle-switch-frame
+        isearch-forward-word
+        org-return
+        yas-expand
         ))
