@@ -10,6 +10,7 @@
  '(bookmark-save-flag 1)
  '(column-number-mode t)
  '(comment-style 'extra-line)
+ '(custom-enabled-themes '(sarcasm))
  '(dired-listing-switches "-alhv" nil nil "natural sorting helps sort files like fs.cpp, fs.h, fs.test.cpp together, and not fslite.h before fs.test.cpp")
  '(fill-column 80)
  '(frame-resize-pixelwise t)

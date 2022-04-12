@@ -80,7 +80,7 @@
    `(hl-line ((t (:background ,dark-grey))))
    `(secondary-selection ((t (:background ,dark-grey))))
    ;; Mode line
-   `(mode-line ((t (:background ,dark-grey :foreground ,bright-grey :italic t
+   `(mode-line ((t (:background "#52002c" :foreground ,bright-grey :italic t
                                 :box (:line-width 1 :color ,grey)))))
    `(mode-line-inactive ((t (:background ,dark-grey :foreground ,bright-grey :italic nil  :box nil))))
    `(mode-line-buffer-id ((t (:bold t :foreground ,pink :italic nil))))
