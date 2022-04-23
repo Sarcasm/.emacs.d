@@ -8,28 +8,53 @@
 
 (add-to-list 'auto-mode-alist '("\\.clang-\\(?:format\\|tidy\\)\\'" . yaml-mode))
 
-(with-eval-after-load 'git-commit
-  ;; When redacting commit message in magit,
-  ;; with the diff view in the other window,
-  ;; use company-dabbrev[-code] to complete words of the other buffer
-  ;; in the commit message buffer.
-  ;; Stolen from https://github.com/company-mode/company-mode/issues/704#issuecomment-325783249
+(progn ;; git-commit
+  (defun sarcasm-git-commit-setup ()
+    """Enable git-commit mode even when `git-commit' hasn't been loaded yet.
 
-  (defun sarcasm-company-dabbrev-ignore-except-magit-diff (buffer)
-    (let ((name (buffer-name)))
-      (and (string-match-p "\\`[ *]" name)
-           (not (string-match-p "\\*magit-diff:" name)))))
+This is useful when using git from the command line, e.g.:
 
-  (defun sarcasm-git-commit-setup-hook ()
-    (setq-local company-backends '(company-capf company-dabbrev-code company-dabbrev))
-    (setq-local company-dabbrev-code-modes '(text-mode magit-diff-mode))
-    (setq-local company-dabbrev-code-other-buffers 'code)
-    (setq-local company-dabbrev-downcase nil)
-    (setq-local company-dabbrev-ignore-buffers
-                #'sarcasm-company-dabbrev-ignore-except-magit-diff)
-    (setq-local company-dabbrev-ignore-case nil))
+    EDITOR='emacs -nw' git commit
 
-  (add-hook 'git-commit-setup-hook #'sarcasm-git-commit-setup-hook))
+At the time of this writing,
+there are no autoloads providing the necessary features to do this cleanly,
+see https://github.com/magit/magit/pull/4352.
+"""
+    ;; based on git-commit-filename-regexp
+    (let ((git-msg-or-desc-re "/\\(\
+\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|MERGEREQ\\|TAG\\)_EDIT\\|MERGE_\\|\\)MSG\
+\\|\\(BRANCH\\|EDIT\\)_DESCRIPTION\\)\\'"))
+      (when (and buffer-file-name
+                 (string-match-p git-msg-or-desc-re buffer-file-name)
+                 (not (featurep 'git-commit)))
+        (require 'git-commit)
+        (or git-commit-mode (git-commit-setup)))))
+
+  (add-hook 'find-file-hook #'sarcasm-git-commit-setup)
+
+  (with-eval-after-load 'git-commit
+    ;; When redacting commit message in magit,
+    ;; with the diff view in the other window,
+    ;; use company-dabbrev[-code] to complete words of the other buffer
+    ;; in the commit message buffer.
+    ;; Stolen from https://github.com/company-mode/company-mode/issues/704#issuecomment-325783249
+    (remove-hook 'find-file-hook #'sarcasm-git-commit-setup)
+
+    (defun sarcasm-company-dabbrev-ignore-except-magit-diff (buffer)
+      (let ((name (buffer-name)))
+        (and (string-match-p "\\`[ *]" name)
+             (not (string-match-p "\\*magit-diff:" name)))))
+
+    (defun sarcasm-git-commit-setup-hook ()
+      (setq-local company-backends '(company-capf company-dabbrev-code company-dabbrev))
+      (setq-local company-dabbrev-code-modes '(text-mode magit-diff-mode))
+      (setq-local company-dabbrev-code-other-buffers 'code)
+      (setq-local company-dabbrev-downcase nil)
+      (setq-local company-dabbrev-ignore-buffers
+                  #'sarcasm-company-dabbrev-ignore-except-magit-diff)
+      (setq-local company-dabbrev-ignore-case nil))
+
+    (add-hook 'git-commit-setup-hook #'sarcasm-git-commit-setup-hook)))
 
 (progn ;; org-mode
   (define-key mode-specific-map "oa" #'org-agenda)
@@ -84,6 +109,7 @@
  ;; If there is more than one, they won't work right.
  '(company-backends '(company-capf))
  '(compilation-scroll-output 'first-error)
+ '(completions-detailed t)
  '(dired-listing-switches "-alhv" nil nil "natural sorting helps sort files like fs.cpp, fs.h, fs.test.cpp together, and not fslite.h before fs.test.cpp")
  '(indent-tabs-mode nil)
  '(kill-whole-line t nil nil "C-k kills whole line and newline if at beginning of line")
