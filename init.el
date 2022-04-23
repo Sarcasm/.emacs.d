@@ -111,19 +111,67 @@ see https://github.com/magit/magit/pull/4352.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bookmark-save-flag 1)
+ '(comment-style 'extra-line)
  '(company-backends '(company-capf))
  '(compilation-scroll-output 'first-error)
  '(completions-detailed t)
  '(dired-listing-switches "-alhv" nil nil "natural sorting helps sort files like fs.cpp, fs.h, fs.test.cpp together, and not fslite.h before fs.test.cpp")
+ '(fill-column 80)
+ '(global-hl-line-sticky-flag t)
  '(indent-tabs-mode nil)
  '(kill-whole-line t nil nil "C-k kills whole line and newline if at beginning of line")
  '(magit-diff-refine-hunk t)
+ '(mouse-yank-at-point t)
  '(org-modules '(ol-docview ol-info org-mouse org-tempo))
  '(package-selected-packages
-   '(beancount ledger-mode multiple-cursors ace-window buffer-move markdown-mode dockerfile-mode yaml-mode strace-mode company eglot vertico magit)))
+   '(beancount ledger-mode multiple-cursors ace-window buffer-move markdown-mode dockerfile-mode yaml-mode strace-mode company eglot vertico magit))
+ '(read-buffer-completion-ignore-case t)
+ '(read-file-name-completion-ignore-case t)
+ '(safe-local-variable-values
+   '((eval c-set-offset 'innamespace 0)))
+ '(save-abbrevs 'silently nil nil "don't want to answer yes everytime")
+ '(scroll-preserve-screen-position t nil nil "restore cursor after PgUp/PgDown")
+ '(sentence-end-double-space nil nil nil "sentences end with one space when M-q `fill-paragraph' is called")
+ '(yank-pop-change-selection t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(defun sarcasm-cache (file)
+  (let ((path (expand-file-name (convert-standard-filename file)
+                                (expand-file-name (convert-standard-filename ".cache/")
+                                                  user-emacs-directory))))
+    (make-directory (file-name-directory path) t)
+    path))
+
+;; backup and autosave files
+;; - http://www.emacswiki.org/emacs/BackupDirectory
+;; - http://snarfed.org/gnu_emacs_backup_files
+(setq backup-by-copying         t       ; don't clobber symlinks
+      backup-directory-alist    (list (cons "." (sarcasm-cache "backup")))
+      delete-old-versions       t
+      kept-new-versions         6
+      kept-old-versions         2
+      version-control           t)      ; use versioned backups
+
+(let ((autosave-dir (file-name-as-directory (sarcasm-cache "auto-save"))))
+  (setq auto-save-list-file-prefix autosave-dir
+        auto-save-file-name-transforms
+        (list (list ".*" (concat autosave-dir "\\1") t)))
+  ;; create the autosave dir if necessary, since emacs won't.
+  (make-directory autosave-dir t))
+
+;; Enable some disabled commands
+(put 'dired-find-alternate-file 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'erase-buffer 'disabled nil)
+(put 'narrow-to-defun 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'org-narrow-to-subtree 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'widen 'disabled nil)
