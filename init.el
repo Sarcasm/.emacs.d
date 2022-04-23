@@ -8,9 +8,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.clang-\\(?:format\\|tidy\\)\\'" . yaml-mode))
 
-(progn ;; eglot
-  (autoload #'eglot-ensure "eglot")
-  (add-hook 'c++-mode-hook #'eglot-ensure))
+(add-hook 'eglot-server-initialized-hook #'yas-minor-mode)
+(add-hook 'c++-mode-hook #'eglot-ensure)
 
 (progn ;; git-commit
   (defun sarcasm-git-commit-setup ()
@@ -125,11 +124,10 @@ see https://github.com/magit/magit/pull/4352.
  '(mouse-yank-at-point t)
  '(org-modules '(ol-docview ol-info org-mouse org-tempo))
  '(package-selected-packages
-   '(beancount ledger-mode multiple-cursors ace-window buffer-move markdown-mode dockerfile-mode yaml-mode strace-mode company eglot vertico magit))
+   '(yasnippet beancount ledger-mode multiple-cursors ace-window buffer-move markdown-mode dockerfile-mode yaml-mode strace-mode company eglot vertico magit))
  '(read-buffer-completion-ignore-case t)
  '(read-file-name-completion-ignore-case t)
- '(safe-local-variable-values
-   '((eval c-set-offset 'innamespace 0)))
+ '(safe-local-variable-values '((eval c-set-offset 'innamespace 0)))
  '(save-abbrevs 'silently nil nil "don't want to answer yes everytime")
  '(scroll-preserve-screen-position t nil nil "restore cursor after PgUp/PgDown")
  '(sentence-end-double-space nil nil nil "sentences end with one space when M-q `fill-paragraph' is called")
