@@ -9,7 +9,8 @@ Emacs configuration files, everything starts from init.el.
 Install
 -------
 
-    git clone git@github.com:Sarcasm/.emacs.d.git ~/.emacs.d
+    git clone git@github.com:Sarcasm/.emacs.d.git ~/.config/emacs
+    emacs --eval "(package-install-selected-packages)"
 
 Configuration
 -------------
@@ -19,8 +20,8 @@ full name, etc, are recommended to be set.
 
 An example of the content of this file can be:
 
-    $ cat init.d/identity.el
-    (setq user-mail-address "firstname.lastname@gmail.com"
+    $ cat identity.el
+    (setq user-mail-address "firstname.lastname@mailprovider.foo"
           user-full-name    "Firstname Lastname")
 
 Startup time performance
@@ -31,7 +32,7 @@ Prefer add-hook, keybindings, ...
 
 Some commands of things I'd like to be fast:
 
-    $ perf stat emacs -l ~/.emacs.d/init.el -batch --eval '(message "Hello, world!")'
+    $ perf stat emacs -l ~/.config/emacs/init.el -batch --eval '(message "Hello, world!")'
     $ for i in {1..10}; { perf stat emacs -l ~/.emacs.d/init.el -batch --eval '(message "Hello, world!")' |& grep "seconds time elapsed" ; } | sort -n
     $ EDITOR='emacs -nw' git commit
 
@@ -39,20 +40,15 @@ Some commands of things I'd like to be fast:
     $ perf stat emacs -l ~/.emacs.d/init.elc -batch --eval '(message "Hello, world!")'
     $ find . -name "*.elc"
 
+Also check time reported by `M-x emacs-init-time RET`,
+to account for UI elements.
 
 Troubleshooting
 ---------------
 
-Buggy cursor color on KDE
--------------------------
+Package Quickstart
+------------------
 
-Comment the Emacs*Foreground key of `/usr/share/kdisplay/app-defaults/Emacs.ad`:
+If quickstarts aren't up-to-date, call:
 
-```diff
--Emacs*Foreground:		WINDOW_FOREGROUND
-+! Emacs*Foreground:		WINDOW_FOREGROUND
-```
-
-See:
-- https://lists.gnu.org/archive/html/help-gnu-emacs/2002-04/msg00116.html
-- https://emacs.stackexchange.com/a/32764/901
+    M-x package-quickstart-refresh RET

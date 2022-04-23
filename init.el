@@ -1,66 +1,99 @@
 ;;; init.el --- Emacs user configuration file  -*- lexical-binding: t; -*-
 
-(let ((old-threshold gc-cons-threshold))
-  (setq gc-cons-threshold 100000000)
-  (run-with-idle-timer 1 nil (lambda ()
-                               ;; restore the default GC threshold
-                               (setq gc-cons-threshold old-threshold))))
+(setq inhibit-startup-screen t)
+(setq truncate-lines t)
 
-;; stolen from https://github.com/tarsius/no-littering
-(defconst sarcasm-etc-directory
-  (expand-file-name (convert-standard-filename "etc/") user-emacs-directory)
-  "The directory where packages place their configuration files.")
+;; When using C-x C-e to edit the command line
+(add-to-list 'auto-mode-alist '("^/tmp/zsh" . sh-mode))
 
-(defconst sarcasm-cache-directory
-  (expand-file-name (convert-standard-filename ".cache/") user-emacs-directory)
-  "The directory where packages place their persistent data files.")
+(add-to-list 'auto-mode-alist '("\\.clang-\\(?:format\\|tidy\\)\\'" . yaml-mode))
 
-(defun sarcasm-expand-etc-file-name (file)
-  "Expand filename FILE relative to `sarcasm-etc-directory'."
-  (let* ((path (expand-file-name (convert-standard-filename file) sarcasm-etc-directory)))
-    (make-directory (file-name-directory path) t)
-    path))
+(with-eval-after-load 'git-commit
+  ;; When redacting commit message in magit,
+  ;; with the diff view in the other window,
+  ;; use company-dabbrev[-code] to complete words of the other buffer
+  ;; in the commit message buffer.
+  ;; Stolen from https://github.com/company-mode/company-mode/issues/704#issuecomment-325783249
 
-(defun sarcasm-expand-cache-file-name (file)
-  "Expand filename FILE relative to `sarcasm-cache-directory'."
-  (let* ((path (expand-file-name (convert-standard-filename file) sarcasm-cache-directory)))
-    (make-directory (file-name-directory path) t)
-    path))
+  (defun sarcasm-company-dabbrev-ignore-except-magit-diff (buffer)
+    (let ((name (buffer-name)))
+      (and (string-match-p "\\`[ *]" name)
+           (not (string-match-p "\\*magit-diff:" name)))))
 
-(setq-default package-user-dir (sarcasm-expand-cache-file-name "elpa"))
+  (defun sarcasm-git-commit-setup-hook ()
+    (setq-local company-backends '(company-capf company-dabbrev-code company-dabbrev))
+    (setq-local company-dabbrev-code-modes '(text-mode magit-diff-mode))
+    (setq-local company-dabbrev-code-other-buffers 'code)
+    (setq-local company-dabbrev-downcase nil)
+    (setq-local company-dabbrev-ignore-buffers
+                #'sarcasm-company-dabbrev-ignore-except-magit-diff)
+    (setq-local company-dabbrev-ignore-case nil))
 
-(require 'package)
-(setq package-enable-at-startup nil   ;Info node `(emacs) Package Installation'
-      ;; prefer melpa-stable, then the default source gnu, then others
-      package-archive-priorities '(("gnu"          . 10)
-                                   ("melpa-stable" . 5))
-      package-pinned-packages '((use-package . "melpa")))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-;; NOTE: this call is probably the more expensive function call of the init file
-;; but this is also the building block for the rest of the configuration
-(package-initialize)
+  (add-hook 'git-commit-setup-hook #'sarcasm-git-commit-setup-hook))
 
-;; Configure and bootstrap `use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+(progn ;; org-mode
+  (define-key mode-specific-map "oa" #'org-agenda)
+  (define-key mode-specific-map "ol" #'org-store-link)
+  (define-key mode-specific-map "oc" #'org-capture)
+  (define-key mode-specific-map "oo" #'org-open-at-point-global)
+  (define-key mode-specific-map "oi" #'org-insert-link-global)
 
-(require 'use-package)
+  (setq-default org-log-done t
+                org-src-fontify-natively t ;display specific mode colors in src block
+                org-insert-mode-line-in-empty-file t
+                org-hide-emphasis-markers t
+                org-startup-folded t
+                org-capture-bookmark nil
+                org-hide-leading-stars t)
 
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+  (with-eval-after-load 'org
+    (setq org-default-notes-file (expand-file-name "inbox.org" org-directory))
+    (setq org-adapt-indentation nil))
 
-;; ignore hidden files, this ignores lock files,
-;; symlinks of the form .#foo.el -> user@hostname.XXXX:XXXXXX
-(dolist (el-file (directory-files
-                  (expand-file-name "init.d" user-emacs-directory) t
-                  "^[^.].*\\.el$"))
-  ;; load filename sans extension so that `load' tries byte compile init files
-  (let ((load-prefer-newer t))
-    ;; stolen from https://github.com/tarsius/no-littering
-    (cl-letf (((symbol-function 'etc)
-               (symbol-function #'sarcasm-expand-etc-file-name))
-              ((symbol-function 'cache)
-               (symbol-function #'sarcasm-expand-cache-file-name)))
-      (load (file-name-sans-extension el-file) nil t))))
+  ;; Make windmove work in Org-Mode:
+  ;; https://orgmode.org/manual/Conflicts.html
+  (add-hook 'org-shiftup-final-hook 'windmove-up)
+  (add-hook 'org-shiftleft-final-hook 'windmove-left)
+  (add-hook 'org-shiftdown-final-hook 'windmove-down)
+  (add-hook 'org-shiftright-final-hook 'windmove-right)
+
+  (with-eval-after-load 'org-agenda
+    (setq org-agenda-files (list org-directory
+                                 (expand-file-name "media" org-directory)))
+    (setq org-agenda-skip-scheduled-if-done t)
+    (add-to-list 'org-agenda-custom-commands
+                 '("c" "Calendar" agenda ""
+                   ((org-agenda-files (list "~/org/ink.org" "~/org/substance.org" "~/org/siggraph2020.org"))
+                    (org-agenda-start-day "-7d")
+                    (org-agenda-span 16)
+                    (org-agenda-start-with-log-mode t)
+                    (org-agenda-archives-mode t)
+                    (org-agenda-include-inactive-timestamps 't)
+                    (org-agenda-time-grid nil))))))
+
+(progn ;; compile
+  (defun sarcasm-truncate-lines-on ()
+    (toggle-truncate-lines 1))
+
+  (add-hook 'compilation-mode-hook 'sarcasm-truncate-lines-on))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-backends '(company-capf))
+ '(compilation-scroll-output 'first-error)
+ '(dired-listing-switches "-alhv" nil nil "natural sorting helps sort files like fs.cpp, fs.h, fs.test.cpp together, and not fslite.h before fs.test.cpp")
+ '(indent-tabs-mode nil)
+ '(kill-whole-line t nil nil "C-k kills whole line and newline if at beginning of line")
+ '(magit-diff-refine-hunk t)
+ '(org-modules '(ol-docview ol-info org-mouse org-tempo))
+ '(package-selected-packages
+   '(beancount ledger-mode multiple-cursors ace-window buffer-move markdown-mode dockerfile-mode yaml-mode strace-mode company eglot vertico magit)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

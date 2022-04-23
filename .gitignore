@@ -1,3 +1,4 @@
 *.elc
 /init.d/identity.el
 .cache/
+/package-quickstart.el

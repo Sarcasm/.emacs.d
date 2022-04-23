@@ -18,17 +18,16 @@
 ;; usage:
 ;; In init file:
 ;;
-;;     (setq custom-theme-directory *sarcasm-directory*)
 ;;     (load-theme 'sarcasm)
 ;;
 ;; Or after init:
-;; M-x `load-theme' RET sarcasm RET
+;; M-x `load-theme' RET `sarcasm' RET
+;;
+;; Or via `customize':
+;; M-x `customize-variable' RET `custom-enabled-themes' RET.
 
 ;; Note:
 ;; M-x `list-faces-display' RET
-;; http://www.gnu.org/software/libtool/manual/emacs/Standard-Faces.html
-;; http://elpa.gnu.org/themes/
-;; http://git.naquadah.org/?p=naquadah-theme.git;a=blob_plain;f=naquadah-theme.el;hb=HEAD
 ;;; Code:
 
 (deftheme sarcasm
