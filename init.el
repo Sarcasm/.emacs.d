@@ -8,6 +8,10 @@
 
 (add-to-list 'auto-mode-alist '("\\.clang-\\(?:format\\|tidy\\)\\'" . yaml-mode))
 
+(progn ;; eglot
+  (autoload #'eglot-ensure "eglot")
+  (add-hook 'c++-mode-hook #'eglot-ensure))
+
 (progn ;; git-commit
   (defun sarcasm-git-commit-setup ()
     """Enable git-commit mode even when `git-commit' hasn't been loaded yet.

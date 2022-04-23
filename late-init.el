@@ -99,7 +99,3 @@
 (with-eval-after-load 'ledger-mode
   (autoload 'sarcasm-ledger-time-stamp "sarcasm-ledger")
   (define-key mode-specific-map "." #'sarcasm-ledger-time-stamp))
-
-(progn ;; eglot
-  (autoload #'eglot-ensure "eglot")
-  (add-hook 'c++-mode-hook #'eglot-ensure))
