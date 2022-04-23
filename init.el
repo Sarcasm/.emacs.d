@@ -1,5 +1,7 @@
 ;;; init.el --- Emacs user configuration file  -*- lexical-binding: t; -*-
 
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
+
 (setq inhibit-startup-screen t)
 (setq truncate-lines t)
 
@@ -10,6 +12,13 @@
 
 (add-hook 'eglot-server-initialized-hook #'yas-minor-mode)
 (add-hook 'c++-mode-hook #'eglot-ensure)
+
+(autoload 'sarcasm-clang-format-set-c-style "sarcasm-clang-format")
+(defun sarcasm-set-c++-cc-style ()
+  "Personalized cc-style for c++ mode."
+  (c-set-offset 'innamespace 0)
+  (sarcasm-clang-format-set-c-style))
+(add-hook 'c++-mode-hook 'sarcasm-set-c++-cc-style)
 
 (progn ;; git-commit
   (defun sarcasm-git-commit-setup ()
@@ -124,7 +133,7 @@ see https://github.com/magit/magit/pull/4352.
  '(mouse-yank-at-point t)
  '(org-modules '(ol-docview ol-info org-mouse org-tempo))
  '(package-selected-packages
-   '(yasnippet beancount ledger-mode multiple-cursors ace-window buffer-move markdown-mode dockerfile-mode yaml-mode strace-mode company eglot vertico magit))
+   '(clang-format yasnippet beancount ledger-mode multiple-cursors ace-window buffer-move markdown-mode dockerfile-mode yaml-mode strace-mode company eglot vertico magit))
  '(read-buffer-completion-ignore-case t)
  '(read-file-name-completion-ignore-case t)
  '(safe-local-variable-values '((eval c-set-offset 'innamespace 0)))

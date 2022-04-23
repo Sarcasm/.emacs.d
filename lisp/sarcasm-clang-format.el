@@ -14,12 +14,9 @@
 (defun sarcasm-clang-format-set-c-style ()
   (let ((orig-path (or buffer-file-name default-directory))
         vars)
-    (when (and orig-path
-               (string= clang-format-style "file")
-               (locate-dominating-file orig-path ".clang-format"))
+    (when (and orig-path (locate-dominating-file orig-path ".clang-format"))
       (with-temp-buffer
         (call-process clang-format-executable nil t nil
-                      "-style" clang-format-style
                       "-dump-config")
         ;; TODO: narrow region to Langage Cpp?
         (goto-char (point-min))

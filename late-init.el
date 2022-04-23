@@ -8,8 +8,6 @@
 ;; Unlike early-init.el and init.el,
 ;; this late-init.el is not a standard Emacs initialization step.
 
-(add-to-list 'load-path (concat user-emacs-directory "lisp"))
-
 (with-eval-after-load 'package
   (when (< emacs-major-version 28)
     (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/")))
