@@ -9,6 +9,8 @@
         c-electric-semi&comma
         c-electric-slash
         c-scope-operator
+        delete-horizontal-space
+        ignore
         isearch-forward-word
         kill-rectangle
         kill-region
@@ -16,6 +18,8 @@
         org-self-insert-command
         transpose-words
         undefined
+        wdired-finish-edit
+        wdired-next-line
         wgrep-finish-edit
         yaml-electric-backspace
         ))
@@ -24,8 +28,10 @@
       '(
         clang-format-region
         compile-goto-error
+        describe-key
         handle-switch-frame
         isearch-forward-word
         org-return
+        yaml-electric-dash-and-dot
         yas-expand
         ))

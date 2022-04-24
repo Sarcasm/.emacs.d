@@ -1,16 +1,5 @@
 ;;; sarcasm.el --- Utility shared definitions
 
-(defun sarcasm-deffered-global-mode (global-mode turn-on &optional mode)
-  ;; call global-mode first, this one usually have autoload,
-  ;; while turn-on doesn't
-  (funcall global-mode)
-  ;; then enable mode in existing buffers
-  (dolist (buf (buffer-list))
-    (with-current-buffer buf
-      ;; don't turn on the mode unnecessarily if it's already on
-      (unless (symbol-value mode)
-        (funcall turn-on)))))
-
 ;; Source: http://groups.google.com/group/gnu.emacs.help/browse_thread/thread/75dd91fd45742d54?pli=1
 (defun sarcasm--move-text-internal (arg)
   (cond

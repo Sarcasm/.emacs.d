@@ -38,6 +38,20 @@
   (define-key company-mode-map "\M-\r" #'company-complete))
 (require 'company nil t)
 
+(with-eval-after-load 'flymake
+  ;; Configure `display-buffer' behaviour for some special buffers.
+  ;; see http://www.lunaryorn.com/2015/04/29/the-power-of-display-buffer-alist.html
+  ;; and https://github.com/lunaryorn/.emacs.d/blob/2233f7dc277453b7eaeb447b00d8cb8d72435318/init.el#L420-L439
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Flymake diagnostics"
+                 (display-buffer-reuse-window
+                  display-buffer-in-side-window)
+                 (side            . bottom)
+                 (reusable-frames . visible)
+                 (window-height   . 0.22)))
+  (define-key mode-specific-map "!p" #'flymake-show-project-diagnostics)
+  (define-key mode-specific-map "!l" #'flymake-show-buffer-diagnostics))
+
 (defun sarcasm-narrow-to-region (start end)
   "Deactivate the mark after `narrow-to-region'."
   (interactive "r")
@@ -93,6 +107,59 @@
 (progn ;; muliple-cursors
   (define-key global-map [(control \;)] #'mc/mark-all-dwim)
   (define-key global-map [C-S-mouse-1] #'mc/add-cursor-on-click))
+
+(progn ;; ibuffer
+  ;; Thx: http://martinowen.net/blog/2010/02/tips-for-emacs-ibuffer.html
+  (defun sarcasm-ibuffer-other-window ()
+    "Open ibuffer in other window."
+    (interactive)
+    (ibuffer t))
+
+  (defun sarcasm-ibuffer-mode-init ()
+    (ibuffer-auto-mode 1)                 ;auto update
+    (ibuffer-switch-to-saved-filter-groups "default"))
+
+  (define-key global-map [remap list-buffers] #'sarcasm-ibuffer-other-window)
+
+  (add-hook 'ibuffer-mode-hook #'sarcasm-ibuffer-mode-init)
+
+  (with-eval-after-load 'ibuffer
+    (add-to-list 'ibuffer-formats '(mark
+                                    modified
+                                    " "
+                                    (name 25 25 :left :elide)
+                                    " "
+                                    (size 9 -1 :right)
+                                    " "
+                                    (mode 16 16 :left :elide)
+                                    " " filename-and-process))
+    (setq ibuffer-saved-filter-groups
+          '(("default"
+
+             ("Interactive" (or (mode . lisp-interaction-mode)
+                                (name . "\*Messages\*")
+                                (name . "\*compilation\*")
+                                (name . "\*Customize\*")
+                                (name . "\*ag search\*")
+                                (name . "\*grep\*")))
+
+             ("Dired" (mode . dired-mode))
+
+             ;; Need to be before "Programming" otherwise
+             ;; `emacs-lisp-mode' will match.
+             ("Emacs config" (filename . ".config/emacs"))
+
+             ("Org-Mode" (mode . org-mode))
+
+             ("Programming" (derived-mode . prog-mode))
+
+             ("Magit" (name . "\*magit"))
+
+             ("Help" (or (name . "\*Help\*")
+                         (name . "\*Apropos\*")
+                         (name . "\*info\*")))
+
+             ("Man" (mode . Man-mode)))))))
 
 (with-eval-after-load 'ledger-mode
   (autoload 'sarcasm-ledger-time-stamp "sarcasm-ledger")
