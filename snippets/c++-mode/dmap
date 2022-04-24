@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name : std::map<T, U> name;
-# contributor : Guillaume Papin
-# key: dmap
-# --
-std::map<${1:T}, ${2:U}>        ${3:var};$0

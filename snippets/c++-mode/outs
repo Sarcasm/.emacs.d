@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name : llvm::outs() << ...;
-# contributor : Guillaume Papin
-# key: outs
-# --
-llvm::outs() << ${1:...};

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name : std::cin >> ...;
-# contributor : Guillaume Papin
-# key: cin
-# --
-std::cin >> ${1:...};

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name : llvm::errs() << ...;
-# contributor : Guillaume Papin
-# key: errs
-# --
-llvm::errs() << ${1:...};

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name : std::cerr << ... << std::endl;
-# contributor : Guillaume Papin
-# key: cerr
-# --
-std::cerr << ${1:...} << std::endl;

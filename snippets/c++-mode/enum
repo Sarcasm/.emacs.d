@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name : enum E {...};
-# contributor : Guillaume Papin
-# key: enum
-# --
-enum ${1:Name} {
-  $0
-};

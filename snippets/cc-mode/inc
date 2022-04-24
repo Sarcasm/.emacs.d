@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name : #include "..."
-# contributor : Guillaume Papin
-# key: inc
-# --
-#include "$1"$0

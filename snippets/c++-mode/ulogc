@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name : UlogC << ... << std::endl;
-# contributor : Guillaume Papin
-# key: ulogc
-# --
-UlogC << ${1:...} << std::endl;
