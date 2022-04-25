@@ -114,21 +114,7 @@ see https://github.com/magit/magit/pull/4352.
   (add-hook 'org-shiftup-final-hook 'windmove-up)
   (add-hook 'org-shiftleft-final-hook 'windmove-left)
   (add-hook 'org-shiftdown-final-hook 'windmove-down)
-  (add-hook 'org-shiftright-final-hook 'windmove-right)
-
-  (with-eval-after-load 'org-agenda
-    (setq org-agenda-files (list org-directory
-                                 (expand-file-name "media" org-directory)))
-    (setq org-agenda-skip-scheduled-if-done t)
-    (add-to-list 'org-agenda-custom-commands
-                 '("c" "Calendar" agenda ""
-                   ((org-agenda-files (list "~/org/ink.org" "~/org/substance.org" "~/org/siggraph2020.org"))
-                    (org-agenda-start-day "-7d")
-                    (org-agenda-span 16)
-                    (org-agenda-start-with-log-mode t)
-                    (org-agenda-archives-mode t)
-                    (org-agenda-include-inactive-timestamps 't)
-                    (org-agenda-time-grid nil))))))
+  (add-hook 'org-shiftright-final-hook 'windmove-right))
 
 (progn ;; compile
   (defun sarcasm-truncate-lines-on ()
