@@ -155,7 +155,7 @@ see https://github.com/magit/magit/pull/4352.
  '(mouse-yank-at-point t)
  '(org-modules '(ol-docview ol-info org-mouse org-tempo))
  '(package-selected-packages
-   '(clang-format yasnippet beancount ledger-mode multiple-cursors ace-window buffer-move markdown-mode dockerfile-mode yaml-mode strace-mode company eglot vertico magit))
+   '(clang-format yasnippet ledger-mode multiple-cursors ace-window buffer-move markdown-mode dockerfile-mode yaml-mode strace-mode company eglot vertico magit))
  '(read-buffer-completion-ignore-case t)
  '(read-file-name-completion-ignore-case t)
  '(safe-local-variable-values '((eval c-set-offset 'innamespace 0)))
