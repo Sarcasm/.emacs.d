@@ -68,6 +68,20 @@ see https://github.com/magit/magit/pull/4352.
 
     (add-hook 'git-commit-setup-hook #'sarcasm-git-commit-setup-hook)))
 
+;; git-revise
+;; copy-pasted git-rebase-todo configuration at bottom of magit/git-rebase-mode.el
+(let ((git-revise-filename-regexp "/git-revise-todo\\'"))
+  (add-to-list 'auto-mode-alist
+               (cons git-revise-filename-regexp 'git-rebase-mode))
+
+  (with-eval-after-load 'recentf
+    (add-to-list 'recentf-exclude git-revise-filename-regexp))
+
+  (with-eval-after-load 'with-editor
+    (add-to-list 'with-editor-server-window-alist
+                 (cons git-revise-filename-regexp 'switch-to-buffer))
+    (add-to-list 'with-editor-file-name-history-exclude git-revise-filename-regexp)))
+
 (progn ;; org-mode
   (define-key mode-specific-map "oa" #'org-agenda)
   (define-key mode-specific-map "ol" #'org-store-link)
