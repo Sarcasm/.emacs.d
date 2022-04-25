@@ -5,6 +5,14 @@
 (setq inhibit-startup-screen t)
 (setq truncate-lines t)
 
+(with-eval-after-load 'package
+  (when (< emacs-major-version 28)
+    (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (setq package-archive-priorities '(("gnu" . 20)
+				     ("nongnu" . 10)
+				     ("melpa" . 0))))
+
 ;; When using C-x C-e to edit the command line
 (add-to-list 'auto-mode-alist '("^/tmp/zsh" . sh-mode))
 

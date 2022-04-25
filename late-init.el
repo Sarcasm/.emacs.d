@@ -8,14 +8,6 @@
 ;; Unlike early-init.el and init.el,
 ;; this late-init.el is not a standard Emacs initialization step.
 
-(with-eval-after-load 'package
-  (when (< emacs-major-version 28)
-    (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (setq package-archive-priorities '(("gnu" . 20)
-				     ("nongnu" . 10)
-				     ("melpa" . 0))))
-
 ;; Automatically 'chmod' scripts as they are saved
 (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
 
