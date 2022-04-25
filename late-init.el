@@ -20,6 +20,7 @@
 (global-subword-mode)
 (savehist-mode)
 (winner-mode)
+(context-menu-mode)
 
 (with-eval-after-load 'vertico
   (vertico-mode))
