@@ -12,19 +12,16 @@
 (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
 
 (column-number-mode)
+(context-menu-mode)
 (delete-selection-mode)
 (electric-layout-mode)
 (electric-pair-mode)
+(fido-vertical-mode)
 (global-auto-revert-mode)
 (global-hl-line-mode)
 (global-subword-mode)
 (savehist-mode)
 (winner-mode)
-(context-menu-mode)
-
-(with-eval-after-load 'vertico
-  (vertico-mode))
-(require 'vertico nil t)
 
 (with-eval-after-load 'company
   (global-company-mode)
@@ -157,3 +154,10 @@
 (with-eval-after-load 'ledger-mode
   (autoload 'sarcasm-ledger-time-stamp "sarcasm-ledger")
   (define-key mode-specific-map "." #'sarcasm-ledger-time-stamp))
+
+(let ((curtime (current-time)))
+  (message "init:%dms total:%dms[+%dms] gc-done:%d"
+	   (* 1000 (float-time (time-subtract after-init-time before-init-time)))
+	   (* 1000 (float-time (time-subtract curtime before-init-time)))
+	   (* 1000 (float-time (time-subtract curtime after-init-time)))
+	   gcs-done))
