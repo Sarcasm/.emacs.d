@@ -89,7 +89,7 @@
   (define-key global-map [C-mouse-5] #'text-scale-decrease)
 
   ;; M-<up> and M-<down> like the Ecplise IDE functionnality
-  (autoload 'sarcasm-move-text-down "sarcasm" nil t)
+  (autoload 'sarcasm-move-text-up "sarcasm" nil t)
   (define-key global-map [M-up] #'sarcasm-move-text-up)
   (autoload 'sarcasm-move-text-down "sarcasm" nil t)
   (define-key global-map [M-down] #'sarcasm-move-text-down))
