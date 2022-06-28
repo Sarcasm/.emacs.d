@@ -19,6 +19,10 @@
 (add-to-list 'auto-mode-alist '("\\.clang-\\(?:format\\|tidy\\)\\'" . yaml-mode))
 
 (add-hook 'eglot-server-initialized-hook #'yas-minor-mode)
+
+(defun sarcasm-eglot-yas ()
+  (yas-minor-mode (eglot-managed-p)))
+(add-hook 'eglot-managed-mode-hook #'sarcasm-eglot-yas)
 (add-hook 'c++-mode-hook #'eglot-ensure)
 
 (autoload 'sarcasm-clang-format-set-c-style "sarcasm-clang-format")
